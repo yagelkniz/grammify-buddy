@@ -9,6 +9,7 @@ type Question = {
   options: string[];
   correct: string;
   color?: string;
+  infinitive: string; // שם הפועל
 };
 
 const questions: Question[] = [
@@ -20,6 +21,7 @@ const questions: Question[] = [
     options: ["אוכל", "אוכלת", "אוכלים", "אוכלות"],
     correct: "אוכל",
     color: "bg-red-100",
+    infinitive: "לאכול",
   },
   {
     emoji: "🏀",
@@ -29,6 +31,7 @@ const questions: Question[] = [
     options: ["משחק", "משחקת", "משחקים", "משחקות"],
     correct: "משחק",
     color: "bg-orange-100",
+    infinitive: "לשחק",
   },
   {
     emoji: "🎵",
@@ -38,6 +41,7 @@ const questions: Question[] = [
     options: ["שומעים", "שומעות", "שומע", "שומעת"],
     correct: "שומעים",
     color: "bg-pink-100",
+    infinitive: "לשמוע",
   },
   {
     emoji: "🥪",
@@ -47,6 +51,7 @@ const questions: Question[] = [
     options: ["אוכלת", "אוכל", "אוכלות", "אוכלים"],
     correct: "אוכלת",
     color: "bg-yellow-100",
+    infinitive: "לאכול",
   },
   {
     emoji: "📚",
@@ -56,6 +61,7 @@ const questions: Question[] = [
     options: ["לומדים", "לומדות", "לומד", "לומדת"],
     correct: "לומדים",
     color: "bg-green-100",
+    infinitive: "ללמוד",
   },
   {
     emoji: "🚗",
@@ -65,6 +71,7 @@ const questions: Question[] = [
     options: ["נוסעות", "נוסעים", "נוסעת", "נוסע"],
     correct: "נוסעות",
     color: "bg-blue-100",
+    infinitive: "לנסוע",
   },
   {
     emoji: "🦸‍♀️",
@@ -74,6 +81,7 @@ const questions: Question[] = [
     options: ["הולכת", "הולך", "הולכות", "הולכים"],
     correct: "הולכת",
     color: "bg-purple-100",
+    infinitive: "ללכת",
   },
   {
     emoji: "🌙",
@@ -83,6 +91,7 @@ const questions: Question[] = [
     options: ["נרדם", "נרדמת", "נרדמים", "נרדמות"],
     correct: "נרדם",
     color: "bg-indigo-100",
+    infinitive: "להירדם",
   },
 ];
 
@@ -106,6 +115,14 @@ export default function PresentTenseVerbPractice() {
       {questions.map((q, i) => (
         <div key={i} className={`w-full max-w-md flex flex-col items-center mb-2 rounded-xl shadow ${q.color}`}>
           <div className="flex items-center text-3xl mt-2">{q.emoji}</div>
+          {/* שם הפועל בעיצוב עדין */}
+          <div
+            className="text-sm text-gray-500 italic mt-1 mb-1"
+            dir="rtl"
+            style={{ letterSpacing: "0.05em" }}
+          >
+            {q.infinitive}
+          </div>
           <p className="text-lg mb-2 flex flex-wrap items-center justify-center" dir="rtl">
             {q.textBefore} <span className="mx-1 font-bold">{q.blank}</span> {q.textAfter}
           </p>
