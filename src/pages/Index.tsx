@@ -14,7 +14,7 @@ import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlace
 import InterviewQuestionnaire from "@/components/InterviewQuestionnaire";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import PronounsTable from "@/components/PronounsTable";
+import PronounsMenu from "@/components/PronounsMenu";
 import PossessivePronounsTable from "@/components/PossessivePronounsTable";
 import LinkingWordsTable from "@/components/LinkingWordsTable";
 import IndexMainMenu from "./IndexMainMenu";
@@ -149,12 +149,7 @@ const Index = () => {
   // Pronoun tables, etc
   if (showPronounsTable) {
     return (
-      <div className="w-full">
-        <div className="flex justify-end mb-4">
-          <Button variant="outline" onClick={() => setShowPronounsTable(false)}>⬅ Back</Button>
-        </div>
-        <PronounsTable />
-      </div>
+      <PronounsMenu onBack={() => setShowPronounsTable(false)} />
     );
   }
 
