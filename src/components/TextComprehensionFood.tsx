@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { Smile, PartyPopper, Frown, RotateCcw } from "lucide-react";
+import TranslatableText from "./TranslatableText";
 
 type Question = {
   question: string;
@@ -9,6 +10,35 @@ type Question = {
 };
 
 const readingText = `שחר הולך לבקר את חבר שלו בערב. הם מחליטים לבשל יחד פסטה ולאכול סלט ירקות גדול. שחר אוהב להוסיף גבינה לפסטה שלו, אבל החבר מעדיף פסטה בלי גבינה. אחרי האוכל, שותים תה עם עוגה.`;
+
+// מפת תרגומים למילים מרכזיות
+const translationMap: { [hebrewWord: string]: string } = {
+  "שחר": "Shahar (a name)",
+  "חבר": "friend",
+  "הולך": "goes",
+  "לבקר": "to visit",
+  "בערב": "in the evening",
+  "מחליטים": "decide",
+  "לבשל": "to cook",
+  "יחד": "together",
+  "פסטה": "pasta",
+  "סלט": "salad",
+  "ירקות": "vegetables",
+  "גדול": "big",
+  "אוהב": "likes/loves",
+  "להוסיף": "to add",
+  "גבינה": "cheese",
+  "שלו": "his",
+  "אבל": "but",
+  "מעדיף": "prefers",
+  "בלי": "without",
+  "אחרי": "after",
+  "האוכל": "the food/meal",
+  "שותים": "drink (plural)",
+  "תה": "tea",
+  "עם": "with",
+  "עוגה": "cake"
+};
 
 const questions: Question[] = [
   {
@@ -34,7 +64,7 @@ export default function TextComprehensionFood() {
   const [finished, setFinished] = useState(false);
 
   function checkAnswer(qIdx: number, option: string) {
-    if (answers[qIdx]) return; // מניעת לחיצה חוזרת
+    if (answers[qIdx]) return;
     setAnswers((prev) => ({ ...prev, [qIdx]: option }));
     setFeedbacks((prev) => ({
       ...prev,
@@ -59,7 +89,7 @@ export default function TextComprehensionFood() {
         🍝 הבנת הנקרא: אוכל
       </h2>
       <div className="border px-7 py-5 rounded-xl bg-yellow-100 text-lg leading-8 mb-2 shadow" dir="rtl">
-        {readingText}
+        <TranslatableText text={readingText} translations={translationMap} />
       </div>
       <div className="flex flex-col gap-5 w-full">
         {questions.map((q, i) => (
