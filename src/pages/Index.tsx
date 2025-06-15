@@ -14,6 +14,7 @@ import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlace
 import InterviewQuestionnaire from "@/components/InterviewQuestionnaire";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import PronounsTable from "@/components/PronounsTable";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -71,6 +72,7 @@ const Index = () => {
     null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy"
   >(null);
   const nav = useNavigate();
+  const [showPronounsTable, setShowPronounsTable] = useState(false);
 
   // אם לא מחובר - להפנות ל־/auth
   useEffect(() => {
@@ -124,6 +126,17 @@ const Index = () => {
     );
   }
 
+  if (showPronounsTable) {
+    return (
+      <div className="w-full">
+        <div className="flex justify-end mb-4">
+          <Button variant="outline" onClick={() => setShowPronounsTable(false)}>⬅ חזרה</Button>
+        </div>
+        <PronounsTable />
+      </div>
+    );
+  }
+
   if (selectedTextComp) {
     return (
       <div className="w-full">
@@ -164,6 +177,14 @@ const Index = () => {
             איזה תרגול תרצה לתרגל?
           </h1>
           <div className="grid gap-6 w-full">
+            {/* כפתור חדש — טבלת שמות גוף */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
+              onClick={() => setShowPronounsTable(true)}
+            >
+              <span className="text-3xl">👤</span>
+              <span dir="rtl">טבלת שמות גוף (עברית-אנגלית)</span>
+            </button>
             {practiceOptions.map((option) => (
               <button
                 key={option.value}
