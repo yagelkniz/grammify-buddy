@@ -4,6 +4,7 @@ import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
 import PresentTenseVerbPractice from "@/components/PresentTenseVerbPractice";
 import NounAdjectivePractice from "@/components/NounAdjectivePractice";
 import TextComprehensionFood from "@/components/TextComprehensionFood";
+import TextComprehensionAnimalsEasy from "@/components/TextComprehensionAnimalsEasy";
 
 const tenseOptions = [
   {
@@ -44,7 +45,7 @@ const practiceOptions = [
 const Index = () => {
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
-  const [selectedTextComp, setSelectedTextComp] = useState<null | "food">(null);
+  const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy">(null);
 
   function handleBack() {
     if (selectedTextComp) setSelectedTextComp(null);
@@ -59,6 +60,7 @@ const Index = () => {
           <Button variant="outline" onClick={handleBack}>⬅ חזרה</Button>
         </div>
         {selectedTextComp==="food" && <TextComprehensionFood />}
+        {selectedTextComp==="animals-easy" && <TextComprehensionAnimalsEasy />}
       </div>
     );
   }
@@ -88,6 +90,14 @@ const Index = () => {
             >
               <span className="text-3xl">🍽️</span>
               <span dir="rtl">הבנת הנקרא - אוכל</span>
+            </button>
+            {/* כפתור חדש לתרגול הבנת הנקרא - חיות (קל) */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-green-100 text-green-900 border-green-200"
+              onClick={() => setSelectedTextComp("animals-easy")}
+            >
+              <span className="text-3xl">🐾</span>
+              <span dir="rtl">הבנת הנקרא - חיות (קל)</span>
             </button>
           </div>
         </div>
