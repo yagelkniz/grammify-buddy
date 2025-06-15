@@ -20,6 +20,7 @@ import LinkingWordsTable from "@/components/LinkingWordsTable";
 import IndexMainMenu from "./IndexMainMenu";
 import EverydayHebrewPractice from "@/components/EverydayHebrewPractice";
 import EverydayHebrewCategorySelect from "@/components/EverydayHebrewCategorySelect";
+import menuText from "@/i18n/menu";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -83,6 +84,7 @@ const Index = () => {
   const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
   // change here: add "transportation" to the type
   const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<null | "restaurant" | "supermarket" | "transportation">(null);
+  const [lang, setLang] = useState<"he" | "en">("he"); // שפת ממשק
 
   // אם לא מחובר - להפנות ל־/auth
   useEffect(() => {
@@ -102,6 +104,17 @@ const Index = () => {
     else if (selectedTense) setSelectedTense(null);
     else setSelectedPractice(null);
   }
+
+  // הפונקציה מחזירה טקסט בלוקל לפי השפה
+  const t = (key: string) => {
+    // תומך גם במפתחות מורכבים (למשל everydayCategories.restaurant)
+    const path = key.split(".");
+    let val: any = menuText[lang];
+    for (const p of path) {
+      val = val?.[p];
+    }
+    return val || key;
+  };
 
   // Welcome screen
   if (showWelcome) {
@@ -235,12 +248,17 @@ const Index = () => {
     );
   }
 
-  // Main menu – now in English
+  // דוגמה: שינוי התפריט הראשי באחת התצוגות
   if (!selectedPractice) {
     return (
       <div className="flex flex-col gap-8 items-center w-full max-w-md mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir="ltr">
-          What do you want to practice?
+        <div className="flex items-center gap-4 self-end">
+          <span className="text-sm">{t("lang")}:</span>
+          <Button variant={lang === "he" ? "default" : "outline"} onClick={() => setLang("he")}>{t("hebrew")}</Button>
+          <Button variant={lang === "en" ? "default" : "outline"} onClick={() => setLang("en")}>{t("english")}</Button>
+        </div>
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir={lang === "he" ? "rtl" : "ltr"}>
+          {t("mainTitle")}
         </h1>
         <div className="grid gap-6 w-full">
           <button
@@ -248,98 +266,98 @@ const Index = () => {
             onClick={() => setShowLinkingWords(true)}
           >
             <span className="text-3xl">🔗</span>
-            <span dir="ltr">Linking words table (categories & examples)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("linkingWords")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
             onClick={() => setShowPronounsTable(true)}
           >
             <span className="text-3xl">👤</span>
-            <span dir="ltr">Pronouns table (Hebrew–English)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("pronouns")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-teal-100 text-teal-900 border-teal-300"
             onClick={() => setShowPossessivePronouns(true)}
           >
             <span className="text-3xl">🔗</span>
-            <span dir="ltr">Possessive pronouns table (Hebrew–English)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("possessivePronouns")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-100 text-orange-900 border-orange-300"
             onClick={() => setShowEverydayHebrew(true)}
           >
             <span className="text-3xl">🗣️</span>
-            <span dir="ltr">Everyday Hebrew – Fill-in-the-blank Practice</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("everydayHebrew")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 text-blue-900 border-blue-200"
             onClick={() => setSelectedPractice("verb")}
           >
             <span className="text-3xl">🕰️</span>
-            <span dir="ltr">Verbs – Past / Present / Future</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("verbs")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-pink-100 text-pink-900 border-pink-400"
             onClick={() => setSelectedPractice("nounAdj")}
           >
             <span className="text-3xl">📝</span>
-            <span dir="ltr">Nouns + Adjectives</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("nouns")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
             onClick={() => setShowQuestionnaire(true)}
           >
             <span className="text-3xl">💬</span>
-            <span dir="ltr">Introductory Questionnaire</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("questionnaire")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-yellow-100 text-yellow-900 border-yellow-300"
             onClick={() => setSelectedTextComp("food-levels")}
           >
             <span className="text-3xl">🥗</span>
-            <span dir="ltr">Reading comprehension – Food (Three levels)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("foodComp")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-200 text-orange-900 border-orange-300"
             onClick={() => setSelectedTextComp("food-order-medium")}
           >
             <span className="text-3xl">🍽️</span>
-            <span dir="ltr">Reading comprehension – Ordering food (Medium)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("foodOrder")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-green-100 text-green-900 border-green-200"
             onClick={() => setSelectedTextComp("animals-easy")}
           >
             <span className="text-3xl">🐾</span>
-            <span dir="ltr">Reading comprehension – Animals (Easy)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("animalsEasy")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-100 text-blue-900 border-blue-300"
             onClick={() => setSelectedTextComp("social-media")}
           >
             <span className="text-3xl">📱</span>
-            <span dir="ltr">Reading comprehension – TV & Social Media</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("socialMedia")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
             onClick={() => setSelectedTextComp("countries-levels")}
           >
             <span className="text-3xl">🌏</span>
-            <span dir="ltr">Reading comprehension – Countries (Three levels)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("countries")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-50 text-blue-900 border-blue-400"
             onClick={() => setSelectedTextComp("movies-series-levels")}
           >
             <span className="text-3xl">📺</span>
-            <span dir="ltr">Reading comprehension – TV & Series (Three levels)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("movies")}</span>
           </button>
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-sky-100 text-sky-900 border-sky-400"
             onClick={() => setSelectedTextComp("places-food-easy")}
           >
             <span className="text-3xl">🌊</span>
-            <span dir="ltr">Reading comprehension – Fun at the beach & food (Easy)</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("placesFoodEasy")}</span>
           </button>
         </div>
       </div>

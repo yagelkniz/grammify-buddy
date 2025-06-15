@@ -281,6 +281,126 @@
   },
   {
     "id": 36,
+    "category": "supermarket",
+    "question": "כמה עולה ___ הקפה?",
+    "options": ["קופסת", "ספל", "חבילת", "פחית"],
+    "correctAnswer": "קופסת",
+    "translation": "How much is the coffee pack?"
+  },
+  {
+    "id": 37,
+    "category": "supermarket",
+    "question": "אפשר לקבל ___ למחלקת מוצרי חלב?",
+    "options": ["הכוונה", "הפתעה", "בעיה", "שיר"],
+    "correctAnswer": "הכוונה",
+    "translation": "Can I get directions to the dairy products section?"
+  },
+  {
+    "id": 38,
+    "category": "supermarket",
+    "question": "האם יש לכם ___ לפסח?",
+    "options": ["מוצרים", "מחירים", "שוקולדים", "בשר"],
+    "correctAnswer": "מוצרים",
+    "translation": "Do you have products for Passover?"
+  },
+  {
+    "id": 39,
+    "category": "supermarket",
+    "question": "אני מחפש ___ טרי.",
+    "options": ["חלב", "קפה", "ביצה", "פלאפון"],
+    "correctAnswer": "חלב",
+    "translation": "I'm looking for fresh milk."
+  },
+  {
+    "id": 40,
+    "category": "supermarket",
+    "question": "האם אפשר להחזיר ___ בלי קבלה?",
+    "options": ["מוצר", "עבודה", "כניסה", "ידיים"],
+    "correctAnswer": "מוצר",
+    "translation": "Can I return a product without a receipt?"
+  },
+  {
+    "id": 41,
+    "category": "supermarket",
+    "question": "יש מדף ל___ חינם?",
+    "options": ["מבצעים", "עמותות", "תלמידים", "ילדים"],
+    "correctAnswer": "מבצעים",
+    "translation": "Is there a shelf for deals/freebies?"
+  },
+  {
+    "id": 42,
+    "category": "supermarket",
+    "question": "אתם מוכרים ___ אורגניים?",
+    "options": ["פירות", "חטיפים", "מים", "ביצים"],
+    "correctAnswer": "פירות",
+    "translation": "Do you sell organic fruits?"
+  },
+  {
+    "id": 43,
+    "category": "supermarket",
+    "question": "איפה נמצא מדף ה___?",
+    "options": ["דגנים", "סוכר", "מים", "עופרת"],
+    "correctAnswer": "דגנים",
+    "translation": "Where is the cereals shelf?"
+  },
+  {
+    "id": 44,
+    "category": "supermarket",
+    "question": "יש לכם ___ ללא סוכר?",
+    "options": ["מיצים", "לחם", "פירות", "מים"],
+    "correctAnswer": "מיצים",
+    "translation": "Do you have sugar-free juices?"
+  },
+  {
+    "id": 45,
+    "category": "supermarket",
+    "question": "האם אפשר לעטוף את זה כ___?",
+    "options": ["מתנה", "ארוחה", "קינוח", "שתייה"],
+    "correctAnswer": "מתנה",
+    "translation": "Can you wrap this as a gift?"
+  },
+  {
+    "id": 46,
+    "category": "supermarket",
+    "question": "האם יש לכם ___ למילוי מים?",
+    "options": ["עמדה", "סל", "כיסא", "רצפה"],
+    "correctAnswer": "עמדה",
+    "translation": "Do you have a water refill station?"
+  },
+  {
+    "id": 47,
+    "category": "supermarket",
+    "question": "אתם עושים ___ גם בשבת?",
+    "options": ["משלוחים", "מבצעים", "הגרלות", "הפתעות"],
+    "correctAnswer": "משלוחים",
+    "translation": "Do you deliver also on Shabbat?"
+  },
+  {
+    "id": 48,
+    "category": "supermarket",
+    "question": "מה ה___ של הסניף?",
+    "options": ["כתובת", "שם", "סיסמה", "מספר"],
+    "correctAnswer": "כתובת",
+    "translation": "What is the address of the branch?"
+  },
+  {
+    "id": 49,
+    "category": "supermarket",
+    "question": "האם יש לכם ___ כשרות?",
+    "options": ["תעודת", "חגיגת", "מילת", "הפתעת"],
+    "correctAnswer": "תעודת",
+    "translation": "Do you have a kosher certificate?"
+  },
+  {
+    "id": 50,
+    "category": "supermarket",
+    "question": "האם אפשר לשלם ב___?",
+    "options": ["תווים", "ירקות", "כיסאות", "שוקולד"],
+    "correctAnswer": "תווים",
+    "translation": "Can I pay with gift cards?"
+  },
+  {
+    "id": 36,
     "category": "transportation",
     "question": "איפה אפשר ___ כרטיס לאוטובוס?",
     "options": ["לקנות", "לנהוג", "לבשל", "ללבוש"],
@@ -398,5 +518,205 @@
     "options": ["קו", "חנות", "ספסל", "שוק"],
     "correctAnswer": "קו",
     "translation": "Is there a direct line to Ben Gurion Airport?"
+  },
+  {
+    "id": 51,
+    "category": "transportation",
+    "question": "יש ___ מונית באזור הזה?",
+    "options": ["תחנת", "מכונית", "חנות", "עוגה"],
+    "correctAnswer": "תחנת",
+    "translation": "Is there a taxi station in this area?"
+  },
+  {
+    "id": 52,
+    "category": "transportation",
+    "question": "לאן האוטובוס הזה ___?",
+    "options": ["נוסע", "רץ", "משייט", "עושה"],
+    "correctAnswer": "נוסע",
+    "translation": "Where does this bus go?"
+  },
+  {
+    "id": 53,
+    "category": "transportation",
+    "question": "אפשר לקנות ___ בתחנה?",
+    "options": ["כרטיס", "ספר", "סכין", "לחם"],
+    "correctAnswer": "כרטיס",
+    "translation": "Can I buy a ticket at the station?"
+  },
+  {
+    "id": 54,
+    "category": "transportation",
+    "question": "האם יש ___ לאוטובוסים בין-עירוניים?",
+    "options": ["תחנה", "עליה", "קוביה", "חניה"],
+    "correctAnswer": "תחנה",
+    "translation": "Is there a terminal for intercity buses?"
+  },
+  {
+    "id": 55,
+    "category": "transportation",
+    "question": "כמה ___ הנסיעה?",
+    "options": ["עולה", "מסובכת", "טעימה", "שקטה"],
+    "correctAnswer": "עולה",
+    "translation": "How much does the ride cost?"
+  },
+  {
+    "id": 56,
+    "category": "transportation",
+    "question": "יש ___ לסטודנטים?",
+    "options": ["הנחות", "מתנות", "ארוחות", "חדרים"],
+    "correctAnswer": "הנחות",
+    "translation": "Are there discounts for students?"
+  },
+  {
+    "id": 57,
+    "category": "transportation",
+    "question": "האם אפשר ___ כרטיס באפליקציה?",
+    "options": ["להזמין", "להכין", "לטגן", "לעבוד"],
+    "correctAnswer": "להזמין",
+    "translation": "Can I order a ticket in the app?"
+  },
+  {
+    "id": 58,
+    "category": "transportation",
+    "question": "מתי ___ רכבת הבאה?",
+    "options": ["יוצאת", "נוסעת", "מחכה", "יושבת"],
+    "correctAnswer": "יוצאת",
+    "translation": "When does the next train leave?"
+  },
+  {
+    "id": 59,
+    "category": "transportation",
+    "question": "יש ___ ישיר לאוניברסיטה?",
+    "options": ["קו", "אוטובוס", "שולחן", "ספסל"],
+    "correctAnswer": "קו",
+    "translation": "Is there a direct line to the university?"
+  },
+  {
+    "id": 60,
+    "category": "transportation",
+    "question": "איפה אפשר ___ אופניים?",
+    "options": ["להחנות", "להדליק", "לאכול", "להגיע"],
+    "correctAnswer": "להחנות",
+    "translation": "Where can I park a bicycle?"
+  },
+  {
+    "id": 61,
+    "category": "transportation",
+    "question": "מה ____ של הקו הזה?",
+    "options": ["המספר", "הצבע", "הגודל", "השם"],
+    "correctAnswer": "המספר",
+    "translation": "What is the number of this line?"
+  },
+  {
+    "id": 62,
+    "category": "transportation",
+    "question": "האם יש ___ ברכבת?",
+    "options": ["Wi-Fi", "קפה", "ספרים", "מסעדה"],
+    "correctAnswer": "Wi-Fi",
+    "translation": "Is there Wi-Fi on the train?"
+  },
+  {
+    "id": 63,
+    "category": "transportation",
+    "question": "האם אפשר ___ תחנה?",
+    "options": ["להודיע", "לקנות", "לטלפן", "לשחק"],
+    "correctAnswer": "להודיע",
+    "translation": "Can you announce the station?"
+  },
+  {
+    "id": 64,
+    "category": "transportation",
+    "question": "יש ___ לילדים מתחת לגיל 5?",
+    "options": ["הנחה", "חדר", "תחנה", "רכבת"],
+    "correctAnswer": "הנחה",
+    "translation": "Is there a discount for children under 5?"
+  },
+  {
+    "id": 65,
+    "category": "transportation",
+    "question": "אפשר לשים ___ ברכבת?",
+    "options": ["אופניים", "מזוודה", "אוכל", "מים"],
+    "correctAnswer": "אופניים",
+    "translation": "Can I bring a bike on the train?"
+  },
+  {
+    "id": 66,
+    "category": "transportation",
+    "question": "האם יש ___ בתחנה?",
+    "options": ["מעלית", "ספר", "חלב", "קופה"],
+    "correctAnswer": "מעלית",
+    "translation": "Is there an elevator at the station?"
+  },
+  {
+    "id": 67,
+    "category": "transportation",
+    "question": "האם אפשר לעלות עם ___?",
+    "options": ["חיה", "סנדוויץ'", "חלון", "עיתון"],
+    "correctAnswer": "חיה",
+    "translation": "Can I get on with a pet?"
+  },
+  {
+    "id": 68,
+    "category": "transportation",
+    "question": "לאן האוטובוס הזה ___?",
+    "options": ["מגיע", "טס", "קופץ", "נח"],
+    "correctAnswer": "מגיע",
+    "translation": "Where does this bus arrive?"
+  },
+  {
+    "id": 69,
+    "category": "transportation",
+    "question": "איזו ___ מגיעה לשוק?",
+    "options": ["תחנה", "חנות", "מפה", "רכבת"],
+    "correctAnswer": "תחנה",
+    "translation": "Which stop serves the market?"
+  },
+  {
+    "id": 70,
+    "category": "transportation",
+    "question": "כמה ___ יש לנסיעה?",
+    "options": ["תחנות", "ירקות", "מאכלים", "כרטיסים"],
+    "correctAnswer": "תחנות",
+    "translation": "How many stops are in this ride?"
+  },
+  {
+    "id": 71,
+    "category": "transportation",
+    "question": "יש ___ בלילה?",
+    "options": ["שירות", "חנות", "סופר", "מונית"],
+    "correctAnswer": "שירות",
+    "translation": "Is there night service?"
+  },
+  {
+    "id": 72,
+    "category": "transportation",
+    "question": "אפשר לשלם ב___?",
+    "options": ["כרטיס אשראי", "לחם", "מחבת", "ספר"],
+    "correctAnswer": "כרטיס אשראי",
+    "translation": "Can I pay by credit card?"
+  },
+  {
+    "id": 73,
+    "category": "transportation",
+    "question": "האם יש ___ מידע בתחנה?",
+    "options": ["עמדת", "קפה", "חנות", "אוטובוס"],
+    "correctAnswer": "עמדת",
+    "translation": "Is there an info desk at the station?"
+  },
+  {
+    "id": 74,
+    "category": "transportation",
+    "question": "האם יש ___ לאופניים?",
+    "options": ["חניה", "מכונה", "מכולת", "קופה"],
+    "correctAnswer": "חניה",
+    "translation": "Is there parking for bicycles?"
+  },
+  {
+    "id": 75,
+    "category": "transportation",
+    "question": "איפה אני קונה ___ לשבוע?",
+    "options": ["כרטיס", "פלאפון", "קפה", "בירה"],
+    "correctAnswer": "כרטיס",
+    "translation": "Where do I buy a weekly ticket?"
   }
 ]
