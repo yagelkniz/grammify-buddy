@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
 import PresentTenseVerbPractice from "@/components/PresentTenseVerbPractice";
@@ -66,6 +66,18 @@ const Index = () => {
   const [selectedTextComp, setSelectedTextComp] = useState<
     null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy"
   >(null);
+  const nav = useNavigate();
+
+  // אם לא מחובר - להפנות ל־/auth
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) nav("/auth", { replace: true });
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) nav("/auth", { replace: true });
+    });
+    return () => subscription.unsubscribe();
+  }, [nav]);
 
   function handleBack() {
     if (selectedTextComp) setSelectedTextComp(null);
