@@ -72,6 +72,9 @@ const practiceOptions = [
 ];
 
 const Index = () => {
+  // Add lang state
+  const [lang] = useState<"he" | "en">("he"); // אפשרות להחלפה בעתיד
+
   const [showWelcome, setShowWelcome] = useState(true);
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
