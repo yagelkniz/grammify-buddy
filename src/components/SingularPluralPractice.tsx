@@ -20,6 +20,28 @@ interface SingularPluralQuestion {
 
 type Lang = "he" | "en";
 
+function buildDistractors(word: string, answer: string): string[] {
+  // פתרון פשוט: מייצרים שלושה סוגי תשובות - יחיד, רבים בוות, רבים ב-ים
+  // אם התשובה ב-ים -> המחולל ייתן וריאציה ב-ות ולהיפך, תמיד מציג גם את היחיד.
+  const base = word.replace(/ים$|ות$/, "");
+  let pluralYim = base + "ים";
+  let pluralVot = base + "ות";
+
+  // מניעת כפילויות ואי התאמות 
+  // אם ה"ות" או "ים" כבר מופיע במקור, נשתמש בו, אחרת נייצר משורש המילה
+  if (answer.endsWith("ים")) pluralYim = answer;
+  if (answer.endsWith("ות")) pluralVot = answer;
+
+  // תמיד יש יחיד, שתי וריאציות רבים (ים, ות)
+  const options: string[] = [base, pluralYim, pluralVot];
+
+  // remove duplicates and put the answer where it should be
+  const filteredOptions = Array.from(new Set(options));
+  // ודא שהתשובה האמיתית אכן קיימת באפשרויות
+  if (!filteredOptions.includes(answer)) filteredOptions.push(answer);
+  return filteredOptions;
+}
+
 export default function SingularPluralPractice({
   lang = "he",
   onBack,
@@ -34,14 +56,32 @@ export default function SingularPluralPractice({
 
   const q: SingularPluralQuestion = (questions as SingularPluralQuestion[])[step];
 
-  // אופציות מוצגות תמיד גם בעברית וגם באנגלית
-  const joinedOptions = q.he.options
-    .map((heOpt, idx) => {
-      const enOpt = q.en.options[idx];
-      return { heOpt, enOpt };
-    })
-    .filter(optPair => optPair.heOpt !== "טעות") // מסנן את "טעות"
-    .map(({ heOpt, enOpt }) => `${heOpt} (${enOpt.replace(/.*\(([^)]+)\).*/, '$1').trim()})`);
+  // חילוץ המילה המקורית מתוך השאלה
+  // בהנחה שהמילה בין גרשיים ראשונה
+  const match = q.he.question.match(/'([^']+)'/);
+  const baseWord = match ? match[1] : "";
+
+  // בונה אופציות בצורה דינמית, תמיד: יחיד, רבים-ים, רבים-ות — תשובה שגויה אחת לפחות תמיד (הסחה).
+  const heOptions = buildDistractors(baseWord, q.answer);
+
+  // מחלץ מקבילי אנגלית
+  // משתמשים באותו האינדקס מתוך אופציות באנגלית לפי סדר החדש
+  const enRawOptions = q.en.options.map(opt => opt.replace(/.*\(([^)]+)\).*/, "$1"));
+  // במקביל לבניית אפשרות חדשה, נשתדל למפות לאנגלית לפי סדר השאלה המקורי,
+  // ואם אין התאמה, פשוט נחזור על האופציה הקיימת באנגלית.
+  function findEnglishForHebrew(opt: string): string {
+    const idx = q.he.options.indexOf(opt);
+    if (idx !== -1 && q.en.options[idx]) {
+      return q.en.options[idx].replace(/.*\(([^)]+)\).*/, "$1");
+    }
+    // לא נמצא: נסה להתאים "ים" -> "(boys)" וכו'
+    if (opt.endsWith("ים") && enRawOptions.find(x => x.endsWith("s"))) return enRawOptions.find(x => x.endsWith("s")) as string;
+    if (opt.endsWith("ות") && enRawOptions.find(x => x.endsWith("s"))) return enRawOptions.find(x => x.endsWith("s")) as string;
+    if (!opt.endsWith("ים") && !opt.endsWith("ות") && enRawOptions.find(x => !x.endsWith("s"))) return enRawOptions.find(x => !x.endsWith("s")) as string;
+    // אחרת נחזיר תרגום גולמי של המילה
+    return opt;
+  }
+  const joinedOptions = heOptions.map((heOpt) => `${heOpt} (${findEnglishForHebrew(heOpt)})`);
 
   function handleOption(idx: number) {
     setSelected(idx);
@@ -57,11 +97,9 @@ export default function SingularPluralPractice({
 
   const t = (h: string, e: string) => (lang === "he" ? h : e);
 
-  // get correct option after possibility filtering (שימו לב! התאמה חדשה לצורך הסרת "טעות")
   function getCorrectOptionIdx() {
-    // מחפש את האינדקס מתוך מערך האופציות (ללא "טעות")
-    const filteredOptions = q.he.options.filter(opt => opt !== "טעות");
-    return filteredOptions.findIndex(opt => opt === q.answer);
+    // מחפש איזה אינדקס באופציות החדשות שווה לתשובה הנכונה
+    return heOptions.findIndex(opt => opt === q.answer);
   }
 
   return (
@@ -87,8 +125,8 @@ export default function SingularPluralPractice({
           onClick={() => setShowTranslation((b) => !b)}
         >
           {showTranslation
-            ? t("הסתר תרגום", "Hide translation")
-            : t("הצג תרגום", "Show translation")}
+            ? t("הסתר אנגלית", "Hide English")
+            : t("הצג אנגלית", "Show English")}
         </Button>
       </div>
       <div className="flex flex-col gap-3 w-full">
@@ -133,4 +171,3 @@ export default function SingularPluralPractice({
     </div>
   );
 }
-
