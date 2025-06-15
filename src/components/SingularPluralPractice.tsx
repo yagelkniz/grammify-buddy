@@ -62,7 +62,7 @@ export default function SingularPluralPractice({
   const [showSummary, setShowSummary] = useState(false); // מצב סיכום
 
   // בניית נתוני השאלה
-  const q: SingularPluralQuestion = (questions as SingularPluralQuestion[])[step];
+  const q: SingularPluralQuestion = (questions as unknown as SingularPluralQuestion[])[step];
 
   // חילוץ המילה לשאלה
   const match = q.he.question.match(/'([^']+)'/);
