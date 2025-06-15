@@ -83,12 +83,9 @@ const Index = () => {
   const nav = useNavigate();
   const [showPronounsTable, setShowPronounsTable] = useState(false);
   const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
-  // change here: add "transportation" to the type
   const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<null | "restaurant" | "supermarket" | "transportation">(null);
-  const [lang, setLang] = useState<"he" | "en">("he"); // שפת ממשק
   const [showSingularPlural, setShowSingularPlural] = useState(false);
 
-  // אם לא מחובר - להפנות ל־/auth
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) nav("/auth", { replace: true });
@@ -107,16 +104,11 @@ const Index = () => {
     else setSelectedPractice(null);
   }
 
-  // הפונקציה מחזירה טקסט בלוקל לפי השפה
-  const t = (key: string) => {
-    // תומך גם במפתחות מורכבים (למשל everydayCategories.restaurant)
-    const path = key.split(".");
-    let val: any = menuText[lang];
-    for (const p of path) {
-      val = val?.[p];
-    }
-    return val || key;
-  };
+  // פונקציה מחזירה אובייקט שבו גם hebrew וגם english
+  const t = (key: string) => ({
+    he: menuText.he[key],
+    en: menuText.en[key]
+  });
 
   // Welcome screen
   if (showWelcome) {
@@ -264,121 +256,134 @@ const Index = () => {
   if (!selectedPractice) {
     return (
       <div className="flex flex-col gap-8 items-center w-full max-w-md mx-auto">
-        <div className="flex items-center gap-4 self-end">
-          <span className="text-sm">{t("lang")}:</span>
-          <Button variant={lang === "he" ? "default" : "outline"} onClick={() => setLang("he")}>{t("hebrew")}</Button>
-          <Button variant={lang === "en" ? "default" : "outline"} onClick={() => setLang("en")}>{t("english")}</Button>
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir={lang === "he" ? "rtl" : "ltr"}>
-          {t("mainTitle")}
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir="rtl">
+          איזה תרגול תרצה לתרגל?<br />
+          <span className="text-base text-slate-600 font-normal" dir="ltr">
+            What would you like to practice?
+          </span>
         </h1>
         <div className="grid gap-6 w-full">
-          {/* כפתור תרגול יחיד/רבים + זכר/נקבה */}
+          {/* יחיד/רבים + זכר/נקבה*/}
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-lime-100 text-lime-900 border-lime-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-lime-100 text-lime-900 border-lime-300"
             onClick={() => setShowSingularPlural(true)}
           >
-            <span className="text-3xl">📚</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("singularPlural")}</span>
+            <span className="text-3xl mb-2">📚</span>
+            <span dir="rtl">{t("singularPlural").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("singularPlural").en}</span>
           </button>
-          {/* שאר כפתורי התפריט, כפי שהיו, בעברית/אנגלית, לפי t() */}
+          {/* שאר הכפתורים – תצוגה דו־לשונית */}
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
             onClick={() => setShowLinkingWords(true)}
           >
-            <span className="text-3xl">🔗</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("linkingWords")}</span>
+            <span className="text-3xl mb-2">🔗</span>
+            <span dir="rtl">{t("linkingWords").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("linkingWords").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
             onClick={() => setShowPronounsTable(true)}
           >
-            <span className="text-3xl">👤</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("pronouns")}</span>
+            <span className="text-3xl mb-2">👤</span>
+            <span dir="rtl">{t("pronouns").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("pronouns").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-teal-100 text-teal-900 border-teal-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-teal-100 text-teal-900 border-teal-300"
             onClick={() => setShowPossessivePronouns(true)}
           >
-            <span className="text-3xl">🔗</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("possessivePronouns")}</span>
+            <span className="text-3xl mb-2">🔗</span>
+            <span dir="rtl">{t("possessivePronouns").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("possessivePronouns").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-100 text-orange-900 border-orange-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-100 text-orange-900 border-orange-300"
             onClick={() => setShowEverydayHebrew(true)}
           >
-            <span className="text-3xl">🗣️</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("everydayHebrew")}</span>
+            <span className="text-3xl mb-2">🗣️</span>
+            <span dir="rtl">{t("everydayHebrew").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("everydayHebrew").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 text-blue-900 border-blue-200"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 text-blue-900 border-blue-200"
             onClick={() => setSelectedPractice("verb")}
           >
-            <span className="text-3xl">🕰️</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("verbs")}</span>
+            <span className="text-3xl mb-2">🕰️</span>
+            <span dir="rtl">{t("verbs").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("verbs").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-pink-100 text-pink-900 border-pink-400"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-pink-100 text-pink-900 border-pink-400"
             onClick={() => setSelectedPractice("nounAdj")}
           >
-            <span className="text-3xl">📝</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("nouns")}</span>
+            <span className="text-3xl mb-2">📝</span>
+            <span dir="rtl">{t("nouns").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("nouns").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
             onClick={() => setShowQuestionnaire(true)}
           >
-            <span className="text-3xl">💬</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("questionnaire")}</span>
+            <span className="text-3xl mb-2">💬</span>
+            <span dir="rtl">{t("questionnaire").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("questionnaire").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-yellow-100 text-yellow-900 border-yellow-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-yellow-100 text-yellow-900 border-yellow-300"
             onClick={() => setSelectedTextComp("food-levels")}
           >
-            <span className="text-3xl">🥗</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("foodComp")}</span>
+            <span className="text-3xl mb-2">🥗</span>
+            <span dir="rtl">{t("foodComp").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("foodComp").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-200 text-orange-900 border-orange-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-200 text-orange-900 border-orange-300"
             onClick={() => setSelectedTextComp("food-order-medium")}
           >
-            <span className="text-3xl">🍽️</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("foodOrder")}</span>
+            <span className="text-3xl mb-2">🍽️</span>
+            <span dir="rtl">{t("foodOrder").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("foodOrder").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-green-100 text-green-900 border-green-200"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-green-100 text-green-900 border-green-200"
             onClick={() => setSelectedTextComp("animals-easy")}
           >
-            <span className="text-3xl">🐾</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("animalsEasy")}</span>
+            <span className="text-3xl mb-2">🐾</span>
+            <span dir="rtl">{t("animalsEasy").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("animalsEasy").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-100 text-blue-900 border-blue-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-100 text-blue-900 border-blue-300"
             onClick={() => setSelectedTextComp("social-media")}
           >
-            <span className="text-3xl">📱</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("socialMedia")}</span>
+            <span className="text-3xl mb-2">📱</span>
+            <span dir="rtl">{t("socialMedia").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("socialMedia").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
             onClick={() => setSelectedTextComp("countries-levels")}
           >
-            <span className="text-3xl">🌏</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("countries")}</span>
+            <span className="text-3xl mb-2">🌏</span>
+            <span dir="rtl">{t("countries").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("countries").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-50 text-blue-900 border-blue-400"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-50 text-blue-900 border-blue-400"
             onClick={() => setSelectedTextComp("movies-series-levels")}
           >
-            <span className="text-3xl">📺</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("movies")}</span>
+            <span className="text-3xl mb-2">📺</span>
+            <span dir="rtl">{t("movies").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("movies").en}</span>
           </button>
           <button
-            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-sky-100 text-sky-900 border-sky-400"
+            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-sky-100 text-sky-900 border-sky-400"
             onClick={() => setSelectedTextComp("places-food-easy")}
           >
-            <span className="text-3xl">🌊</span>
-            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("placesFoodEasy")}</span>
+            <span className="text-3xl mb-2">🌊</span>
+            <span dir="rtl">{t("placesFoodEasy").he}</span>
+            <span className="text-base font-normal text-slate-600" dir="ltr">{t("placesFoodEasy").en}</span>
           </button>
         </div>
       </div>
