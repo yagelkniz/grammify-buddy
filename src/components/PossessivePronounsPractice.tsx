@@ -1,19 +1,59 @@
 
 import React, { useState } from "react";
-import questions from "./possessivePronounsQuestions.json";
+import questionsData from "./possessivePronounsQuestions.json";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+// Category type for TS inference
+interface Category {
+  id: string;
+  label: string;
+  questions: {
+    question: string;
+    options: string[];
+    answer: string;
+    translation: string;
+  }[];
+}
 
 interface Props {
   onBack: () => void;
 }
 
 const PossessivePronounsPractice: React.FC<Props> = ({ onBack }) => {
+  // Parse and type questions
+  const categories: Category[] = (questionsData as any).categories;
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // Find the category
+  const category = categories.find(c => c.id === selectedCategory);
+  const questions = category ? category.questions : [];
+
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string>("");
   const [showAnswer, setShowAnswer] = useState(false);
   const [score, setScore] = useState(0);
 
+  // If user hasn't picked category yet
+  if (!selectedCategory) {
+    return (
+      <div className="flex flex-col items-center gap-7 p-6 w-full">
+        <div className="flex justify-end w-full">
+          <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>
+        </div>
+        <h2 className="text-2xl font-bold text-teal-900 mb-2" dir="rtl">בחר קטגוריית תרגול</h2>
+        <div className="flex flex-col gap-5 w-full max-w-xs">
+          {categories.map(cat => (
+            <Button key={cat.id} onClick={() => setSelectedCategory(cat.id)} className="text-lg py-4">
+              {cat.label}
+            </Button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Questions flow
   const total = questions.length;
   const q = questions[current];
 
@@ -30,14 +70,21 @@ const PossessivePronounsPractice: React.FC<Props> = ({ onBack }) => {
     setCurrent((c) => c + 1);
   };
 
-  if (current >= questions.length) {
+  if (current >= total) {
     return (
       <div className="flex flex-col items-center gap-6 p-4">
         <h2 className="text-xl font-bold text-violet-900" dir="rtl">סיימת!</h2>
         <div className="text-lg" dir="rtl">
           צברת {score} מתוך {total} נקודות.
         </div>
-        <Button className="mt-4" onClick={onBack}>⬅ חזרה</Button>
+        <Button className="mt-4" onClick={() => {
+          setSelectedCategory(null);
+          setCurrent(0);
+          setScore(0);
+        }}>
+          תרגול מחדש / New Practice
+        </Button>
+        <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>
       </div>
     );
   }
