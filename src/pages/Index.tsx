@@ -46,7 +46,9 @@ const Index = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
-  const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy">(null);
+  const [selectedTextComp, setSelectedTextComp] = useState<
+    null | "food" | "animals-easy" | "food-order-medium"
+  >(null);
 
   function handleBack() {
     if (selectedTextComp) setSelectedTextComp(null);
@@ -91,6 +93,12 @@ const Index = () => {
         </div>
         {selectedTextComp==="food" && <TextComprehensionFood />}
         {selectedTextComp==="animals-easy" && <TextComprehensionAnimalsEasy />}
+        {selectedTextComp==="food-order-medium" && (
+          <React.Suspense fallback={<div>טוען...</div>}>
+            {/** נטען דינמית בעתיד, כעת ישירות */}
+            {require('../components/TextComprehensionFoodOrderMedium').default()}
+          </React.Suspense>
+        )}
       </div>
     );
   }
@@ -113,13 +121,13 @@ const Index = () => {
                 <span dir="rtl">{option.label}</span>
               </button>
             ))}
-            {/* כפתור חדש לתרגול הבנת הנקרא - אוכל */}
+            {/* כפתור חדש לתרגול הבנת הנקרא - אוכל (בינוני) */}
             <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-orange-100 text-orange-900 border-orange-200"
-              onClick={() => setSelectedTextComp("food")}
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-orange-200 text-orange-900 border-orange-300"
+              onClick={() => setSelectedTextComp("food-order-medium")}
             >
               <span className="text-3xl">🍽️</span>
-              <span dir="rtl">הבנת הנקרא - אוכל</span>
+              <span dir="rtl">הבנת הנקרא - הזמנת אוכל (בינוני)</span>
             </button>
             {/* כפתור חדש לתרגול הבנת הנקרא - חיות (קל) */}
             <button
