@@ -1,0 +1,143 @@
+
+[
+  {
+    "id": 1,
+    "he": {
+      "question": "מה הרבים של 'ספר'?",
+      "options": ["ספרים", "ספר", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'ספר' (book)?",
+      "options": ["ספרים (books)", "ספר (book)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "ספרים"
+  },
+  {
+    "id": 2,
+    "he": {
+      "question": "מה הרבים של 'מכונית'?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car)?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 3,
+    "he": {
+      "question": "מה הרבים של 'ילד'?",
+      "options": ["ילדים", "ילד", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'ילד' (boy)?",
+      "options": ["ילדים (boys)", "ילד (boy)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "ילדים"
+  },
+  {
+    "id": 4,
+    "he": {
+      "question": "מה הרבים של 'ילדה'?",
+      "options": ["ילדות", "ילדה", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'ילדה' (girl)?",
+      "options": ["ילדות (girls)", "ילדה (girl)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "ילדות"
+  },
+  {
+    "id": 5,
+    "he": {
+      "question": "מה הרבים של 'שולחן'?",
+      "options": ["שולחנות", "שולחן", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'שולחן' (table)?",
+      "options": ["שולחנות (tables)", "שולחן (table)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "שולחנות"
+  },
+  {
+    "id": 6,
+    "he": {
+      "question": "מה הרבים של 'כיסא'?",
+      "options": ["כיסאות", "כיסא", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'כיסא' (chair)?",
+      "options": ["כיסאות (chairs)", "כיסא (chair)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "כיסאות"
+  },
+  {
+    "id": 7,
+    "he": {
+      "question": "מה הרבים של 'עוגה'?",
+      "options": ["עוגות", "עוגה", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'עוגה' (cake)?",
+      "options": ["עוגות (cakes)", "עוגה (cake)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "עוגות"
+  },
+  {
+    "id": 8,
+    "he": {
+      "question": "מה הרבים של 'בקבוק'?",
+      "options": ["בקבוקים", "בקבוק", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'בקבוק' (bottle)?",
+      "options": ["בקבוקים (bottles)", "בקבוק (bottle)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "בקבוקים"
+  },
+  {
+    "id": 9,
+    "he": {
+      "question": "מה הרבים של 'דלת'?",
+      "options": ["דלתות", "דלת", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'דלת' (door)?",
+      "options": ["דלתות (doors)", "דלת (door)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "דלתות"
+  },
+  {
+    "id": 10,
+    "he": {
+      "question": "מה הרבים של 'חלון'?",
+      "options": ["חלונות", "חלון", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'חלון' (window)?",
+      "options": ["חלונות (windows)", "חלון (window)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "חלונות"
+  }
+]

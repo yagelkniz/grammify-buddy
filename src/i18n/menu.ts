@@ -2,6 +2,7 @@
 const menuText = {
   he: {
     mainTitle: "איזה תרגול תרצה לתרגל?",
+    singularPlural: "יחיד/רבים + זכר/נקבה",
     linkingWords: "טבלת מילות קישור (קטגוריות ודוגמאות)",
     pronouns: "טבלת שמות גוף (עברית-אנגלית)",
     possessivePronouns: "טבלת מילות שייכות (עברית-אנגלית)",
@@ -27,6 +28,7 @@ const menuText = {
   },
   en: {
     mainTitle: "What would you like to practice?",
+    singularPlural: "Singular/Plural + Gender",
     linkingWords: "Linking words table (categories & examples)",
     pronouns: "Pronouns table (Hebrew–English)",
     possessivePronouns: "Possessive pronouns table (Hebrew–English)",

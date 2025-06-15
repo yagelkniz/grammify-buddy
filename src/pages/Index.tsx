@@ -32,6 +32,7 @@ const LazyTextComprehensionCountriesLevels = React.lazy(() =>
 const LazyTextComprehensionMoviesAndSeriesLevels = React.lazy(() =>
   import("@/components/TextComprehensionMoviesAndSeriesLevels")
 );
+import SingularPluralPractice from "@/components/SingularPluralPractice";
 
 const tenseOptions = [
   {
@@ -85,6 +86,7 @@ const Index = () => {
   // change here: add "transportation" to the type
   const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<null | "restaurant" | "supermarket" | "transportation">(null);
   const [lang, setLang] = useState<"he" | "en">("he"); // שפת ממשק
+  const [showSingularPlural, setShowSingularPlural] = useState(false);
 
   // אם לא מחובר - להפנות ל־/auth
   useEffect(() => {
@@ -248,6 +250,16 @@ const Index = () => {
     );
   }
 
+  // תרגול יחיד/רבים + זכר/נקבה
+  if (showSingularPlural) {
+    return (
+      <SingularPluralPractice
+        lang={lang}
+        onBack={() => setShowSingularPlural(false)}
+      />
+    );
+  }
+
   // דוגמה: שינוי התפריט הראשי באחת התצוגות
   if (!selectedPractice) {
     return (
@@ -261,6 +273,15 @@ const Index = () => {
           {t("mainTitle")}
         </h1>
         <div className="grid gap-6 w-full">
+          {/* כפתור תרגול יחיד/רבים + זכר/נקבה */}
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-lime-100 text-lime-900 border-lime-300"
+            onClick={() => setShowSingularPlural(true)}
+          >
+            <span className="text-3xl">📚</span>
+            <span dir={lang === "he" ? "rtl" : "ltr"}>{t("singularPlural")}</span>
+          </button>
+          {/* שאר כפתורי התפריט, כפי שהיו, בעברית/אנגלית, לפי t() */}
           <button
             className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
             onClick={() => setShowLinkingWords(true)}
