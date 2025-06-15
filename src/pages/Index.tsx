@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
 import PresentTenseVerbPractice from "@/components/PresentTenseVerbPractice";
@@ -11,6 +12,8 @@ import TextComprehensionCountriesLevels from "@/components/TextComprehensionCoun
 import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensionMoviesAndSeriesLevels";
 import FutureTenseVerbPractice from "@/components/FutureTenseVerbPractice";
 import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlacesFoodEasy";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
