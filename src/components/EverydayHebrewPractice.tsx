@@ -1,10 +1,17 @@
-
 import React, { useState } from "react";
 import { everydayHebrewQuestionsPart1 } from "./everydayHebrewQuestionsParts";
 import { Button } from "@/components/ui/button";
+import questionsRaw from "./everydayHebrewQuestions.json";
 
-export default function EverydayHebrewPractice({ onBack }: { onBack?: () => void }) {
-  const questions = everydayHebrewQuestionsPart1; // אפשר להחליף ל־part2, part3 וכו'
+interface EverydayHebrewPracticeProps {
+  category: "restaurant" | "supermarket";
+  onBack?: () => void;
+}
+
+export default function EverydayHebrewPractice({ category, onBack }: EverydayHebrewPracticeProps) {
+  // סינון השאלות לפי קטגוריה
+  const questions = (questionsRaw as any[]).filter(q => q.category === category);
+
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -29,6 +36,16 @@ export default function EverydayHebrewPractice({ onBack }: { onBack?: () => void
     setCurrent(c => (c > 0 ? c - 1 : c));
   }
 
+  // אם אין שאלות, נציג הודעה
+  if (!q) {
+    return (
+      <div className="flex flex-col items-center justify-center p-6 gap-8 min-h-[40vh]">
+        <h2 className="text-2xl text-red-800 font-bold">לא נמצאו שאלות לקטגוריה זו</h2>
+        {onBack && <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>}
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center p-6 gap-8 min-h-[65vh] max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow-md border rtl">
       <div className="flex justify-between w-full">
@@ -38,7 +55,7 @@ export default function EverydayHebrewPractice({ onBack }: { onBack?: () => void
         <span className="text-gray-600 text-sm">{current + 1} / {questions.length}</span>
       </div>
       <h1 className="text-2xl md:text-3xl font-bold text-blue-800 mb-1" dir="rtl">
-        עברית יומיומית – תרגול השלמת מילים
+        {category === "restaurant" ? "עברית יומיומית – מסעדה" : "עברית יומיומית – סופר"}
       </h1>
       <div className="bg-blue-50 p-5 rounded-xl border w-full text-xl font-semibold flex flex-col items-center" dir="rtl">
         <span dangerouslySetInnerHTML={{ __html: q.question.replace("___", "<span class='underline decoration-blue-400'>_____</span>") }} />

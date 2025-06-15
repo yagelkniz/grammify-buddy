@@ -19,6 +19,7 @@ import PossessivePronounsTable from "@/components/PossessivePronounsTable";
 import LinkingWordsTable from "@/components/LinkingWordsTable";
 import IndexMainMenu from "./IndexMainMenu";
 import EverydayHebrewPractice from "@/components/EverydayHebrewPractice";
+import EverydayHebrewCategorySelect from "@/components/EverydayHebrewCategorySelect";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -80,6 +81,7 @@ const Index = () => {
   const nav = useNavigate();
   const [showPronounsTable, setShowPronounsTable] = useState(false);
   const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
+  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<null | "restaurant" | "supermarket">(null);
 
   // אם לא מחובר - להפנות ל־/auth
   useEffect(() => {
@@ -93,7 +95,8 @@ const Index = () => {
   }, [nav]);
 
   function handleBack() {
-    if (showEverydayHebrew) setShowEverydayHebrew(false);
+    if (everydayHebrewCategory !== null) setEverydayHebrewCategory(null);
+    else if (showEverydayHebrew) setShowEverydayHebrew(false);
     else if (selectedTextComp) setSelectedTextComp(null);
     else if (selectedTense) setSelectedTense(null);
     else setSelectedPractice(null);
@@ -169,7 +172,16 @@ const Index = () => {
     );
   }
 
-  if (showEverydayHebrew) {
+  if (showEverydayHebrew && everydayHebrewCategory === null) {
+    return (
+      <EverydayHebrewCategorySelect
+        onSelect={cat => setEverydayHebrewCategory(cat)}
+        onBack={handleBack}
+      />
+    );
+  }
+
+  if (showEverydayHebrew && everydayHebrewCategory) {
     return (
       <div className="w-full max-w-3xl mx-auto">
         <div className="flex justify-end mb-4">
@@ -177,7 +189,10 @@ const Index = () => {
             ⬅ חזרה
           </Button>
         </div>
-        <EverydayHebrewPractice onBack={handleBack} />
+        <EverydayHebrewPractice
+          category={everydayHebrewCategory}
+          onBack={handleBack}
+        />
       </div>
     );
   }

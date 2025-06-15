@@ -55,7 +55,6 @@ export default function IndexMainMenu({
         >
           <span className="text-3xl">🗣️</span>
           <span dir="rtl">עברית יומיומית – תרגול השלמת מילים</span>
-          <ChevronRight className="text-orange-400" size={30} />
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 text-blue-900 border-blue-200"
