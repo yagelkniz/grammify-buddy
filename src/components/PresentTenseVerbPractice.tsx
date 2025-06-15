@@ -1,0 +1,145 @@
+
+import React, { useState } from "react";
+
+type Question = {
+  emoji: string;
+  textBefore: string;
+  blank?: string;
+  textAfter?: string;
+  options: string[];
+  correct: string;
+  color?: string;
+};
+
+const questions: Question[] = [
+  {
+    emoji: "🍎",
+    textBefore: "אני",
+    blank: "______",
+    textAfter: "תפוח כל בוקר.",
+    options: ["אוכל", "אוכלת", "אוכלים", "אוכלות"],
+    correct: "אוכל",
+    color: "bg-red-100",
+  },
+  {
+    emoji: "🏀",
+    textBefore: "אתה",
+    blank: "______",
+    textAfter: "כדורסל עם חברים?",
+    options: ["משחק", "משחקת", "משחקים", "משחקות"],
+    correct: "משחק",
+    color: "bg-orange-100",
+  },
+  {
+    emoji: "🎵",
+    textBefore: "הם",
+    blank: "______",
+    textAfter: "מוזיקה בשיעור.",
+    options: ["שומעים", "שומעות", "שומע", "שומעת"],
+    correct: "שומעים",
+    color: "bg-pink-100",
+  },
+  {
+    emoji: "🥪",
+    textBefore: "היא",
+    blank: "______",
+    textAfter: "סנדוויץ'.",
+    options: ["אוכלת", "אוכל", "אוכלות", "אוכלים"],
+    correct: "אוכלת",
+    color: "bg-yellow-100",
+  },
+  {
+    emoji: "📚",
+    textBefore: "אנחנו",
+    blank: "______",
+    textAfter: "בכיתה.",
+    options: ["לומדים", "לומדות", "לומד", "לומדת"],
+    correct: "לומדים",
+    color: "bg-green-100",
+  },
+  {
+    emoji: "🚗",
+    textBefore: "אתן",
+    blank: "______",
+    textAfter: "לעבודה יחד?",
+    options: ["נוסעות", "נוסעים", "נוסעת", "נוסע"],
+    correct: "נוסעות",
+    color: "bg-blue-100",
+  },
+  {
+    emoji: "🦸‍♀️",
+    textBefore: "את",
+    blank: "______",
+    textAfter: "הביתה לבד.",
+    options: ["הולכת", "הולך", "הולכות", "הולכים"],
+    correct: "הולכת",
+    color: "bg-purple-100",
+  },
+  {
+    emoji: "🌙",
+    textBefore: "הוא",
+    blank: "______",
+    textAfter: "מאוחר כל לילה.",
+    options: ["נרדם", "נרדמת", "נרדמים", "נרדמות"],
+    correct: "נרדם",
+    color: "bg-indigo-100",
+  },
+];
+
+export default function PresentTenseVerbPractice() {
+  const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
+  const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
+
+  function checkVerb(qIndex: number, option: string) {
+    setSelections((prev) => ({ ...prev, [qIndex]: option }));
+    setFeedbacks((prev) => ({
+      ...prev,
+      [qIndex]: option === questions[qIndex].correct ? "correct" : "incorrect",
+    }));
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center p-8 gap-10 min-h-[65vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto rtl">
+      <h1 className="text-3xl font-bold text-primary mb-4" dir="rtl">
+        בחר/י את הפועל הנכון בזמן הווה {String.fromCodePoint(0x1f31f)}
+      </h1>
+      {questions.map((q, i) => (
+        <div key={i} className={`w-full max-w-md flex flex-col items-center mb-2 rounded-xl shadow ${q.color}`}>
+          <div className="flex items-center text-3xl mt-2">{q.emoji}</div>
+          <p className="text-lg mb-2 flex flex-wrap items-center justify-center" dir="rtl">
+            {q.textBefore} <span className="mx-1 font-bold">{q.blank}</span> {q.textAfter}
+          </p>
+          <div className="grid grid-cols-2 gap-3 mb-1 w-full max-w-xs">
+            {q.options.map((opt) => (
+              <button
+                key={opt}
+                onClick={() => checkVerb(i, opt)}
+                className={`rounded-xl px-4 py-2 text-lg font-medium hover:scale-105 transition whitespace-nowrap disabled:opacity-60 ${
+                  selections[i] === opt
+                    ? (opt === q.correct ? "bg-green-300" : "bg-red-200")
+                    : "bg-white hover:bg-gray-200"
+                }`}
+                dir="rtl"
+                disabled={!!selections[i]}
+                aria-disabled={!!selections[i]}
+                style={{ border: selections[i] === opt ? "2px solid #a3a3a3" : "" }}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+          {feedbacks[i] === "correct" && (
+            <div className="text-md font-semibold mt-1 text-green-600" dir="rtl">
+              ✅ תשובה נכונה!
+            </div>
+          )}
+          {feedbacks[i] === "incorrect" && (
+            <div className="text-md font-semibold mt-1 text-red-500" dir="rtl">
+              ❌ נסה שוב
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
