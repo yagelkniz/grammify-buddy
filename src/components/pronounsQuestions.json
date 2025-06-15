@@ -1,42 +1,43 @@
+
 [
   {
     "id": 1,
     "he": {
-      "question": "איזה שם גוף מתאים למשפט: '___ גר בתל אביב.' (גוף שלישי, זכר יחיד)",
-      "options": ["אני", "הוא", "היא", "אנחנו"],
-      "hint": "מדובר בגוף שלישי זכר יחיד."
+      "question": "מי מבין האפשרויות הבאות מתאים למשפט: '___ גר בתל אביב.'",
+      "options": ["אתם", "הוא", "אני", "היא"],
+      "hint": "גוף שלישי יחיד זכר, לא מדבר על עצמי ולא על קבוצה."
     },
     "en": {
-      "question": "Which pronoun fits the sentence: '___ lives in Tel Aviv.' (3rd person masculine singular)",
-      "options": ["I", "He", "She", "We"],
-      "hint": "It's third-person masculine singular."
+      "question": "Which of the following fits: '___ lives in Tel Aviv.'",
+      "options": ["You (pl.)", "He", "I", "She"],
+      "hint": "Third person, masculine, singular."
     },
     "answer": "הוא"
   },
   {
     "id": 2,
     "he": {
-      "question": "איזה שם גוף מתאים: '___ מדברת עברית יפה.' (נקבה יחידה, גוף שני)",
-      "options": ["את", "היא", "אתה", "אני"],
-      "hint": "נקבה יחידה בגוף שני."
+      "question": "מי מבין האפשרויות הבאות מתאים למשפט: '___ מדברת עברית יפה.'",
+      "options": ["את", "אני", "אתה", "הם"],
+      "hint": "פנייה לנקבה יחידה בגוף שני."
     },
     "en": {
-      "question": "Which pronoun fits: '___ speaks Hebrew beautifully.' (feminine singular, 2nd person)",
-      "options": ["You (f. sg.)", "She", "You (m. sg.)", "I"],
-      "hint": "It's second-person feminine singular."
+      "question": "Which option fits: '___ speaks Hebrew beautifully.'",
+      "options": ["You (f. sg.)", "I", "You (m. sg.)", "They (m.)"],
+      "hint": "Second person singular, feminine."
     },
     "answer": "את"
   },
   {
     "id": 3,
     "he": {
-      "question": "בחר את שם הגוף המתאים: '___ שותה קפה כל בוקר.' (גוף ראשון יחיד)",
-      "options": ["הוא", "אתה", "אני", "את"],
-      "hint": "מדובר בי/בדובר עצמו."
+      "question": "'___ שותה קפה כל בוקר.' מתייחס לדובר עצמו. איזו אפשרות נכונה?",
+      "options": ["אני", "הוא", "היא", "אנחנו"],
+      "hint": "גוף ראשון יחיד."
     },
     "en": {
-      "question": "Select the suitable pronoun: '___ drinks coffee every morning.' (first-person singular)",
-      "options": ["He", "You (m. sg.)", "I", "You (f. sg.)"],
+      "question": "'___ drinks coffee every morning.' Refers to the speaker. Which is correct?",
+      "options": ["I", "He", "She", "We"],
       "hint": "First person singular."
     },
     "answer": "אני"
@@ -44,379 +45,99 @@
   {
     "id": 4,
     "he": {
-      "question": "איזה שם גוף מתאים: '___ עובד בבית חולים.' (גוף שלישי, זכר יחיד)",
-      "options": ["הוא", "אני", "אנחנו", "אתה"],
-      "hint": "גוף שלישי, זכר יחיד."
+      "question": "מי מבין האפשרויות הבאות מתאים: '___ עובד בבית חולים.' (גבר שאינו הדובר או השומע)",
+      "options": ["הוא", "אני", "אתם", "את"],
+      "hint": "גוף שלישי זכר יחיד שמדובר עליו."
     },
     "en": {
-      "question": "Which pronoun fits: '___ works at a hospital.' (third-person masculine singular)",
-      "options": ["He", "I", "We", "You (m. sg.)"],
-      "hint": "3rd person masculine singular."
+      "question": "Which fits: '___ works at a hospital.' (A man, not the speaker or listener)",
+      "options": ["He", "I", "You (pl.)", "You (f. sg.)"],
+      "hint": "Third person masculine singular (not I, not you)."
     },
     "answer": "הוא"
   },
   {
     "id": 5,
     "he": {
-      "question": "בחר את שם הגוף: '___ מטיילים בסוף השבוע.' (המשיבים מדברים על עצמם ברבים)",
-      "options": ["אנחנו", "אתם", "הם", "אני"],
+      "question": "'___ מטיילים בסוף השבוע.' מהי האפשרות היחידה שמדברת על הדוברים עצמם ברבים?",
+      "options": ["אנחנו", "הוא", "היא", "אתה"],
       "hint": "גוף ראשון רבים."
     },
     "en": {
-      "question": "Select the pronoun: '___ travel on weekends.' (first-person plural)",
-      "options": ["We", "You (m. pl.)", "They (m.)", "I"],
-      "hint": "First-person plural."
+      "question": "'___ travel on weekends.' Which is the only option for speakers talking about themselves (plural)?",
+      "options": ["We", "He", "She", "You (m. sg.)"],
+      "hint": "First person plural."
     },
     "answer": "אנחנו"
   },
   {
     "id": 6,
     "he": {
-      "question": "לאיזו קבוצה מתייחס: '___ משחקים כדורגל כל יום שישי.' (גוף שני, רבים, זכר)",
-      "options": ["אתם", "אנחנו", "הם", "היא"],
-      "hint": "אתם = גוף שני רבים."
+      "question": "איזו אפשרות נכונה: '___ משחקות כדורגל כל יום שישי.' (פנייה לקבוצת בנות)",
+      "options": ["אתן", "היא", "אני", "הם"],
+      "hint": "פנייה לנקבות ברבים."
     },
     "en": {
-      "question": "Who does this refer to: '___ play soccer every Friday.' (second-person plural masculine)",
-      "options": ["You (m. pl.)", "We", "They (m.)", "She"],
-      "hint": "Second-person plural, masculine."
-    },
-    "answer": "אתם"
-  },
-  {
-    "id": 7,
-    "he": {
-      "question": "איזה שם גוף מתאים: '___ מדברות אנגלית.' (רבות גוף שני)",
-      "options": ["אתן", "הן", "אתה", "אני"],
-      "hint": "נשים רבות המקשיבות/אליהן פונים."
-    },
-    "en": {
-      "question": "Which pronoun fits: '___ speak English.' (feminine second-person plural)",
-      "options": ["You (f. pl.)", "They (f.)", "You (m. sg.)", "I"],
-      "hint": "Second-person feminine plural."
+      "question": "Which is correct: '___ play soccer every Friday.' (addressing a group of girls)",
+      "options": ["You (f. pl.)", "She", "I", "They (m.)"],
+      "hint": "Second person plural, feminine."
     },
     "answer": "אתן"
   },
   {
-    "id": 8,
+    "id": 7,
     "he": {
-      "question": "בחר את שם הגוף: '___ לומדים באוניברסיטה.' (רבים, גוף שלישי זכר)",
-      "options": ["הם", "אנחנו", "אתם", "היא"],
-      "hint": "גוף שלישי רבים, זכר."
+      "question": "מהי האפשרות הנכונה: '___ מדברות אנגלית.' (קבוצה של בנות שאינן הדוברות או הנמענות)",
+      "options": ["הן", "אנחנו", "הוא", "אתה"],
+      "hint": "גוף שלישי רבות, נקבה."
     },
     "en": {
-      "question": "Select the pronoun: '___ study at the university.' (masculine third-person plural)",
-      "options": ["They (m.)", "We", "You (m. pl.)", "She"],
-      "hint": "Third-person, masculine plural."
+      "question": "Which is correct: '___ speak English.' (group of girls, not speakers/listeners)",
+      "options": ["They (f.)", "We", "He", "You (m. sg.)"],
+      "hint": "Third person plural, feminine."
+    },
+    "answer": "הן"
+  },
+  {
+    "id": 8,
+    "he": {
+      "question": "'___ לומדים באוניברסיטה.' מהי האפשרות הנכונה כאשר מדובר בקבוצת בנים (לא אנחנו)?",
+      "options": ["הם", "אתן", "היא", "אני"],
+      "hint": "קבוצת בנים, גוף שלישי רבים."
+    },
+    "en": {
+      "question": "'___ study at the university.' Which is correct for a group of boys (not us)?",
+      "options": ["They (m.)", "You (f. pl.)", "She", "I"],
+      "hint": "Third person plural, masculine."
     },
     "answer": "הם"
   },
   {
     "id": 9,
     "he": {
-      "question": "איזה שם גוף מתאים: '___ גרות בירושלים.' (נשמעים רבים, גוף שלישי נקבה)",
-      "options": ["הן", "אנחנו", "אתן", "הוא"],
-      "hint": "גוף שלישי רבות."
+      "question": "'___ גרות בירושלים.' איזו אפשרות נכונה כשהכוונה לקבוצת בנות אחרות?",
+      "options": ["הן", "אתן", "אנחנו", "אני"],
+      "hint": "רבות, גוף שלישי."
     },
     "en": {
-      "question": "Which pronoun fits: '___ live in Jerusalem.' (third-person feminine plural)",
-      "options": ["They (f.)", "We", "You (f. pl.)", "He"],
-      "hint": "Third-person, feminine plural."
+      "question": "'___ live in Jerusalem.' Which is correct for a group of other girls?",
+      "options": ["They (f.)", "You (f. pl.)", "We", "I"],
+      "hint": "Third person, feminine plural."
     },
     "answer": "הן"
   },
   {
     "id": 10,
     "he": {
-      "question": "בחר את שם הגוף: '___ עובדת בחנות.' (יחידה בגוף שלישי נקבה)",
-      "options": ["היא", "אני", "את", "הוא"],
-      "hint": "גוף שלישי יחיד, נקבה."
+      "question": "מי הנכונה: '___ עובדת בחנות.' (אישה שאינה הדוברת)",
+      "options": ["היא", "אני", "אתה", "הוא"],
+      "hint": "גוף שלישי נקבה יחיד."
     },
     "en": {
-      "question": "Select the pronoun: '___ works at a shop.' (third-person feminine singular)",
-      "options": ["She", "I", "You (f. sg.)", "He"],
-      "hint": "3rd person feminine singular."
+      "question": "Which is correct: '___ works at a shop.' (a woman, not the speaker)",
+      "options": ["She", "I", "You (m. sg.)", "He"],
+      "hint": "Third person, feminine singular."
     },
     "answer": "היא"
-  },
-  {
-    "id": 11,
-    "he": {
-      "question": "מה התרגום ל-'We'?",
-      "options": ["אנחנו", "הן", "הם", "אתן"],
-      "hint": "מדובר בגוף ראשון רבים."
-    },
-    "en": {
-      "question": "What is the translation for 'We'?",
-      "options": ["אנחנו", "הן", "הם", "אתן"],
-      "hint": "It's first-person plural."
-    },
-    "answer": "אנחנו"
-  },
-  {
-    "id": 12,
-    "he": {
-      "question": "מה התרגום ל-'She'?",
-      "options": ["היא", "הוא", "אתה", "אני"],
-      "hint": "נקבה יחידה."
-    },
-    "en": {
-      "question": "What is the translation for 'She'?",
-      "options": ["היא", "הוא", "אתה", "אני"],
-      "hint": "Feminine singular."
-    },
-    "answer": "היא"
-  },
-  {
-    "id": 13,
-    "he": {
-      "question": "מה התרגום ל-'They (m.)'?",
-      "options": ["הם", "הן", "אתם", "אנחנו"],
-      "hint": "גוף שלישי, רבים, זכר."
-    },
-    "en": {
-      "question": "What is the translation for 'They (m.)'?",
-      "options": ["הם", "הן", "אתם", "אנחנו"],
-      "hint": "Third-person, masculine plural."
-    },
-    "answer": "הם"
-  },
-  {
-    "id": 14,
-    "he": {
-      "question": "מה התרגום ל-'You (f. sg.)'?",
-      "options": ["את", "אתה", "היא", "אני"],
-      "hint": "נקבה יחידה גוף שני."
-    },
-    "en": {
-      "question": "What is the translation for 'You (f. sg.)'?",
-      "options": ["את", "אתה", "היא", "אני"],
-      "hint": "Feminine, singular, second-person."
-    },
-    "answer": "את"
-  },
-  {
-    "id": 15,
-    "he": {
-      "question": "מה התרגום ל-'He'?",
-      "options": ["הוא", "היא", "אני", "אתה"],
-      "hint": "זכר יחיד."
-    },
-    "en": {
-      "question": "What is the translation for 'He'?",
-      "options": ["הוא", "היא", "אני", "אתה"],
-      "hint": "Masculine singular."
-    },
-    "answer": "הוא"
-  },
-  {
-    "id": 16,
-    "he": {
-      "question": "מה התרגום ל-'They (f.)'?",
-      "options": ["הן", "הם", "אתן", "אנחנו"],
-      "hint": "נקבות ברבים."
-    },
-    "en": {
-      "question": "What is the translation for 'They (f.)'?",
-      "options": ["הן", "הם", "אתן", "אנחנו"],
-      "hint": "Feminine plural."
-    },
-    "answer": "הן"
-  },
-  {
-    "id": 17,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ קונות בגדים חדשים.'",
-      "options": ["הן", "אתן", "אנחנו", "הוא"],
-      "hint": "נקבות ברבים, גוף שלישי."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ are buying new clothes.'",
-      "options": ["They (f.)", "You (f. pl.)", "We", "He"],
-      "hint": "Feminine, third-person plural."
-    },
-    "answer": "הן"
-  },
-  {
-    "id": 18,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ גרה ברחוב הזה.'",
-      "options": ["היא", "אני", "הוא", "את"],
-      "hint": "נקבה יחידה, גוף שלישי."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ lives on this street.'",
-      "options": ["She", "I", "He", "You (f. sg.)"],
-      "hint": "Feminine singular, third person."
-    },
-    "answer": "היא"
-  },
-  {
-    "id": 19,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ עובד בחנות.'",
-      "options": ["הוא", "היא", "אני", "אתה"],
-      "hint": "זכר יחיד, גוף שלישי."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ works at a shop.'",
-      "options": ["He", "She", "I", "You (m. sg.)"],
-      "hint": "Masculine singular, third person."
-    },
-    "answer": "הוא"
-  },
-  {
-    "id": 20,
-    "he": {
-      "question": "מה התרגום ל-'You (m. pl.)'?",
-      "options": ["אתם", "אנחנו", "אתן", "הם"],
-      "hint": "רבים, גוף שני, זכר."
-    },
-    "en": {
-      "question": "What is the translation for 'You (m. pl.)'?",
-      "options": ["אתם", "אנחנו", "אתן", "הם"],
-      "hint": "Masculine, plural, second person."
-    },
-    "answer": "אתם"
-  },
-  {
-    "id": 21,
-    "he": {
-      "question": "מה התרגום ל-'You (f. pl.)'?",
-      "options": ["אתן", "אתם", "הן", "אנחנו"],
-      "hint": "נקבות רבות בגוף שני."
-    },
-    "en": {
-      "question": "What is the translation for 'You (f. pl.)'?",
-      "options": ["אתן", "אתם", "הן", "אנחנו"],
-      "hint": "Feminine plural, second person."
-    },
-    "answer": "אתן"
-  },
-  {
-    "id": 22,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ חושבת עליך.'",
-      "options": ["היא", "הוא", "אני", "את"],
-      "hint": "נקבה יחידה, גוף שלישי."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ is thinking about you.'",
-      "options": ["She", "He", "I", "You (f. sg.)"],
-      "hint": "Feminine singular, third person."
-    },
-    "answer": "היא"
-  },
-  {
-    "id": 23,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ אומר שלום לחברים שלו.'",
-      "options": ["הוא", "אני", "היא", "אנחנו"],
-      "hint": "זכר יחיד, גוף שלישי."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ says hello to his friends.'",
-      "options": ["He", "I", "She", "We"],
-      "hint": "Masculine singular, third person."
-    },
-    "answer": "הוא"
-  },
-  {
-    "id": 24,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ אכלו ארוחת ערב.'",
-      "options": ["הם", "אנחנו", "אתן", "אתם"],
-      "hint": "רבים, גוף שלישי."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ ate dinner.'",
-      "options": ["They (m.)", "We", "You (f. pl.)", "You (m. pl.)"],
-      "hint": "Third-person, plural."
-    },
-    "answer": "הם"
-  },
-  {
-    "id": 25,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ כתבה סיפור מעניין.'",
-      "options": ["היא", "אני", "הוא", "אתה"],
-      "hint": "נקבה יחידה, גוף שלישי."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ wrote an interesting story.'",
-      "options": ["She", "I", "He", "You (m. sg.)"],
-      "hint": "Feminine singular, third person."
-    },
-    "answer": "היא"
-  },
-  {
-    "id": 26,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ דיברו בטלפון.'",
-      "options": ["הם", "הן", "אנחנו", "אתם"],
-      "hint": "רבים, גוף שלישי."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ talked on the phone.'",
-      "options": ["They (m.)", "They (f.)", "We", "You (m. pl.)"],
-      "hint": "Third-person, plural."
-    },
-    "answer": "הם"
-  },
-  {
-    "id": 27,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ אוהבים גלידה.'",
-      "options": ["אנחנו", "הם", "אני", "הוא"],
-      "hint": "רבים, בגוף ראשון."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ love ice cream.'",
-      "options": ["We", "They (m.)", "I", "He"],
-      "hint": "First-person plural."
-    },
-    "answer": "אנחנו"
-  },
-  {
-    "id": 28,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ גרים בבית הזה.'",
-      "options": ["אנחנו", "אתם", "הם", "אני"],
-      "hint": "ברבים, גוף ראשון."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ live in this house.'",
-      "options": ["We", "You (m. pl.)", "They (m.)", "I"],
-      "hint": "First-person plural."
-    },
-    "answer": "אנחנו"
-  },
-  {
-    "id": 29,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ גרה ברמת גן.'",
-      "options": ["היא", "אני", "הוא", "אנחנו"],
-      "hint": "נקבה יחידה."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ lives in Ramat Gan.'",
-      "options": ["She", "I", "He", "We"],
-      "hint": "Feminine singular."
-    },
-    "answer": "היא"
-  },
-  {
-    "id": 30,
-    "he": {
-      "question": "איזה שם גוף מתאים: '______ קורא ספר.'",
-      "options": ["הוא", "אני", "היא", "אתה"],
-      "hint": "זכר יחיד."
-    },
-    "en": {
-      "question": "Which pronoun fits: '______ reads a book.'",
-      "options": ["He", "I", "She", "You (m. sg.)"],
-      "hint": "Masculine singular."
-    },
-    "answer": "הוא"
   }
 ]
