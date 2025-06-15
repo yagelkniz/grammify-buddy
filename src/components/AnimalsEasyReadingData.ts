@@ -1,3 +1,4 @@
+
 export const readingText = `דני הוא תלמיד בן 14 שאוהב מאוד בעלי חיים. אחת לשבוע הוא מבקר בגן החיות העירוני, שם הוא מתנדב בטיפול בבעלי החיים. החיה האהובה עליו היא הפיל – הוא מתרשם מהגודל שלו, מהאינטליגנציה שלו ומההתנהגות הרגועה שלו. ביום ההולדת שלו, המטפל הראשי אפשר לדני להאכיל את הפיל – ודני הרגיש שזו הייתה חוויה בלתי נשכחת.
 
 🍔 הזמנה במסעדה
@@ -108,7 +109,6 @@ export const translationMap: { [hebrewWord: string]: string } = {
   "סרטונים": "videos",
   "לערוך": "to edit",
   "לשתף": "to share",
-  "חברים": "friends",
   "עוקבת": "follows",
   "תוכניות": "shows/programs",
   "לקבל": "to get/receive",
@@ -116,5 +116,5 @@ export const translationMap: { [hebrewWord: string]: string } = {
   "נועם": "Noam",
   "יוצר": "creator",
   "תוכן": "content",
-  "ערוץ": "channel",
-  "
+  "ערוץ": "channel"
+};
