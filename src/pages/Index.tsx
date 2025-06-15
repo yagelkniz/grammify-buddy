@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
@@ -12,6 +11,7 @@ import TextComprehensionCountriesLevels from "@/components/TextComprehensionCoun
 import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensionMoviesAndSeriesLevels";
 import FutureTenseVerbPractice from "@/components/FutureTenseVerbPractice";
 import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlacesFoodEasy";
+import InterviewQuestionnaire from "@/components/InterviewQuestionnaire";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 
@@ -64,6 +64,7 @@ const practiceOptions = [
 
 const Index = () => {
   const [showWelcome, setShowWelcome] = useState(true);
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
   const [selectedTextComp, setSelectedTextComp] = useState<
@@ -117,6 +118,12 @@ const Index = () => {
     );
   }
 
+  if (showQuestionnaire) {
+    return (
+      <InterviewQuestionnaire onBack={() => setShowQuestionnaire(false)} />
+    );
+  }
+
   if (selectedTextComp) {
     return (
       <div className="w-full">
@@ -167,6 +174,14 @@ const Index = () => {
                 <span dir="rtl">{option.label}</span>
               </button>
             ))}
+            {/* כפתור לשאלון היכרות */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
+              onClick={() => setShowQuestionnaire(true)}
+            >
+              <span className="text-3xl">💬</span>
+              <span dir="rtl">שאלון היכרות</span>
+            </button>
             {/* כפתור חדש לתרגול הבנת הנקרא - אוכל (בשלוש רמות) */}
             <button
               className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-yellow-100 text-yellow-900 border-yellow-300"
