@@ -1,0 +1,83 @@
+
+[
+  {
+    "hebrew": "שלי",
+    "english": "My",
+    "hebrewExample": "זה הספר ___ (שלי).",
+    "englishExample": "This is ___ book.",
+    "answerHe": "שלי",
+    "answerEn": "my"
+  },
+  {
+    "hebrew": "שלך (זכר)",
+    "english": "Your (m. sg.)",
+    "hebrewExample": "הכובע ___ (שלך) יפה.",
+    "englishExample": "___ hat is nice.",
+    "answerHe": "שלך",
+    "answerEn": "your"
+  },
+  {
+    "hebrew": "שלך (נקבה)",
+    "english": "Your (f. sg.)",
+    "hebrewExample": "המחברת ___ (שלך) על השולחן.",
+    "englishExample": "___ notebook is on the table.",
+    "answerHe": "שלך",
+    "answerEn": "your"
+  },
+  {
+    "hebrew": "שלו",
+    "english": "His",
+    "hebrewExample": "התיק ___ (שלו) על הכיסא.",
+    "englishExample": "___ bag is on the chair.",
+    "answerHe": "שלו",
+    "answerEn": "his"
+  },
+  {
+    "hebrew": "שלה",
+    "english": "Her",
+    "hebrewExample": "הטלפון ___ (שלה) חדש.",
+    "englishExample": "___ phone is new.",
+    "answerHe": "שלה",
+    "answerEn": "her"
+  },
+  {
+    "hebrew": "שלנו",
+    "english": "Our",
+    "hebrewExample": "הבית ___ (שלנו) גדול.",
+    "englishExample": "___ house is big.",
+    "answerHe": "שלנו",
+    "answerEn": "our"
+  },
+  {
+    "hebrew": "שלכם",
+    "english": "Your (m. pl.)",
+    "hebrewExample": "המבחנים ___ (שלכם) קשים.",
+    "englishExample": "___ exams are hard.",
+    "answerHe": "שלכם",
+    "answerEn": "your"
+  },
+  {
+    "hebrew": "שלכן",
+    "english": "Your (f. pl.)",
+    "hebrewExample": "החברות ___ (שלכן) נחמדות.",
+    "englishExample": "___ friends are nice.",
+    "answerHe": "שלכן",
+    "answerEn": "your"
+  },
+  {
+    "hebrew": "שלהם",
+    "english": "Their (m.)",
+    "hebrewExample": "הספרים ___ (שלהם) בספרייה.",
+    "englishExample": "___ books are in the library.",
+    "answerHe": "שלהם",
+    "answerEn": "their"
+  },
+  {
+    "hebrew": "שלהן",
+    "english": "Their (f.)",
+    "hebrewExample": "הדעות ___ (שלהן) שונות.",
+    "englishExample": "___ opinions are different.",
+    "answerHe": "שלהן",
+    "answerEn": "their"
+  }
+]

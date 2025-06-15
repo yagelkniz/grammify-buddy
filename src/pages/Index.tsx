@@ -33,6 +33,7 @@ const LazyTextComprehensionMoviesAndSeriesLevels = React.lazy(() =>
   import("@/components/TextComprehensionMoviesAndSeriesLevels")
 );
 import SingularPluralPractice from "@/components/SingularPluralPractice";
+import PossessivePronounsMenu from "@/components/PossessivePronounsMenu";
 
 const tenseOptions = [
   {
@@ -155,12 +156,7 @@ const Index = () => {
 
   if (showPossessivePronouns) {
     return (
-      <div className="w-full">
-        <div className="flex justify-end mb-4">
-          <Button variant="outline" onClick={() => setShowPossessivePronouns(false)}>⬅ Back</Button>
-        </div>
-        <PossessivePronounsTable />
-      </div>
+      <PossessivePronounsMenu onBack={() => setShowPossessivePronouns(false)} />
     );
   }
 
