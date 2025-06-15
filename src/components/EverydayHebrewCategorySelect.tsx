@@ -1,10 +1,10 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { UtensilsCrossed, ShoppingBasket } from "lucide-react";
+import { UtensilsCrossed, ShoppingBasket, Bus } from "lucide-react";
 
 interface Props {
-  onSelect: (category: "restaurant" | "supermarket") => void;
+  onSelect: (category: "restaurant" | "supermarket" | "transportation") => void;
   onBack?: () => void;
 }
 
@@ -30,6 +30,14 @@ export default function EverydayHebrewCategorySelect({ onSelect, onBack }: Props
         >
           <ShoppingBasket size={32} />
           <span dir="rtl">סופר</span>
+        </Button>
+        <Button
+          variant="outline"
+          className="w-full flex items-center justify-center gap-4 py-6 text-2xl font-bold rounded-xl border-2 bg-yellow-100 text-yellow-900 border-yellow-300 shadow hover:scale-105"
+          onClick={() => onSelect("transportation")}
+        >
+          <Bus size={32} />
+          <span dir="rtl">תחבורה</span>
         </Button>
       </div>
       {onBack && (

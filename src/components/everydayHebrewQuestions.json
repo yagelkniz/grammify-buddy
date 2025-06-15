@@ -1,4 +1,3 @@
-
 [
   {
     "id": 1,
@@ -279,5 +278,125 @@
     "options": ["ירקות", "ספרים", "טלפונים", "מגבות"],
     "correctAnswer": "ירקות",
     "translation": "I'm looking for discounted vegetables."
+  },
+  {
+    "id": 36,
+    "category": "transportation",
+    "question": "איפה אפשר ___ כרטיס לאוטובוס?",
+    "options": ["לקנות", "לנהוג", "לבשל", "ללבוש"],
+    "correctAnswer": "לקנות",
+    "translation": "Where can I buy a bus ticket?"
+  },
+  {
+    "id": 37,
+    "category": "transportation",
+    "question": "התחנה המרכזית ___ קרוב לכאן?",
+    "options": ["נמצאת", "נוסעת", "שותה", "עומדת"],
+    "correctAnswer": "נמצאת",
+    "translation": "Is the central station nearby?"
+  },
+  {
+    "id": 38,
+    "category": "transportation",
+    "question": "כמה זמן ___ להגיע ברכבת מתל אביב לחיפה?",
+    "options": ["לוקח", "אוכל", "נוסע", "חושב"],
+    "correctAnswer": "לוקח",
+    "translation": "How long does it take to get from Tel Aviv to Haifa by train?"
+  },
+  {
+    "id": 39,
+    "category": "transportation",
+    "question": "לאן אני צריך ___ כדי להגיע לתחנת רכבת?",
+    "options": ["לפנות", "לשחק", "לשיר", "לאכול"],
+    "correctAnswer": "לפנות",
+    "translation": "Where should I turn to get to the train station?"
+  },
+  {
+    "id": 40,
+    "category": "transportation",
+    "question": "אפשר ___ לי איך להגיע לדואר?",
+    "options": ["להסביר", "לשבת", "לבשל", "לצחוק"],
+    "correctAnswer": "להסביר",
+    "translation": "Can you explain to me how to get to the post office?"
+  },
+  {
+    "id": 41,
+    "category": "transportation",
+    "question": "מתי ___ האוטובוס האחרון?",
+    "options": ["יוצא", "שותה", "עובד", "לובש"],
+    "correctAnswer": "יוצא",
+    "translation": "When does the last bus leave?"
+  },
+  {
+    "id": 42,
+    "category": "transportation",
+    "question": "האם יש ___ ישיר מהשדה לעיר?",
+    "options": ["קו", "מונית", "ספר", "שולחן"],
+    "correctAnswer": "קו",
+    "translation": "Is there a direct line from the airport to the city?"
+  },
+  {
+    "id": 43,
+    "category": "transportation",
+    "question": "אני צריך מונית ל___ הקרוב.",
+    "options": ["בית המלון", "ארון", "ספר", "חולצה"],
+    "correctAnswer": "בית המלון",
+    "translation": "I need a taxi to the nearest hotel."
+  },
+  {
+    "id": 44,
+    "category": "transportation",
+    "question": "יש ___ לאזור הזה?",
+    "options": ["מפה", "אוכל", "מים", "כיסא"],
+    "correctAnswer": "מפה",
+    "translation": "Is there a map for this area?"
+  },
+  {
+    "id": 45,
+    "category": "transportation",
+    "question": "האם אפשר ___ את האופניים כאן?",
+    "options": ["להחנות", "לחתוך", "לבשל", "ללבוש"],
+    "correctAnswer": "להחנות",
+    "translation": "Can I park the bike here?"
+  },
+  {
+    "id": 46,
+    "category": "transportation",
+    "question": "האם הקו הזה ___ בירושלים?",
+    "options": ["עוצר", "אוכל", "מכין", "קורא"],
+    "correctAnswer": "עוצר",
+    "translation": "Does this line stop in Jerusalem?"
+  },
+  {
+    "id": 47,
+    "category": "transportation",
+    "question": "האם ___ יש הנחות לסטודנטים?",
+    "options": ["בתחבורה הציבורית", "בחנות הבגדים", "בסופר", "במוזיאון"],
+    "correctAnswer": "בתחבורה הציבורית",
+    "translation": "Are there student discounts in public transportation?"
+  },
+  {
+    "id": 48,
+    "category": "transportation",
+    "question": "איך אני יכול ___ את האפליקציה לתשלום?",
+    "options": ["להוריד", "לשטוף", "לשתול", "לצלול"],
+    "correctAnswer": "להוריד",
+    "translation": "How can I download the payment app?"
+  },
+  {
+    "id": 49,
+    "category": "transportation",
+    "question": "האם אפשר ___ אופניים כאן?",
+    "options": ["להשכיר", "לקנות", "לאכול", "לחכות"],
+    "correctAnswer": "להשכיר",
+    "translation": "Can I rent a bike here?"
+  },
+  {
+    "id": 50,
+    "category": "transportation",
+    "question": "האם יש ___ ישיר לנתב\"ג?",
+    "options": ["קו", "חנות", "ספסל", "שוק"],
+    "correctAnswer": "קו",
+    "translation": "Is there a direct line to Ben Gurion Airport?"
   }
 ]
