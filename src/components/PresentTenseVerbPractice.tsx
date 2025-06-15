@@ -1,15 +1,24 @@
 
 import React, { useState } from "react";
-import { presentTenseQuestionsPart1 } from "./presentTenseQuestionsParts";
+import {
+  presentTenseQuestionsPart1,
+  presentTenseQuestionsPart2,
+  presentTenseQuestionsPart3,
+  presentTenseQuestionsPart4,
+} from "./presentTenseQuestionsParts";
 import type { PresentTenseQuestion } from "./presentTenseQuestions";
 
-type Props = {
-  questions?: PresentTenseQuestion[];
-};
+const parts = [
+  { label: "חלק 1", data: presentTenseQuestionsPart1 },
+  { label: "חלק 2", data: presentTenseQuestionsPart2 },
+  { label: "חלק 3", data: presentTenseQuestionsPart3 },
+  { label: "חלק 4", data: presentTenseQuestionsPart4 },
+];
 
-export default function PresentTenseVerbPractice({
-  questions = presentTenseQuestionsPart1,
-}: Props) {
+export default function PresentTenseVerbPractice() {
+  const [currentPart, setCurrentPart] = useState(0); // begin with part 1
+  const questions = parts[currentPart].data;
+
   const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
   const [showVowels, setShowVowels] = useState(false);
@@ -23,7 +32,13 @@ export default function PresentTenseVerbPractice({
     }));
   }
 
-  const totalAnswered = Object.keys(selections).length;
+  // reset state when changing part
+  function handlePartChange(idx: number) {
+    setCurrentPart(idx);
+    setSelections({});
+    setFeedbacks({});
+  }
+
   const correctAnswers = Object.values(feedbacks).filter((f) => f === "correct").length;
   const incorrectAnswers = Object.values(feedbacks).filter((f) => f === "incorrect").length;
 
@@ -38,6 +53,24 @@ export default function PresentTenseVerbPractice({
         <h1 className="text-3xl font-bold text-primary mb-4" dir="rtl">
           בחר/י את הפועל הנכון בזמן הווה {String.fromCodePoint(0x1f31f)}
         </h1>
+        <div className="flex gap-2 mb-3">
+          {parts.map((part, idx) => (
+            <button
+              key={part.label}
+              className={`px-3 py-1 text-base font-semibold rounded-xl border ${
+                idx === currentPart
+                  ? "bg-green-500 text-white border-green-700"
+                  : "bg-white text-green-600 border-green-300 hover:bg-green-100"
+              } transition`}
+              onClick={() => handlePartChange(idx)}
+              disabled={idx === currentPart}
+              aria-disabled={idx === currentPart}
+              type="button"
+            >
+              {part.label}
+            </button>
+          ))}
+        </div>
         <label className="flex gap-2 mb-3 items-center text-base cursor-pointer" dir="rtl">
           <input
             type="checkbox"
