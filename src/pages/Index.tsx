@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 import PronounsTable from "@/components/PronounsTable";
 import PossessivePronounsTable from "@/components/PossessivePronounsTable";
 import LinkingWordsTable from "@/components/LinkingWordsTable";
+import IndexMainMenu from "./IndexMainMenu";
+import EverydayHebrewPractice from "@/components/EverydayHebrewPractice";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -77,6 +79,7 @@ const Index = () => {
   const [showLinkingWords, setShowLinkingWords] = useState(false);
   const nav = useNavigate();
   const [showPronounsTable, setShowPronounsTable] = useState(false);
+  const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
 
   // אם לא מחובר - להפנות ל־/auth
   useEffect(() => {
@@ -90,7 +93,8 @@ const Index = () => {
   }, [nav]);
 
   function handleBack() {
-    if (selectedTextComp) setSelectedTextComp(null);
+    if (showEverydayHebrew) setShowEverydayHebrew(false);
+    else if (selectedTextComp) setSelectedTextComp(null);
     else if (selectedTense) setSelectedTense(null);
     else setSelectedPractice(null);
   }
@@ -165,6 +169,19 @@ const Index = () => {
     );
   }
 
+  if (showEverydayHebrew) {
+    return (
+      <div className="w-full max-w-3xl mx-auto">
+        <div className="flex justify-end mb-4">
+          <Button variant="outline" onClick={handleBack}>
+            ⬅ חזרה
+          </Button>
+        </div>
+        <EverydayHebrewPractice onBack={handleBack} />
+      </div>
+    );
+  }
+
   if (selectedTextComp) {
     return (
       <div className="w-full">
@@ -194,6 +211,21 @@ const Index = () => {
         )}
         {selectedTextComp === "places-food-easy" && <TextComprehensionPlacesFoodEasy />}
       </div>
+    );
+  }
+
+  // תפריט ראשי – עבר לרכיב חיצוני לניהול/ניווט
+  if (!selectedPractice) {
+    return (
+      <IndexMainMenu
+        setShowLinkingWords={setShowLinkingWords}
+        setShowPronounsTable={setShowPronounsTable}
+        setShowPossessivePronouns={setShowPossessivePronouns}
+        setShowQuestionnaire={setShowQuestionnaire}
+        setSelectedPractice={setSelectedPractice}
+        setSelectedTextComp={setSelectedTextComp}
+        setShowEverydayHebrew={setShowEverydayHebrew}
+      />
     );
   }
 
