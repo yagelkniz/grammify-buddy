@@ -5,6 +5,7 @@ import PresentTenseVerbPractice from "@/components/PresentTenseVerbPractice";
 import NounAdjectivePractice from "@/components/NounAdjectivePractice";
 import TextComprehensionFood from "@/components/TextComprehensionFood";
 import TextComprehensionAnimalsEasy from "@/components/TextComprehensionAnimalsEasy";
+import TextComprehensionFoodOrderMedium from "@/components/TextComprehensionFoodOrderMedium";
 
 const tenseOptions = [
   {
@@ -91,13 +92,10 @@ const Index = () => {
         <div className="flex justify-end mb-4">
           <Button variant="outline" onClick={handleBack}>⬅ חזרה</Button>
         </div>
-        {selectedTextComp==="food" && <TextComprehensionFood />}
-        {selectedTextComp==="animals-easy" && <TextComprehensionAnimalsEasy />}
-        {selectedTextComp==="food-order-medium" && (
-          <React.Suspense fallback={<div>טוען...</div>}>
-            {/** נטען דינמית בעתיד, כעת ישירות */}
-            {require('../components/TextComprehensionFoodOrderMedium').default()}
-          </React.Suspense>
+        {selectedTextComp === "food" && <TextComprehensionFood />}
+        {selectedTextComp === "animals-easy" && <TextComprehensionAnimalsEasy />}
+        {selectedTextComp === "food-order-medium" && (
+          <TextComprehensionFoodOrderMedium />
         )}
       </div>
     );
