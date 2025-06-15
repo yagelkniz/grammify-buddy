@@ -5,7 +5,9 @@ export const translationMap: { [hebrewWord: string]: string } = {
   "דני": "Dani",
   "תלמיד": "student",
   "בן": "age",
+  "שנה": "year",
   "אוהב": "loves",
+  "מאוד": "very",
   "בעלי": "animals (when in 'בעלי חיים')",
   "חיים": "life / animals",
   "אחת": "once",
@@ -33,6 +35,7 @@ export const translationMap: { [hebrewWord: string]: string } = {
   "אפשר": "allowed",
   "להאכיל": "to feed",
   "חוויה": "an experience",
-  "בלתי": "un- (like unforgettable)",
+  "בלתי": "un- (as in unforgettable)",
   "נשכחת": "forgotten"
 };
+
