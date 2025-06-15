@@ -1,121 +1,34 @@
-import React, { useState } from "react";
 
-type Question = {
-  emoji: string;
-  textBefore: string;
-  blank?: string;
-  textAfter?: string;
-  options: string[];
-  correct: string;
-  color?: string;
-  infinitive: string; // שם הפועל
+import React, { useState } from "react";
+import { presentTenseQuestionsPart1 } from "./presentTenseQuestionsParts";
+import type { PresentTenseQuestion } from "./presentTenseQuestions";
+
+type Props = {
+  questions?: PresentTenseQuestion[];
 };
 
-const questions: Question[] = [
-  {
-    emoji: "🍎",
-    textBefore: "אני",
-    blank: "______",
-    textAfter: "תפוח כל בוקר.",
-    options: ["אוכל", "אוכלת", "אוכלים", "אוכלות"],
-    correct: "אוכל",
-    color: "bg-red-100",
-    infinitive: "לאכול",
-  },
-  {
-    emoji: "🏀",
-    textBefore: "אתה",
-    blank: "______",
-    textAfter: "כדורסל עם חברים?",
-    options: ["משחק", "משחקת", "משחקים", "משחקות"],
-    correct: "משחק",
-    color: "bg-orange-100",
-    infinitive: "לשחק",
-  },
-  {
-    emoji: "🎵",
-    textBefore: "הם",
-    blank: "______",
-    textAfter: "מוזיקה בשיעור.",
-    options: ["שומעים", "שומעות", "שומע", "שומעת"],
-    correct: "שומעים",
-    color: "bg-pink-100",
-    infinitive: "לשמוע",
-  },
-  {
-    emoji: "🥪",
-    textBefore: "היא",
-    blank: "______",
-    textAfter: "סנדוויץ'.",
-    options: ["אוכלת", "אוכל", "אוכלות", "אוכלים"],
-    correct: "אוכלת",
-    color: "bg-yellow-100",
-    infinitive: "לאכול",
-  },
-  {
-    emoji: "📚",
-    textBefore: "אנחנו",
-    blank: "______",
-    textAfter: "בכיתה.",
-    options: ["לומדים", "לומדות", "לומד", "לומדת"],
-    correct: "לומדים",
-    color: "bg-green-100",
-    infinitive: "ללמוד",
-  },
-  {
-    emoji: "🚗",
-    textBefore: "אתן",
-    blank: "______",
-    textAfter: "לעבודה יחד?",
-    options: ["נוסעות", "נוסעים", "נוסעת", "נוסע"],
-    correct: "נוסעות",
-    color: "bg-blue-100",
-    infinitive: "לנסוע",
-  },
-  {
-    emoji: "🦸‍♀️",
-    textBefore: "את",
-    blank: "______",
-    textAfter: "הביתה לבד.",
-    options: ["הולכת", "הולך", "הולכות", "הולכים"],
-    correct: "הולכת",
-    color: "bg-purple-100",
-    infinitive: "ללכת",
-  },
-  {
-    emoji: "🌙",
-    textBefore: "הוא",
-    blank: "______",
-    textAfter: "מאוחר כל לילה.",
-    options: ["נרדם", "נרדמת", "נרדמים", "נרדמות"],
-    correct: "נרדם",
-    color: "bg-indigo-100",
-    infinitive: "להירדם",
-  },
-];
-
-export default function PresentTenseVerbPractice() {
+export default function PresentTenseVerbPractice({
+  questions = presentTenseQuestionsPart1,
+}: Props) {
   const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
   const [showVowels, setShowVowels] = useState(false);
 
-  function checkVerb(qIndex: number, option: string) {
-    setSelections((prev) => ({ ...prev, [qIndex]: option }));
+  function checkVerb(qNumber: number, option: string) {
+    setSelections((prev) => ({ ...prev, [qNumber]: option }));
+    const q = questions.find((qq) => qq.number === qNumber);
     setFeedbacks((prev) => ({
       ...prev,
-      [qIndex]: option === questions[qIndex].correct ? "correct" : "incorrect",
+      [qNumber]: option === q?.answer ? "correct" : "incorrect",
     }));
   }
 
-  // חישוב סטטיסטיקות פשוט
   const totalAnswered = Object.keys(selections).length;
   const correctAnswers = Object.values(feedbacks).filter((f) => f === "correct").length;
   const incorrectAnswers = Object.values(feedbacks).filter((f) => f === "incorrect").length;
 
-  // פונקציית הוספת או הסרת ניקוד, במידה ורלוונטי
   function displayWithVowels(text: string) {
     if (!showVowels) return text;
-    // כאן אפשר להטמיע טבלת ניקוד פשוטה בעתיד; בינתיים, חזרה על הטקסט (ההדגמה).
     return text.normalize("NFC");
   }
 
@@ -135,45 +48,42 @@ export default function PresentTenseVerbPractice() {
           הפעל ניקוד בתשובות
         </label>
       </div>
-      {questions.map((q, i) => (
-        <div key={i} className={`w-full max-w-md flex flex-col items-center mb-2 rounded-xl shadow ${q.color}`}>
-          <div className="flex items-center text-3xl mt-2">{q.emoji}</div>
-          {/* שם הפועל בעיצוב עדין */}
-          <div
-            className="text-sm text-gray-500 italic mt-1 mb-1"
-            dir="rtl"
-            style={{ letterSpacing: "0.05em" }}
-          >
-            {displayWithVowels(q.infinitive)}
-          </div>
+      {questions.map((q) => (
+        <div key={q.number} className={`w-full max-w-md flex flex-col items-center mb-2 rounded-xl shadow`}>
+          {/* מספר שאלה */}
+          <div className="text-xs text-gray-400 mt-2">#{q.number}</div>
           <p className="text-lg mb-2 flex flex-wrap items-center justify-center" dir="rtl">
-            {q.textBefore} <span className="mx-1 font-bold">{q.blank}</span> {q.textAfter}
+            {q.sentence}
           </p>
+          {/* תרגום באנגלית */}
+          <div className="text-sm text-gray-500 italic mb-2 text-center" dir="ltr">
+            ({q.translation})
+          </div>
           <div className="grid grid-cols-2 gap-3 mb-1 w-full max-w-xs">
             {q.options.map((opt) => (
               <button
                 key={opt}
-                onClick={() => checkVerb(i, opt)}
+                onClick={() => checkVerb(q.number, opt)}
                 className={`rounded-xl px-4 py-2 text-lg font-medium hover:scale-105 transition whitespace-nowrap disabled:opacity-60 ${
-                  selections[i] === opt
-                    ? (opt === q.correct ? "bg-green-300" : "bg-red-200")
+                  selections[q.number] === opt
+                    ? (opt === q.answer ? "bg-green-300" : "bg-red-200")
                     : "bg-white hover:bg-gray-200"
                 }`}
                 dir="rtl"
-                disabled={!!selections[i]}
-                aria-disabled={!!selections[i]}
-                style={{ border: selections[i] === opt ? "2px solid #a3a3a3" : "" }}
+                disabled={!!selections[q.number]}
+                aria-disabled={!!selections[q.number]}
+                style={{ border: selections[q.number] === opt ? "2px solid #a3a3a3" : "" }}
               >
                 {displayWithVowels(opt)}
               </button>
             ))}
           </div>
-          {feedbacks[i] === "correct" && (
+          {feedbacks[q.number] === "correct" && (
             <div className="text-md font-semibold mt-1 text-green-600" dir="rtl">
               ✅ תשובה נכונה!
             </div>
           )}
-          {feedbacks[i] === "incorrect" && (
+          {feedbacks[q.number] === "incorrect" && (
             <div className="text-md font-semibold mt-1 text-red-500" dir="rtl">
               ❌ נסה שוב
             </div>
