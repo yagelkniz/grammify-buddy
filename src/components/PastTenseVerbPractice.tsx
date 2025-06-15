@@ -468,6 +468,86 @@ const questions: Question[] = [
     correct: "אפיתה",
     translation: "Mom ______ a cake for the birthday.",
   },
+  {
+    textBefore: "למרות העייפות הרבה, היא",
+    blank: "______",
+    textAfter: "את כל המבחן מבלי להפסיק אפילו לרגע.",
+    options: ["פתרה", "פותרת", "תפתור"],
+    correct: "פתרה",
+    translation: "Despite great fatigue, she ___ the entire test without pausing for a moment. (solved)"
+  },
+  {
+    textBefore: "הם",
+    blank: "______",
+    textAfter: "לעומק את כל הנתונים לפני שקיבלו החלטה על הפרויקט.",
+    options: ["ניתחו", "מנתחים", "ינתחו"],
+    correct: "ניתחו",
+    translation: "They ___ the entire data thoroughly before making a decision on the project. (analyzed)"
+  },
+  {
+    textBefore: "אני",
+    blank: "______",
+    textAfter: "את כל האפשרויות האפשריות, אך אף אחת לא התאימה לצרכים שלנו.",
+    options: ["בדקתי", "בודק", "אבדוק"],
+    correct: "בדקתי",
+    translation: "I ___ all possible options, but none suited our needs. (checked)"
+  },
+  {
+    textBefore: "הוא",
+    blank: "______",
+    textAfter: "את עצמו מול המראה שעות כדי להיות מוכן להצגה.",
+    options: ["תרגל", "מתרגל", "יתרגל"],
+    correct: "תרגל",
+    translation: "He ___ in front of the mirror for hours to be ready for the performance. (practiced)"
+  },
+  {
+    textBefore: "אתן",
+    blank: "______",
+    textAfter: "את העוגה עם קצפת ופירות יער שהכנתן לבד.",
+    options: ["קישטתן", "מקשטות", "תקשטו"],
+    correct: "קישטתן",
+    translation: "You (f. pl.) ___ the cake with whipped cream and berries you prepared yourselves. (decorated)"
+  },
+  {
+    textBefore: "אנחנו",
+    blank: "______",
+    textAfter: "באירוע שנמשך כמעט חמש שעות ללא הפסקה.",
+    options: ["השתתפנו", "משתתפים", "נשתתף"],
+    correct: "השתתפנו",
+    translation: "We ___ in an event that lasted almost five hours non-stop. (participated)"
+  },
+  {
+    textBefore: "הם",
+    blank: "______",
+    textAfter: "את הדלת בשקט כדי לא להעיר את התינוק.",
+    options: ["סגרו", "סוגרים", "יסגרו"],
+    correct: "סגרו",
+    translation: "They ___ the door quietly to avoid waking the baby. (closed)"
+  },
+  {
+    textBefore: "הוא",
+    blank: "______",
+    textAfter: "את המדרגות במהירות כי איחר לרכבת.",
+    options: ["רץ", "רץ", "ירוץ"],
+    correct: "רץ",
+    translation: "He ___ up the stairs quickly because he was late for the train. (ran)"
+  },
+  {
+    textBefore: "אני",
+    blank: "______",
+    textAfter: "את הספר הזה כבר שלוש פעמים וכל פעם מגלה משהו חדש.",
+    options: ["קראתי", "קורא", "אקרא"],
+    correct: "קראתי",
+    translation: "I ___ this book three times already and each time discover something new. (read)"
+  },
+  {
+    textBefore: "היא",
+    blank: "______",
+    textAfter: "כל כך חזק עד שכל החדר שמע אותה.",
+    options: ["צעקה", "צועקת", "תצעק"],
+    correct: "צעקה",
+    translation: "She ___ so loudly that the whole room heard her. (shouted)"
+  },
 ];
 
 export default function PastTenseVerbPractice() {
