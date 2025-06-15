@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
 import PresentTenseVerbPractice from "@/components/PresentTenseVerbPractice";
@@ -7,6 +8,11 @@ import TextComprehensionFood from "@/components/TextComprehensionFood";
 import TextComprehensionAnimalsEasy from "@/components/TextComprehensionAnimalsEasy";
 import TextComprehensionFoodOrderMedium from "@/components/TextComprehensionFoodOrderMedium";
 import TextComprehensionSocialMedia from "@/components/TextComprehensionSocialMedia";
+
+// Add lazy import for food levels
+const LazyTextComprehensionFoodLevels = React.lazy(() =>
+  import("@/components/TextComprehensionFoodLevels")
+);
 
 const tenseOptions = [
   {
@@ -101,9 +107,9 @@ const Index = () => {
         {selectedTextComp === "social-media" && <TextComprehensionSocialMedia />}
         {selectedTextComp === "food-levels" && (
           // דינמי – שלוש רמות אוכל
-          <React.Suspense fallback={<div>טוען...</div>}>
-            {React.createElement(require("@/components/TextComprehensionFoodLevels").default)}
-          </React.Suspense>
+          <Suspense fallback={<div>טוען...</div>}>
+            <LazyTextComprehensionFoodLevels />
+          </Suspense>
         )}
       </div>
     );
@@ -219,3 +225,4 @@ const Index = () => {
 };
 
 export default Index;
+
