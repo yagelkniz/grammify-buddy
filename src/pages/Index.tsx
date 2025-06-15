@@ -9,6 +9,7 @@ import TextComprehensionFoodOrderMedium from "@/components/TextComprehensionFood
 import TextComprehensionSocialMedia from "@/components/TextComprehensionSocialMedia";
 import TextComprehensionCountriesLevels from "@/components/TextComprehensionCountriesLevels";
 import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensionMoviesAndSeriesLevels";
+import FutureTenseVerbPractice from "@/components/FutureTenseVerbPractice";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -237,14 +238,11 @@ const Index = () => {
         </div>
       )}
       {selectedPractice === "verb" && selectedTense === "future" && (
-        <div className="w-full flex flex-col items-center gap-6">
-          <div className="flex justify-end w-full mb-4">
+        <div className="w-full">
+          <div className="flex justify-end mb-4">
             <Button variant="outline" onClick={handleBack}>⬅ חזרה</Button>
           </div>
-          <span className="text-3xl mt-10 mb-4">⏩</span>
-          <div className="font-bold text-xl text-yellow-700" dir="rtl">
-            תרגול עתיד יתווסף בקרוב!
-          </div>
+          <FutureTenseVerbPractice />
         </div>
       )}
       {selectedPractice === "nounAdj" && (
