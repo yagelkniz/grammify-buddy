@@ -10,6 +10,7 @@ import TextComprehensionSocialMedia from "@/components/TextComprehensionSocialMe
 import TextComprehensionCountriesLevels from "@/components/TextComprehensionCountriesLevels";
 import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensionMoviesAndSeriesLevels";
 import FutureTenseVerbPractice from "@/components/FutureTenseVerbPractice";
+import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlacesFoodEasy";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -63,7 +64,7 @@ const Index = () => {
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
   const [selectedTextComp, setSelectedTextComp] = useState<
-    null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels"
+    null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy"
   >(null);
 
   function handleBack() {
@@ -128,6 +129,7 @@ const Index = () => {
             <LazyTextComprehensionMoviesAndSeriesLevels />
           </Suspense>
         )}
+        {selectedTextComp === "places-food-easy" && <TextComprehensionPlacesFoodEasy />}
       </div>
     );
   }
@@ -197,6 +199,14 @@ const Index = () => {
             >
               <span className="text-3xl">📺</span>
               <span dir="rtl">הבנת הנקרא - טלוויזיה וסדרות (שלוש רמות)</span>
+            </button>
+            {/* כפתור חדש: בילוי בים ואוכל (קל) */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-sky-100 text-sky-900 border-sky-400"
+              onClick={() => setSelectedTextComp("places-food-easy")}
+            >
+              <span className="text-3xl">🌊</span>
+              <span dir="rtl">הבנת הנקרא - בילוי בים ואוכל (קל)</span>
             </button>
           </div>
         </div>
