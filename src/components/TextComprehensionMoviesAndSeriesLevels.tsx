@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { BookOpen, tv } from "lucide-react";
+import { BookOpen, Tv } from "lucide-react";
 import { MoviesAndSeriesReadingData } from "./MoviesAndSeriesReadingData";
 import { MoviesAndSeriesQuestions } from "./MoviesAndSeriesQuestions";
 
@@ -45,7 +45,7 @@ export default function TextComprehensionMoviesAndSeriesLevels() {
     return (
       <div className="flex flex-col items-center py-10 px-4 gap-6 bg-blue-50 rounded-2xl shadow-lg border-2 border-blue-400 max-w-lg mx-auto mt-8">
         <h2 className="text-2xl font-bold text-blue-800 flex items-center gap-2 mb-3" dir="rtl">
-          <span><tv className="inline text-blue-400" /></span> הבנת הנקרא: טלוויזיה וסדרות (שלוש רמות)
+          <span><Tv className="inline text-blue-400" /></span> הבנת הנקרא: טלוויזיה וסדרות (שלוש רמות)
         </h2>
         <div className="text-lg font-medium text-gray-700 mb-2" dir="rtl">
           בחר רמת קושי לתרגול קריאה בנושא טלוויזיה וסדרות:
@@ -75,7 +75,7 @@ export default function TextComprehensionMoviesAndSeriesLevels() {
         ← לרמות
       </button>
       <h2 className="text-2xl font-bold text-blue-800 flex items-center gap-2 mb-2" dir="rtl">
-        <span><tv className="inline text-blue-400" /></span> תרגול ברמת {levels.find(l => l.key === selectedLevel)?.label}
+        <span><Tv className="inline text-blue-400" /></span> תרגול ברמת {levels.find(l => l.key === selectedLevel)?.label}
       </h2>
       <div className="rounded-xl border px-5 py-3 bg-blue-100 text-lg leading-8 text-black shadow-sm w-full" dir="rtl">
         {text}
