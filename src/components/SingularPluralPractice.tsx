@@ -35,11 +35,13 @@ export default function SingularPluralPractice({
   const q: SingularPluralQuestion = (questions as SingularPluralQuestion[])[step];
 
   // אופציות מוצגות תמיד גם בעברית וגם באנגלית
-  const joinedOptions = q.he.options.map((heOpt, idx) => {
-    // ניקוי סוגריים באנגלית אם זה אותו דבר (למניעת כפילות)
-    const enOpt = q.en.options[idx];
-    return `${heOpt} (${enOpt.replace(/.*\(([^)]+)\).*/, '$1').trim()})`;
-  });
+  const joinedOptions = q.he.options
+    .map((heOpt, idx) => {
+      const enOpt = q.en.options[idx];
+      return { heOpt, enOpt };
+    })
+    .filter(optPair => optPair.heOpt !== "טעות") // מסנן את "טעות"
+    .map(({ heOpt, enOpt }) => `${heOpt} (${enOpt.replace(/.*\(([^)]+)\).*/, '$1').trim()})`);
 
   function handleOption(idx: number) {
     setSelected(idx);
@@ -55,10 +57,11 @@ export default function SingularPluralPractice({
 
   const t = (h: string, e: string) => (lang === "he" ? h : e);
 
-  // התאמת תשובה גם ללוגיקה החדשה הכוללת אנגלית ועברית
+  // get correct option after possibility filtering (שימו לב! התאמה חדשה לצורך הסרת "טעות")
   function getCorrectOptionIdx() {
-    // בקרת התאמת תשובה לפי ערך עברי
-    return q.he.options.findIndex(opt => opt === q.answer);
+    // מחפש את האינדקס מתוך מערך האופציות (ללא "טעות")
+    const filteredOptions = q.he.options.filter(opt => opt !== "טעות");
+    return filteredOptions.findIndex(opt => opt === q.answer);
   }
 
   return (
