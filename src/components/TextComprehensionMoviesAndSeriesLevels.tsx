@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import { BookOpen, Tv } from "lucide-react";
 import { MoviesAndSeriesReadingData } from "./MoviesAndSeriesReadingData";
 import { MoviesAndSeriesQuestions } from "./MoviesAndSeriesQuestions";
+import MoviesAndSeriesTranslatableText from "./MoviesAndSeriesTranslatableText";
 
 const levels = [
   { key: "easy", label: "קל" },
@@ -78,7 +78,7 @@ export default function TextComprehensionMoviesAndSeriesLevels() {
         <span><Tv className="inline text-blue-400" /></span> תרגול ברמת {levels.find(l => l.key === selectedLevel)?.label}
       </h2>
       <div className="rounded-xl border px-5 py-3 bg-blue-100 text-lg leading-8 text-black shadow-sm w-full" dir="rtl">
-        {text}
+        <MoviesAndSeriesTranslatableText text={text} />
       </div>
       <div className="flex flex-col gap-4 w-full">
         {questions.map((q, i) => (
