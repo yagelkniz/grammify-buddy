@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from "react";
 import questions from "./singularPluralQuestions.json";
 import { Button } from "@/components/ui/button";
@@ -22,7 +21,7 @@ interface SingularPluralQuestion {
     hint: string;
   };
   en: {
-    question: string;
+    question: string[];
     options: string[];
     hint: string;
   };
@@ -59,6 +58,8 @@ export default function SingularPluralPractice({
   const [showFeedback, setShowFeedback] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
   const [showHint, setShowHint] = useState(false);
+  const [score, setScore] = useState(0);
+  const [showSummary, setShowSummary] = useState(false); // מצב סיכום
 
   // בניית נתוני השאלה
   const q: SingularPluralQuestion = (questions as SingularPluralQuestion[])[step];
@@ -88,32 +89,51 @@ export default function SingularPluralPractice({
   // רפרנס לאודיו (פידבק)
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // --- צלילים חדשים: מאוזן והרמוני --- //
   function playFeedback(isCorrect: boolean) {
-    // דמו: בחר סאונד אחר לנכון/לא נכון
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    // קוד לדוג׳: (צריך להוסיף קובצי סאונד בסביבה אמיתית)
-    // new Audio(isCorrect ? "correct.mp3" : "wrong.mp3").play();
-    // דמו: נשתמש באפקט תדר-דמיוני
-    try {
-      if (window.AudioContext || (window as any).webkitAudioContext) {
-        const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    if (window.AudioContext || (window as any).webkitAudioContext) {
+      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      // תשובה נכונה: הרמוניה שמחה (C+G)
+      if (isCorrect) {
+        const o1 = ctx.createOscillator();
+        const o2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+        o1.type = "sine";
+        o2.type = "triangle";
+        o1.frequency.value = 523.25; // C5
+        o2.frequency.value = 783.99; // G5
+        o1.connect(gain);
+        o2.connect(gain);
+        gain.connect(ctx.destination);
+        gain.gain.value = 0.13;
+        o1.start();
+        o2.start(ctx.currentTime + 0.05);
+        o1.stop(ctx.currentTime + 0.27);
+        o2.stop(ctx.currentTime + 0.33);
+        setTimeout(() => ctx.close(), 400);
+      } else {
+        // תשובה שגויה: ביפ נמוך רך וסיום עם nhẹ vibrato
         const o = ctx.createOscillator();
+        const gain = ctx.createGain();
         o.type = "sine";
-        o.frequency.value = isCorrect ? 880 : 320;
-        o.connect(ctx.destination);
+        o.frequency.value = 220; // A3 (נמוך)
+        gain.gain.value = 0.13;
+        o.connect(gain);
+        gain.connect(ctx.destination);
         o.start();
-        o.stop(ctx.currentTime + 0.25);
+        setTimeout(() => { o.frequency.setValueAtTime(180, ctx.currentTime + 0.12); }, 120);
+        o.stop(ctx.currentTime + 0.30);
+        setTimeout(() => ctx.close(), 360);
       }
-    } catch (e) { }
+    }
   }
 
   function handleOption(idx: number) {
     setSelected(idx);
     setShowFeedback(true);
-    playFeedback(idx === getCorrectOptionIdx());
+    const correct = idx === getCorrectOptionIdx();
+    playFeedback(correct);
+    if (correct) setScore((s) => s + 1);
   }
 
   function next() {
@@ -121,13 +141,58 @@ export default function SingularPluralPractice({
     setShowFeedback(false);
     setShowTranslation(false);
     setShowHint(false);
-    setStep((prev) => (prev < questions.length - 1 ? prev + 1 : 0));
+    if (step < questions.length - 1) {
+      setStep((prev) => prev + 1);
+    } else {
+      setShowSummary(true);
+    }
+  }
+
+  function restartPractice() {
+    setStep(0);
+    setScore(0);
+    setSelected(null);
+    setShowFeedback(false);
+    setShowTranslation(false);
+    setShowHint(false);
+    setShowSummary(false);
   }
 
   const t = (h: string, e: string) => (lang === "he" ? h : e);
 
   function getCorrectOptionIdx() {
     return heOptions.findIndex(opt => opt === q.answer);
+  }
+
+  // אם מציגים סיכום
+  if (showSummary) {
+    const remarks = score === questions.length
+      ? t("כל הכבוד! הצלחת בכל התרגיל! 😊", "Amazing! You got everything right!")
+      : score > questions.length * 0.7
+        ? t("מצוין! יש עוד קצת להשתפר.", "Great job! There's some room to improve.")
+        : t("מוזמן לנסות שוב כדי להשתפר!", "Try again to improve your score!");
+    return (
+      <div className="flex flex-col items-center justify-center max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow p-4 md:p-8 gap-6 min-h-[60dvh] animate-fade-in">
+        <div className="text-3xl md:text-4xl font-bold mt-3 mb-2 text-green-700 dark:text-green-400 animate-[bounce_1s]">
+          {t("סיימת את התרגול!", "Practice Complete!")}
+        </div>
+        <div className="text-xl font-semibold mt-2 mb-4">
+          {t(
+            `ענית נכון על ${score} מתוך ${questions.length} שאלות.`,
+            `You answered ${score} out of ${questions.length} correctly.`
+          )}
+        </div>
+        <div className="text-base md:text-lg text-gray-700 dark:text-gray-300 mb-2">
+          {remarks}
+        </div>
+        <Button variant="secondary" onClick={restartPractice} className="text-base md:text-lg mt-1 animate-pulse">
+          {t("נסה שוב", "Try Again")}
+        </Button>
+        <Button variant="ghost" onClick={onBack} className="mt-2">
+          ⬅ {t("חזרה", "Back")}
+        </Button>
+      </div>
+    );
   }
 
   // עיצוב רספונסיבי, מינימום ריווח בכפתורים
@@ -174,19 +239,26 @@ export default function SingularPluralPractice({
             : t("הצג אנגלית", "Show English")}
         </Button>
       </div>
-      {/* דגש רספונסיבי לכפתורים */}
+      {/* כפתורי בחירה */}
       <div className="flex flex-col gap-3 w-full transition-all">
-        {joinedOptions.map((opt, idx) => (
-          <Button
-            key={idx}
-            variant={selected === idx ? "default" : "outline"}
-            onClick={() => !showFeedback && handleOption(idx)}
-            className="w-full text-xl py-4 md:py-4"
-            disabled={showFeedback}
-          >
-            {opt}
-          </Button>
-        ))}
+        {joinedOptions.map((opt, idx) => {
+          let ani = "";
+          if (showFeedback) {
+            if (selected === idx && idx === getCorrectOptionIdx()) ani = "animate-bounce";
+            else if (selected === idx && idx !== getCorrectOptionIdx()) ani = "animate-shake";
+          }
+          return (
+            <Button
+              key={idx}
+              variant={selected === idx ? "default" : "outline"}
+              onClick={() => !showFeedback && handleOption(idx)}
+              className={`w-full text-xl py-4 md:py-4 transition-all duration-300 ${ani}`}
+              disabled={showFeedback}
+            >
+              {opt}
+            </Button>
+          );
+        })}
       </div>
       {/* פידבק לתשובה */}
       {showFeedback && (
@@ -236,3 +308,23 @@ export default function SingularPluralPractice({
     </div>
   );
 }
+
+// --- אנימציה shake מותאמת אישית --- //
+/*
+  יש להוסיף להגדרות Tailwind בקובץ tailwind.config.ts:
+  theme: {
+    extend: {
+      keyframes: {
+        shake: {
+          '10%, 90%': { transform: 'translateX(-2px)' },
+          '20%, 80%': { transform: 'translateX(4px)' },
+          '30%, 50%, 70%': { transform: 'translateX(-6px)' },
+          '40%, 60%': { transform: 'translateX(6px)' },
+        },
+      },
+      animation: {
+        shake: 'shake 0.4s linear',
+      }
+    }
+  }
+*/
