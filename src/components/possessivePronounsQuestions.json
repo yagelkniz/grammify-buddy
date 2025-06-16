@@ -1,143 +1,243 @@
 
 [
   {
-    "id": 1,
-    "he": {
-      "question": "אני לא מוצא את הארנק שלי, ראית את הארנק ___ על השולחן?",
-      "options": ["שלי", "שלך", "שלו", "שלה"],
-      "hint": "מדובר בארנק של הדובר עצמו."
-    },
-    "en": {
-      "question": "I can't find my wallet. Did you see ___ wallet on the table?",
-      "options": ["my", "your", "his", "her"],
-      "hint": "The speaker is talking about their own wallet."
-    },
-    "answer": "שלי"
+    "question": "אני לא מוצא את הארנק שלי, ראית את הארנק ___ על השולחן?",
+    "options": ["שלי", "שלך", "שלו"],
+    "answer": "שלי",
+    "translation": "I can't find my wallet. Did you see my wallet on the table?"
   },
   {
-    "id": 2,
-    "he": {
-      "question": "רותי שכחה את המעיל שלה במסעדה. אפשר לבדוק אם יש את המעיל ___?",
-      "options": ["שלה", "שלו", "שלך", "שלי"],
-      "hint": "המעיל שייך לרותי."
-    },
-    "en": {
-      "question": "Ruti forgot her coat at the restaurant. Can we check if ___ coat is there?",
-      "options": ["her", "his", "your", "my"],
-      "hint": "The coat belongs to Ruti."
-    },
-    "answer": "שלה"
+    "question": "רותי שכחה את המעיל שלה במסעדה. אפשר לבדוק אם יש את המעיל ___?",
+    "options": ["שלה", "שלו", "שלך"],
+    "answer": "שלה",
+    "translation": "Ruti forgot her coat at the restaurant. Can we check if her coat is there?"
   },
   {
-    "id": 3,
-    "he": {
-      "question": "הבן של רון הלך הביתה. אני חושב שזה התיק ___.",
-      "options": ["שלו", "שלי", "שלה", "שלך"],
-      "hint": "התיק שייך לבן של רון."
-    },
-    "en": {
-      "question": "Ron's son went home. I think this is ___ bag.",
-      "options": ["his", "my", "her", "your"],
-      "hint": "The bag belongs to Ron's son."
-    },
-    "answer": "שלו"
+    "question": "הבן של רון הלך הביתה. אני חושב שזה התיק ___.",
+    "options": ["שלו", "שלי", "שלה"],
+    "answer": "שלו",
+    "translation": "Ron's son went home. I think this is his bag."
   },
   {
-    "id": 4,
-    "he": {
-      "question": "אנחנו שכחנו לקחת את האוכל ___.",
-      "options": ["שלנו", "שלך", "שלהם", "שלי"],
-      "hint": "האוכל שייך לדוברים."
-    },
-    "en": {
-      "question": "We forgot to take ___ food.",
-      "options": ["our", "your", "their", "my"],
-      "hint": "The food belongs to the speakers."
-    },
-    "answer": "שלנו"
+    "question": "אנחנו שכחנו לקחת את האוכל ___.",
+    "options": ["שלנו", "שלך", "שלהם"],
+    "answer": "שלנו",
+    "translation": "We forgot to take our food."
   },
   {
-    "id": 5,
-    "he": {
-      "question": "יוסי ונועם באו באיחור. איפה הכרטיסים ___?",
-      "options": ["שלהם", "שלי", "שלך", "שלנו"],
-      "hint": "הכרטיסים שייכים ליוסי ונועם."
-    },
-    "en": {
-      "question": "Yossi and Noam arrived late. Where are ___ tickets?",
-      "options": ["their", "my", "your", "our"],
-      "hint": "The tickets belong to Yossi and Noam."
-    },
-    "answer": "שלהם"
+    "question": "יוסי ונועם באו באיחור. איפה הכרטיסים ___?",
+    "options": ["שלהם", "שלי", "שלך"],
+    "answer": "שלהם",
+    "translation": "Yossi and Noam arrived late. Where are their tickets?"
   },
   {
-    "id": 6,
-    "he": {
-      "question": "תמר, את שכחת את הספר ___ על השולחן.",
-      "options": ["שלך", "שלו", "שלי", "שלה"],
-      "hint": "הדובר פונה לתמר לגבי הספר שלה."
-    },
-    "en": {
-      "question": "Tamar, you forgot ___ book on the table.",
-      "options": ["your", "his", "my", "her"],
-      "hint": "The speaker is addressing Tamar about her book."
-    },
-    "answer": "שלך"
+    "question": "תמר, את שכחת את הספר ___ על השולחן.",
+    "options": ["שלך", "שלו", "שלי"],
+    "answer": "שלך",
+    "translation": "Tamar, you forgot your book on the table."
   },
   {
-    "id": 7,
-    "he": {
-      "question": "זו הדירה ___ ואני גר בה כבר חמש שנים.",
-      "options": ["שלי", "שלנו", "שלך", "שלו"],
-      "hint": "הדובר מדבר על הדירה שלו."
-    },
-    "en": {
-      "question": "This is ___ apartment and I've been living in it for five years.",
-      "options": ["my", "our", "your", "his"],
-      "hint": "The speaker is talking about their own apartment."
-    },
-    "answer": "שלי"
+    "question": "זו הדירה ___ ואני גר בה כבר חמש שנים.",
+    "options": ["שלי", "שלנו", "שלך"],
+    "answer": "שלי",
+    "translation": "This is my apartment and I've been living in it for five years."
   },
   {
-    "id": 8,
-    "he": {
-      "question": "שלום לכולם, אנחנו המורים וזו הכיתה ___.",
-      "options": ["שלנו", "שלהם", "שלכם", "שלי"],
-      "hint": "המורים מדברים על הכיתה שלהם."
-    },
-    "en": {
-      "question": "Hello everyone, we are the teachers and this is ___ classroom.",
-      "options": ["our", "their", "your", "my"],
-      "hint": "The teachers are talking about their classroom."
-    },
-    "answer": "שלנו"
+    "question": "שלום לכולם, אנחנו המורים וזו הכיתה ___.",
+    "options": ["שלנו", "שלהם", "שלכם"],
+    "answer": "שלנו",
+    "translation": "Hello everyone, we are the teachers and this is our classroom."
   },
   {
-    "id": 9,
-    "he": {
-      "question": "התלמידים מחכים למורה ___.",
-      "options": ["שלהם", "שלי", "שלו", "שלך"],
-      "hint": "המורה שייכת לתלמידים."
-    },
-    "en": {
-      "question": "The students are waiting for ___ teacher.",
-      "options": ["their", "my", "his", "your"],
-      "hint": "The teacher belongs to the students."
-    },
-    "answer": "שלהם"
+    "question": "התלמידים מחכים למורה ___.",
+    "options": ["שלהם", "שלי", "שלו"],
+    "answer": "שלהם",
+    "translation": "The students are waiting for their teacher."
   },
   {
-    "id": 10,
-    "he": {
-      "question": "הבת שלך מתוקה מאוד. איך קוראים לבת ___?",
-      "options": ["שלך", "שלי", "שלו", "שלה"],
-      "hint": "הדובר מתייחס לבת של הנמען."
-    },
-    "en": {
-      "question": "Your daughter is very sweet. What is ___ daughter's name?",
-      "options": ["your", "my", "his", "her"],
-      "hint": "The speaker is referring to the listener's daughter."
-    },
-    "answer": "שלך"
+    "question": "הבת שלך מתוקה מאוד. איך קוראים לבת ___?",
+    "options": ["שלך", "שלי", "שלו"],
+    "answer": "שלך",
+    "translation": "Your daughter is very sweet. What is your daughter's name?"
+  },
+  {
+    "question": "מיכל, היכן המכונית ___? אני צריך אותה בדחיפות.",
+    "options": ["שלך", "שלו", "שלנו"],
+    "answer": "שלך",
+    "translation": "Michal, where is your car? I need it urgently."
+  },
+  {
+    "question": "הבנות הללו הן חברות טובות ואני מכיר את ההורים ___.",
+    "options": ["שלהן", "שלנו", "שלהם"],
+    "answer": "שלהן",
+    "translation": "These girls are good friends and I know their parents."
+  },
+  {
+    "question": "דן, אתה וחברים שלך בואו לבקר בבית ___.",
+    "options": ["שלכם", "שלנו", "שלי"],
+    "answer": "שלנו",
+    "translation": "Dan, you and your friends come visit our house."
+  },
+  {
+    "question": "הכלב הזה רץ ברחוב. זה נראה כמו הכלב ___.",
+    "options": ["שלהם", "שלי", "שלך"],
+    "answer": "שלהם",
+    "translation": "This dog is running in the street. It looks like their dog."
+  },
+  {
+    "question": "אמא שלי אוהבת את הגינה ___ מאוד.",
+    "options": ["שלה", "שלי", "שלנו"],
+    "answer": "שלה",
+    "translation": "My mother loves her garden very much."
+  },
+  {
+    "question": "בחורים, איפה האופניים ___? אני לא רואה אותם.",
+    "options": ["שלכם", "שלנו", "שלי"],
+    "answer": "שלכם",
+    "translation": "Guys, where are your bikes? I don't see them."
+  },
+  {
+    "question": "המורה בדקה את המחברות ___ והיא הייתה מרוצה.",
+    "options": ["שלנו", "שלה", "שלי"],
+    "answer": "שלנו",
+    "translation": "The teacher checked our notebooks and she was satisfied."
+  },
+  {
+    "question": "בנות, קחו את התיקים ___ לפני שאתן יוצאות.",
+    "options": ["שלכן", "שלנו", "שלהן"],
+    "answer": "שלכן",
+    "translation": "Girls, take your bags before you leave."
+  },
+  {
+    "question": "הרופא אמר לי לקחת את התרופות ___.",
+    "options": ["שלי", "שלו", "שלך"],
+    "answer": "שלי",
+    "translation": "The doctor told me to take my medication."
+  },
+  {
+    "question": "השכנים הלכו לחופשה ואנחנו דואגים לבית ___.",
+    "options": ["שלהם", "שלנו", "שלי"],
+    "answer": "שלהם",
+    "translation": "The neighbors went on vacation and we're taking care of their house."
+  },
+  {
+    "question": "אבא של משה קנה מכונית חדשה. המכונית ___ יפה מאוד.",
+    "options": ["שלו", "שלי", "שלנו"],
+    "answer": "שלו",
+    "translation": "Moshe's father bought a new car. His car is very beautiful."
+  },
+  {
+    "question": "הילדים שוחקים בחצר עם הצעצועים ___.",
+    "options": ["שלהם", "שלנו", "שלי"],
+    "answer": "שלהם",
+    "translation": "The children are playing in the yard with their toys."
+  },
+  {
+    "question": "אחותי גרה בעיר אחרת ואני מתגעגע לבית ___.",
+    "options": ["שלה", "שלי", "שלנו"],
+    "answer": "שלה",
+    "translation": "My sister lives in another city and I miss her house."
+  },
+  {
+    "question": "נורית, איך הולכים לעבודה ___? זה רחוק?",
+    "options": ["שלך", "שלי", "שלו"],
+    "answer": "שלך",
+    "translation": "Nurit, how do you get to your work? Is it far?"
+  },
+  {
+    "question": "אני ואחי נוסעים לבקר את הסבתא ___ בסוף השבוע.",
+    "options": ["שלנו", "שלי", "שלו"],
+    "answer": "שלנו",
+    "translation": "My brother and I are going to visit our grandmother this weekend."
+  },
+  {
+    "question": "הטייס של המטוס הודיע שנגיע ליעד ___.",
+    "options": ["שלנו", "שלו", "שלהם"],
+    "answer": "שלנו",
+    "translation": "The airplane pilot announced that we will reach our destination."
+  },
+  {
+    "question": "החתול הזה תמיד יושב על הגדר של השכן ___.",
+    "options": ["שלנו", "שלי", "שלהם"],
+    "answer": "שלנו",
+    "translation": "This cat always sits on our neighbor's fence."
+  },
+  {
+    "question": "המזכירה שלחה לנו את המסמכים ___ במייל.",
+    "options": ["שלנו", "שלה", "שלי"],
+    "answer": "שלנו",
+    "translation": "The secretary sent us our documents by email."
+  },
+  {
+    "question": "הקבוצה של הבנים מתכננת את המסיבה ___.",
+    "options": ["שלהם", "שלנו", "שלי"],
+    "answer": "שלהם",
+    "translation": "The boys' group is planning their party."
+  },
+  {
+    "question": "גברת כהן, איפה הבן ___ עובד עכשיו?",
+    "options": ["שלך", "שלו", "שלה"],
+    "answer": "שלך",
+    "translation": "Mrs. Cohen, where does your son work now?"
+  },
+  {
+    "question": "השחקן המפורסם חתם על התמונה ___ במזכרת.",
+    "options": ["שלי", "שלו", "שלך"],
+    "answer": "שלי",
+    "translation": "The famous actor signed my photo as a souvenir."
+  },
+  {
+    "question": "הבנות עובדות קשה על הפרויקט ___ לבית הספר.",
+    "options": ["שלהן", "שלנו", "שלי"],
+    "answer": "שלהן",
+    "translation": "The girls are working hard on their school project."
+  },
+  {
+    "question": "חברים יקרים, בואו נחגוג את הישגי הקבוצה ___.",
+    "options": ["שלנו", "שלכם", "שלהם"],
+    "answer": "שלנו",
+    "translation": "Dear friends, let's celebrate our team's achievements."
+  },
+  {
+    "question": "הטכנאי תיקן את המחשב ___ בעשר דקות.",
+    "options": ["שלי", "שלו", "שלך"],
+    "answer": "שלי",
+    "translation": "The technician fixed my computer in ten minutes."
+  },
+  {
+    "question": "הנהג חיכה למשפחה ___ ליד הכניסה.",
+    "options": ["שלו", "שלי", "שלנו"],
+    "answer": "שלו",
+    "translation": "The driver waited for his family near the entrance."
+  },
+  {
+    "question": "בחורות, זכרו לקחת את המעילים ___ לפני שאתן יוצאות.",
+    "options": ["שלכן", "שלהן", "שלנו"],
+    "answer": "שלכן",
+    "translation": "Girls, remember to take your coats before you go out."
+  },
+  {
+    "question": "האמן צייר את הדיוקן ___ בשלושה ימים.",
+    "options": ["שלי", "שלו", "שלה"],
+    "answer": "שלי",
+    "translation": "The artist painted my portrait in three days."
+  },
+  {
+    "question": "הכלבים האלה לא מפסיקים לנבוח ליד הבית ___.",
+    "options": ["שלהם", "שלנו", "שלי"],
+    "answer": "שלהם",
+    "translation": "These dogs don't stop barking near their house."
+  },
+  {
+    "question": "הזמר שר את השיר החדש ___ בקונצרט.",
+    "options": ["שלו", "שלי", "שלך"],
+    "answer": "שלו",
+    "translation": "The singer sang his new song at the concert."
+  },
+  {
+    "question": "החברה ___ עובדת בחברת הייטק גדולה.",
+    "options": ["שלי", "שלו", "שלך"],
+    "answer": "שלי",
+    "translation": "My friend works at a big high-tech company."
   }
 ]
