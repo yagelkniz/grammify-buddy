@@ -4,18 +4,10 @@ import questions from "./pronounsQuestions.json";
 import { Button } from "@/components/ui/button";
 
 interface PronounQuestion {
-  id: number;
-  he: {
-    question: string;
-    options: string[];
-    hint: string;
-  };
-  en: {
-    question: string;
-    options: string[];
-    hint: string;
-  };
+  question: string;
+  options: string[];
   answer: string;
+  translation: string;
 }
 
 type Lang = "he" | "en";
@@ -34,6 +26,11 @@ export default function PronounsPractice({
 
   const q: PronounQuestion = (questions as PronounQuestion[])[step];
 
+  // Add safety check
+  if (!q) {
+    return <div>טוען שאלות...</div>;
+  }
+
   function handleOption(idx: number) {
     setSelected(idx);
     setShowFeedback(true);
@@ -49,15 +46,8 @@ export default function PronounsPractice({
   const t = (h: string, e: string) => (lang === "he" ? h : e);
 
   function getCorrectOptionIdx() {
-    // התאמה לפי אופציות בעברית בלבד — זו תשובה נכונה לכל שפה
-    return q.he.options.findIndex(opt => opt === q.answer);
+    return q.options.findIndex(opt => opt === q.answer);
   }
-
-  // מציגים את האופציות — תמיד גם בעברית וגם באנגלית לפרנטיה
-  const joinedOptions = q.he.options.map((heOpt, idx) => {
-    const enOpt = q.en.options[idx];
-    return `${heOpt} (${enOpt})`;
-  });
 
   return (
     <div className="flex flex-col items-center max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow p-8 gap-6 min-h-[60vh]">
@@ -71,9 +61,9 @@ export default function PronounsPractice({
       </h2>
       <div className="mb-2" dir={lang === "he" ? "rtl" : "ltr"}>
         {showTranslation ? (
-          <span>{q.en.question}</span>
+          <span>{q.translation}</span>
         ) : (
-          <span>{q.he.question}</span>
+          <span>{q.question}</span>
         )}
         <Button
           variant="link"
@@ -87,7 +77,7 @@ export default function PronounsPractice({
         </Button>
       </div>
       <div className="flex flex-col gap-3 w-full">
-        {joinedOptions.map((opt, idx) => (
+        {q.options.map((opt, idx) => (
           <Button
             key={idx}
             variant={selected === idx ? "default" : "outline"}
@@ -110,8 +100,8 @@ export default function PronounsPractice({
           {selected === getCorrectOptionIdx()
             ? t("נכון! מעולה!", "Correct! Well done!")
             : t(
-                `לא נכון. התשובה: ${joinedOptions[getCorrectOptionIdx()]} (${q.he.hint})`,
-                `Incorrect. The answer: ${joinedOptions[getCorrectOptionIdx()]} (${q.en.hint})`
+                `לא נכון. התשובה: ${q.options[getCorrectOptionIdx()]}`,
+                `Incorrect. The answer: ${q.options[getCorrectOptionIdx()]}`
               )}
         </div>
       )}

@@ -1,143 +1,123 @@
 
 [
   {
-    "id": 1,
-    "he": {
-      "question": "מי מבין האפשרויות הבאות מתאים למשפט: '___ גר בתל אביב.'",
-      "options": ["אתם", "הוא", "אני", "היא"],
-      "hint": "גוף שלישי יחיד זכר, לא מדבר על עצמי ולא על קבוצה."
-    },
-    "en": {
-      "question": "Which of the following fits: '___ lives in Tel Aviv.'",
-      "options": ["You (pl.)", "He", "I", "She"],
-      "hint": "Third person, masculine, singular."
-    },
-    "answer": "הוא"
+    "question": "רותי אוהבת לטייל. ___ מטיילת כל שבת בבוקר בפארק.",
+    "options": ["היא", "אני", "אתה"],
+    "answer": "היא",
+    "translation": "Ruti loves hiking. She hikes every Saturday morning in the park."
   },
   {
-    "id": 2,
-    "he": {
-      "question": "מי מבין האפשרויות הבאות מתאים למשפט: '___ מדברת עברית יפה.'",
-      "options": ["את", "אני", "אתה", "הם"],
-      "hint": "פנייה לנקבה יחידה בגוף שני."
-    },
-    "en": {
-      "question": "Which option fits: '___ speaks Hebrew beautifully.'",
-      "options": ["You (f. sg.)", "I", "You (m. sg.)", "They (m.)"],
-      "hint": "Second person singular, feminine."
-    },
-    "answer": "את"
+    "question": "שלום, שמי אלון. ___ גר בירושלים.",
+    "options": ["אני", "אתה", "הוא"],
+    "answer": "אני",
+    "translation": "Hello, my name is Alon. I live in Jerusalem."
   },
   {
-    "id": 3,
-    "he": {
-      "question": "'___ שותה קפה כל בוקר.' מתייחס לדובר עצמו. איזו אפשרות נכונה?",
-      "options": ["אני", "הוא", "היא", "אנחנו"],
-      "hint": "גוף ראשון יחיד."
-    },
-    "en": {
-      "question": "'___ drinks coffee every morning.' Refers to the speaker. Which is correct?",
-      "options": ["I", "He", "She", "We"],
-      "hint": "First person singular."
-    },
-    "answer": "אני"
+    "question": "יוסי, ___ רוצה לבוא איתי לקולנוע?",
+    "options": ["אתה", "הוא", "אני"],
+    "answer": "אתה",
+    "translation": "Yossi, do you want to come with me to the cinema?"
   },
   {
-    "id": 4,
-    "he": {
-      "question": "מי מבין האפשרויות הבאות מתאים: '___ עובד בבית חולים.' (גבר שאינו הדובר או השומע)",
-      "options": ["הוא", "אני", "אתם", "את"],
-      "hint": "גוף שלישי זכר יחיד שמדובר עליו."
-    },
-    "en": {
-      "question": "Which fits: '___ works at a hospital.' (A man, not the speaker or listener)",
-      "options": ["He", "I", "You (pl.)", "You (f. sg.)"],
-      "hint": "Third person masculine singular (not I, not you)."
-    },
-    "answer": "הוא"
+    "question": "הילדים בכיתה ג'. ___ לומדים לקרוא ולכתוב.",
+    "options": ["הם", "אנחנו", "אתם"],
+    "answer": "הם",
+    "translation": "The children are in 3rd grade. They are learning to read and write."
   },
   {
-    "id": 5,
-    "he": {
-      "question": "'___ מטיילים בסוף השבוע.' מהי האפשרות היחידה שמדברת על הדוברים עצמם ברבים?",
-      "options": ["אנחנו", "הוא", "היא", "אתה"],
-      "hint": "גוף ראשון רבים."
-    },
-    "en": {
-      "question": "'___ travel on weekends.' Which is the only option for speakers talking about themselves (plural)?",
-      "options": ["We", "He", "She", "You (m. sg.)"],
-      "hint": "First person plural."
-    },
-    "answer": "אנחנו"
+    "question": "רותי ודנה, ___ גרות ליד הים?",
+    "options": ["אתן", "הן", "אנחנו"],
+    "answer": "אתן",
+    "translation": "Ruti and Dana, do you (f. pl.) live near the sea?"
   },
   {
-    "id": 6,
-    "he": {
-      "question": "איזו אפשרות נכונה: '___ משחקות כדורגל כל יום שישי.' (פנייה לקבוצת בנות)",
-      "options": ["אתן", "היא", "אני", "הם"],
-      "hint": "פנייה לנקבות ברבים."
-    },
-    "en": {
-      "question": "Which is correct: '___ play soccer every Friday.' (addressing a group of girls)",
-      "options": ["You (f. pl.)", "She", "I", "They (m.)"],
-      "hint": "Second person plural, feminine."
-    },
-    "answer": "אתן"
+    "question": "שירה מספרת על עצמה: ___ אוהבת לבשל עם סבתא שלי.",
+    "options": ["אני", "היא", "את"],
+    "answer": "אני",
+    "translation": "Shira tells about herself: I love cooking with my grandma."
   },
   {
-    "id": 7,
-    "he": {
-      "question": "מהי האפשרות הנכונה: '___ מדברות אנגלית.' (קבוצה של בנות שאינן הדוברות או הנמענות)",
-      "options": ["הן", "אנחנו", "הוא", "אתה"],
-      "hint": "גוף שלישי רבות, נקבה."
-    },
-    "en": {
-      "question": "Which is correct: '___ speak English.' (group of girls, not speakers/listeners)",
-      "options": ["They (f.)", "We", "He", "You (m. sg.)"],
-      "hint": "Third person plural, feminine."
-    },
-    "answer": "הן"
+    "question": "יוני ודורון, ___ הולכים לשוק בערב?",
+    "options": ["אתם", "אנחנו", "הם"],
+    "answer": "אתם",
+    "translation": "Yoni and Doron, are you going to the market in the evening?"
   },
   {
-    "id": 8,
-    "he": {
-      "question": "'___ לומדים באוניברסיטה.' מהי האפשרות הנכונה כאשר מדובר בקבוצת בנים (לא אנחנו)?",
-      "options": ["הם", "אתן", "היא", "אני"],
-      "hint": "קבוצת בנים, גוף שלישי רבים."
-    },
-    "en": {
-      "question": "'___ study at the university.' Which is correct for a group of boys (not us)?",
-      "options": ["They (m.)", "You (f. pl.)", "She", "I"],
-      "hint": "Third person plural, masculine."
-    },
-    "answer": "הם"
+    "question": "דני גר לבד בתל אביב. ___ שותה קפה כל בוקר.",
+    "options": ["הוא", "אתה", "אני"],
+    "answer": "הוא",
+    "translation": "Dani lives alone in Tel Aviv. He drinks coffee every morning."
   },
   {
-    "id": 9,
-    "he": {
-      "question": "'___ גרות בירושלים.' איזו אפשרות נכונה כשהכוונה לקבוצת בנות אחרות?",
-      "options": ["הן", "אתן", "אנחנו", "אני"],
-      "hint": "רבות, גוף שלישי."
-    },
-    "en": {
-      "question": "'___ live in Jerusalem.' Which is correct for a group of other girls?",
-      "options": ["They (f.)", "You (f. pl.)", "We", "I"],
-      "hint": "Third person, feminine plural."
-    },
-    "answer": "הן"
+    "question": "שירה וטל מדברות בטלפון. ___ לא נפגשו הרבה זמן.",
+    "options": ["הן", "אתן", "אנחנו"],
+    "answer": "הן",
+    "translation": "Shira and Tal are talking on the phone. They (f.) haven't met in a while."
   },
   {
-    "id": 10,
-    "he": {
-      "question": "מי הנכונה: '___ עובדת בחנות.' (אישה שאינה הדוברת)",
-      "options": ["היא", "אני", "אתה", "הוא"],
-      "hint": "גוף שלישי נקבה יחיד."
-    },
-    "en": {
-      "question": "Which is correct: '___ works at a shop.' (a woman, not the speaker)",
-      "options": ["She", "I", "You (m. sg.)", "He"],
-      "hint": "Third person, feminine singular."
-    },
-    "answer": "היא"
+    "question": "מיכל ואני לומדות עברית. ___ עושות שיעורים כל יום.",
+    "options": ["אנחנו", "הן", "אתן"],
+    "answer": "אנחנו",
+    "translation": "Michal and I are learning Hebrew. We do homework every day."
+  },
+  {
+    "question": "דני, ___ עובד מחר בבוקר?",
+    "options": ["אתה", "הוא", "אני"],
+    "answer": "אתה",
+    "translation": "Dani, are you working tomorrow morning?"
+  },
+  {
+    "question": "היי, אני לירון. ___ גרה במקסיקו סיטי.",
+    "options": ["אני", "היא", "את"],
+    "answer": "אני",
+    "translation": "Hi, I'm Liron. I live in Mexico City."
+  },
+  {
+    "question": "הבנות משחקות כדורגל. ___ ממש טובות בזה.",
+    "options": ["הן", "אתן", "אנחנו"],
+    "answer": "הן",
+    "translation": "The girls are playing soccer. They are really good at it."
+  },
+  {
+    "question": "אמא שלי ואני אופות עוגות. ___ מאוד נהנות ביחד.",
+    "options": ["אנחנו", "הן", "אתן"],
+    "answer": "אנחנו",
+    "translation": "My mom and I bake cakes. We really enjoy it together."
+  },
+  {
+    "question": "התלמיד שואל את המורה: ___ יכולה לעזור לי?",
+    "options": ["את", "היא", "אני"],
+    "answer": "את",
+    "translation": "The student asks the teacher: Can you help me?"
+  },
+  {
+    "question": "דוד מספר על אשתו: ___ מאוד אוהבת פרחים.",
+    "options": ["היא", "את", "אני"],
+    "answer": "היא",
+    "translation": "David talks about his wife: She really loves flowers."
+  },
+  {
+    "question": "שלום! שמי נועה. ___ באתי ללמוד עברית.",
+    "options": ["אני", "היא", "את"],
+    "answer": "אני",
+    "translation": "Hello! My name is Noa. I came to learn Hebrew."
+  },
+  {
+    "question": "טל ודני אוהבים לרקוד. ___ רוקדים בכל יום שישי.",
+    "options": ["הם", "אנחנו", "אתם"],
+    "answer": "הם",
+    "translation": "Tal and Dani love to dance. They dance every Friday."
+  },
+  {
+    "question": "מיכל ויואב, ___ כבר אכלתם ארוחת ערב?",
+    "options": ["אתם", "הם", "אנחנו"],
+    "answer": "אתם",
+    "translation": "Michal and Yoav, have you eaten dinner yet?"
+  },
+  {
+    "question": "שירה, ___ רוצה לשתות משהו?",
+    "options": ["את", "היא", "אני"],
+    "answer": "את",
+    "translation": "Shira, do you want to drink something?"
   }
 ]
