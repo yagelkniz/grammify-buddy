@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import questions from "./possessivePronounsQuestions.json";
@@ -50,11 +51,9 @@ export default function PossessivePronounsPractice({
   const t = (h: string, e: string) => (lang === "he" ? h : e);
 
   function getCorrectOptionIdx() {
-    // התאמה לפי אופציות בעברית בלבד — זו תשובה נכונה לכל שפה
     return q.he.options.findIndex(opt => opt === q.answer);
   }
 
-  // מציגים את האופציות — תמיד גם בעברית וגם באנגלית לפרנטיה
   const joinedOptions = q.he.options.map((heOpt, idx) => {
     const enOpt = q.en.options[idx];
     return `${heOpt} (${enOpt})`;
