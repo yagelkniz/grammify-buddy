@@ -1,0 +1,108 @@
+
+[
+  {
+    "question": "הוא אוהב מתוק ___ אכל שתי עוגות.",
+    "options": ["אבל", "גם", "כדי"],
+    "answer": "גם",
+    "category": "הוספה",
+    "translation": "He loves sweets ___ he ate two cakes."
+  },
+  {
+    "question": "היא קנתה שמלה חדשה ___ נעליים תואמות.",
+    "options": ["גם", "אולם", "למרות"],
+    "answer": "גם",
+    "category": "הוספה",
+    "translation": "She bought a new dress ___ matching shoes."
+  },
+  {
+    "question": "הם לא רק למדו למבחן, ___ פתרו שאלות קשות.",
+    "options": ["אלא גם", "אבל", "לכן"],
+    "answer": "אלא גם",
+    "category": "הוספה",
+    "translation": "They not only studied for the test, ___ they solved difficult questions."
+  },
+  {
+    "question": "היא בישלה ארוחת ערב ___ הכינה קינוח.",
+    "options": ["ולכן", "וגם", "כדי"],
+    "answer": "וגם",
+    "category": "הוספה",
+    "translation": "She cooked dinner ___ made dessert."
+  },
+  {
+    "question": "הם נסעו לים ___ הלכו למסעדה.",
+    "options": ["ולבסוף", "גם", "אך"],
+    "answer": "גם",
+    "category": "הוספה",
+    "translation": "They went to the beach ___ went to a restaurant."
+  },
+  {
+    "question": "לא רק שהוא איחר, ___ הוא שכח את המחברת.",
+    "options": ["אלא גם", "אבל", "כדי"],
+    "answer": "אלא גם",
+    "category": "הוספה",
+    "translation": "Not only was he late, ___ he forgot his notebook."
+  },
+  {
+    "question": "היא לומדת עברית ___ אנגלית.",
+    "options": ["ולכן", "גם", "למרות"],
+    "answer": "גם",
+    "category": "הוספה",
+    "translation": "She studies Hebrew ___ English."
+  },
+  {
+    "question": "הוא שיחק כדורגל ___ כדורסל.",
+    "options": ["וגם", "אבל", "כדי"],
+    "answer": "וגם",
+    "category": "הוספה",
+    "translation": "He played soccer ___ basketball."
+  },
+  {
+    "question": "לא רק שהיא חכמה, ___ היא גם מצחיקה.",
+    "options": ["אלא גם", "אבל", "כי"],
+    "answer": "אלא גם",
+    "category": "הוספה",
+    "translation": "Not only is she smart, ___ she's also funny."
+  },
+  {
+    "question": "הם טיילו בעיר ___ ביקרו במוזיאון.",
+    "options": ["וגם", "אבל", "לכן"],
+    "answer": "וגם",
+    "category": "הוספה",
+    "translation": "They toured the city ___ visited a museum."
+  },
+  {
+    "question": "הם אכלו ארוחת בוקר ___ שתו קפה.",
+    "options": ["ואז", "גם", "אבל"],
+    "answer": "גם",
+    "category": "הוספה",
+    "translation": "They had breakfast ___ drank coffee."
+  },
+  {
+    "question": "היא אוהבת לקרוא ספרים ___ לכתוב שירים.",
+    "options": ["אבל", "גם", "ולכן"],
+    "answer": "גם",
+    "category": "הוספה",
+    "translation": "She loves reading books ___ writing poems."
+  },
+  {
+    "question": "הוא לא רק רופא, ___ הוא גם סופר.",
+    "options": ["אלא גם", "כי", "ולכן"],
+    "answer": "אלא גם",
+    "category": "הוספה",
+    "translation": "He is not only a doctor, ___ he is also a writer."
+  },
+  {
+    "question": "הם קנו כרטיסים לקולנוע ___ לפופקורן.",
+    "options": ["גם", "אבל", "כי"],
+    "answer": "גם",
+    "category": "הוספה",
+    "translation": "They bought tickets for the cinema ___ popcorn."
+  },
+  {
+    "question": "היא רצה בבוקר ___ שוחה בערב.",
+    "options": ["וגם", "לכן", "אבל"],
+    "answer": "וגם",
+    "category": "הוספה",
+    "translation": "She runs in the morning ___ swims in the evening."
+  }
+]

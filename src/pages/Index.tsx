@@ -1,549 +1,290 @@
-import React, { useState, useEffect, Suspense } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
+import IndexMainMenu from "./IndexMainMenu";
+import LinkingWordsTable from "@/components/LinkingWordsTable";
+import PronounsTable from "@/components/PronounsTable";
+import PronounsMenu from "@/components/PronounsMenu";
+import PronounsPractice from "@/components/PronounsPractice";
+import PossessivePronounsTable from "@/components/PossessivePronounsTable";
+import PossessivePronounsMenu from "@/components/PossessivePronounsMenu";
+import PossessivePronounsPractice from "@/components/PossessivePronounsPractice";
+import EverydayHebrewCategorySelect from "@/components/EverydayHebrewCategorySelect";
+import EverydayHebrewPractice from "@/components/EverydayHebrewPractice";
+import LinkingWordsPractice from "@/components/LinkingWordsPractice";
 import PresentTenseVerbPractice from "@/components/PresentTenseVerbPractice";
+import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
+import FutureTenseVerbPractice from "@/components/FutureTenseVerbPractice";
 import NounAdjectivePractice from "@/components/NounAdjectivePractice";
+import InterviewQuestionnaire from "@/components/InterviewQuestionnaire";
 import TextComprehensionFood from "@/components/TextComprehensionFood";
 import TextComprehensionAnimalsEasy from "@/components/TextComprehensionAnimalsEasy";
 import TextComprehensionFoodOrderMedium from "@/components/TextComprehensionFoodOrderMedium";
 import TextComprehensionSocialMedia from "@/components/TextComprehensionSocialMedia";
+import TextComprehensionFoodLevels from "@/components/TextComprehensionFoodLevels";
 import TextComprehensionCountriesLevels from "@/components/TextComprehensionCountriesLevels";
 import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensionMoviesAndSeriesLevels";
-import FutureTenseVerbPractice from "@/components/FutureTenseVerbPractice";
 import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlacesFoodEasy";
-import InterviewQuestionnaire from "@/components/InterviewQuestionnaire";
-import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
-import PronounsMenu from "@/components/PronounsMenu";
-import PossessivePronounsTable from "@/components/PossessivePronounsTable";
-import LinkingWordsTable from "@/components/LinkingWordsTable";
-import IndexMainMenu from "./IndexMainMenu";
-import EverydayHebrewPractice from "@/components/EverydayHebrewPractice";
-import EverydayHebrewCategorySelect from "@/components/EverydayHebrewCategorySelect";
-import menuText from "@/i18n/menu";
 
-// Add lazy import for food levels
-const LazyTextComprehensionFoodLevels = React.lazy(() =>
-  import("@/components/TextComprehensionFoodLevels")
-);
-const LazyTextComprehensionCountriesLevels = React.lazy(() =>
-  import("@/components/TextComprehensionCountriesLevels")
-);
-const LazyTextComprehensionMoviesAndSeriesLevels = React.lazy(() =>
-  import("@/components/TextComprehensionMoviesAndSeriesLevels")
-);
-import SingularPluralPractice from "@/components/SingularPluralPractice";
-import PossessivePronounsMenu from "@/components/PossessivePronounsMenu";
-
-const tenseOptions = [
-  {
-    label: "עבר",
-    color: "bg-blue-100 text-blue-900 border-blue-400",
-    value: "past",
-    emoji: "⏪",
-  },
-  {
-    label: "הווה",
-    color: "bg-green-100 text-green-900 border-green-400",
-    value: "present",
-    emoji: "⏺️",
-  },
-  {
-    label: "עתיד",
-    color: "bg-yellow-100 text-yellow-900 border-yellow-400",
-    value: "future",
-    emoji: "⏩",
-  },
-];
-
-const practiceOptions = [
-  {
-    label: "פעלים - זמן עבר/הווה/עתיד",
-    value: "verb",
-    color: "bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 text-blue-900 border-blue-200",
-    emoji: "🕰️"
-  },
-  {
-    label: "שמות עצם + תואר",
-    value: "nounAdj",
-    color: "bg-pink-100 text-pink-900 border-pink-400",
-    emoji: "📝"
-  }
-];
-
-const Index = () => {
-  // Add lang state
-  const [lang] = useState<"he" | "en">("he"); // אפשרות להחלפה בעתיד
-
-  const [showWelcome, setShowWelcome] = useState(true);
+export default function Index() {
+  const [showLinkingWords, setShowLinkingWords] = useState(false);
+  const [showLinkingWordsPractice, setShowLinkingWordsPractice] = useState(false);
+  const [showPronounsTable, setShowPronounsTable] = useState(false);
+  const [showPronounsMenu, setShowPronounsMenu] = useState(false);
+  const [showPronounsPractice, setShowPronounsPractice] = useState(false);
+  const [showPossessivePronouns, setShowPossessivePronouns] = useState(false);
+  const [showPossessivePronounsMenu, setShowPossessivePronounsMenu] = useState(false);
+  const [showPossessivePronounsPractice, setShowPossessivePronounsPractice] = useState(false);
+  const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
+  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<string | null>(null);
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
-  const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
-  const [selectedTextComp, setSelectedTextComp] = useState<
-    null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy"
-  >(null);
-  const [showPossessivePronouns, setShowPossessivePronouns] = useState(false);
-  const [showLinkingWords, setShowLinkingWords] = useState(false);
-  const nav = useNavigate();
-  const [showPronounsTable, setShowPronounsTable] = useState(false);
-  const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
-  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<null | "restaurant" | "supermarket" | "transportation">(null);
-  const [showSingularPlural, setShowSingularPlural] = useState(false);
+  const [verbTense, setVerbTense] = useState<"present" | "past" | "future" | null>(null);
+  const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">(null);
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) nav("/auth", { replace: true });
-    });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!session) nav("/auth", { replace: true });
-    });
-    return () => subscription.unsubscribe();
-  }, [nav]);
+  const resetToMainMenu = () => {
+    setShowLinkingWords(false);
+    setShowLinkingWordsPractice(false);
+    setShowPronounsTable(false);
+    setShowPronounsMenu(false);
+    setShowPronounsPractice(false);
+    setShowPossessivePronouns(false);
+    setShowPossessivePronounsMenu(false);
+    setShowPossessivePronounsPractice(false);
+    setShowEverydayHebrew(false);
+    setEverydayHebrewCategory(null);
+    setShowQuestionnaire(false);
+    setSelectedPractice(null);
+    setVerbTense(null);
+    setSelectedTextComp(null);
+  };
 
-  function handleBack() {
-    if (everydayHebrewCategory !== null) setEverydayHebrewCategory(null);
-    else if (showEverydayHebrew) setShowEverydayHebrew(false);
-    else if (selectedTextComp) setSelectedTextComp(null);
-    else if (selectedTense) setSelectedTense(null);
-    else setSelectedPractice(null);
-  }
-
-  // פונקציה מחזירה אובייקט שבו גם hebrew וגם english
-  const t = (key: string) => ({
-    he: menuText.he[key],
-    en: menuText.en[key]
-  });
-
-  // Welcome screen
-  if (showWelcome) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
-        <div className="rounded-2xl shadow-lg bg-white dark:bg-gray-900/80 px-6 py-10 max-w-md w-full flex flex-col items-center gap-7 border-2 border-blue-100">
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-800 mb-0" dir="ltr">
-            Welcome to "Hebrew with Eli"
-          </h1>
-          <div className="text-xl text-slate-700 font-semibold" dir="ltr">
-            Practice, learn and enjoy.<br />
-            And it's all free!
-          </div>
-          <div className="w-full h-px bg-gradient-to-r from-blue-200 via-purple-200 to-yellow-200 my-2" />
-          <div className="text-lg text-gray-700 text-center" dir="rtl">
-            ברוכים הבאים לאפליקציה <span className="font-bold text-blue-800">'עברית עם עילי'</span> –<br />
-            מתרגלים, לומדים ונהנים!<br />
-            והכל <span className="font-bold">בחינם</span>!
-          </div>
-          <Button
-            className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold rounded-xl py-3"
-            onClick={() => setShowWelcome(false)}
-          >
-            Go to main menu
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  // Questionnaire
-  if (showQuestionnaire) {
-    return (
-      <InterviewQuestionnaire onBack={() => setShowQuestionnaire(false)} />
-    );
-  }
-
-  // Pronoun tables, etc
-  if (showPronounsTable) {
-    return (
-      <PronounsMenu onBack={() => setShowPronounsTable(false)} />
-    );
-  }
-
-  if (showPossessivePronouns) {
-    return (
-      <PossessivePronounsMenu onBack={() => setShowPossessivePronouns(false)} />
-    );
+  if (showLinkingWordsPractice) {
+    return <LinkingWordsPractice onBack={() => setShowLinkingWordsPractice(false)} />;
   }
 
   if (showLinkingWords) {
     return (
-      <div className="w-full">
-        <div className="flex justify-end mb-4">
-          <Button variant="outline" onClick={() => setShowLinkingWords(false)}>
-            ⬅ Back
-          </Button>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-between items-center mb-6">
+            <Button variant="ghost" onClick={resetToMainMenu}>
+              ⬅ חזרה לתפריט הראשי
+            </Button>
+            <Button 
+              variant="default" 
+              onClick={() => setShowLinkingWordsPractice(true)}
+              className="bg-green-600 hover:bg-green-700"
+            >
+              🏃‍♂️ תרגול מילות קישור
+            </Button>
+          </div>
+          <LinkingWordsTable />
         </div>
-        <LinkingWordsTable />
       </div>
     );
   }
 
-  // Everyday Hebrew – category select
-  if (showEverydayHebrew && everydayHebrewCategory === null) {
+  if (showPronounsTable) {
     return (
-      <EverydayHebrewCategorySelect
-        onSelect={cat => setEverydayHebrewCategory(cat)}
-        onBack={handleBack}
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-between items-center mb-6">
+            <Button variant="ghost" onClick={resetToMainMenu}>
+              ⬅ חזרה לתפריט הראשי
+            </Button>
+            <Button 
+              variant="default" 
+              onClick={() => setShowPronounsMenu(true)}
+              className="bg-green-600 hover:bg-green-700"
+            >
+              🏃‍♂️ תרגול שמות גוף
+            </Button>
+          </div>
+          <PronounsTable />
+        </div>
+      </div>
+    );
+  }
+
+  if (showPronounsMenu) {
+    return (
+      <PronounsMenu
+        onBack={() => {
+          setShowPronounsMenu(false);
+          setShowPronounsTable(true);
+        }}
+        onSelectPractice={() => {
+          setShowPronounsMenu(false);
+          setShowPronounsPractice(true);
+        }}
       />
     );
   }
 
-  // Everyday Hebrew – practice view
-  if (showEverydayHebrew && everydayHebrewCategory) {
+  if (showPronounsPractice) {
+    return <PronounsPractice onBack={() => setShowPronounsPractice(false)} />;
+  }
+
+  if (showPossessivePronouns) {
     return (
-      <div className="w-full max-w-3xl mx-auto">
-        <div className="flex justify-end mb-4">
-          <Button variant="outline" onClick={handleBack}>
-            ⬅ Back
-          </Button>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-between items-center mb-6">
+            <Button variant="ghost" onClick={resetToMainMenu}>
+              ⬅ חזרה לתפריט הראשי
+            </Button>
+            <Button 
+              variant="default" 
+              onClick={() => setShowPossessivePronounsMenu(true)}
+              className="bg-green-600 hover:bg-green-700"
+            >
+              🏃‍♂️ תרגול מילות שייכות
+            </Button>
+          </div>
+          <PossessivePronounsTable />
         </div>
-        <EverydayHebrewPractice
-          category={everydayHebrewCategory}
-          onBack={handleBack}
+      </div>
+    );
+  }
+
+  if (showPossessivePronounsMenu) {
+    return (
+      <PossessivePronounsMenu
+        onBack={() => {
+          setShowPossessivePronounsMenu(false);
+          setShowPossessivePronouns(true);
+        }}
+        onSelectPractice={() => {
+          setShowPossessivePronounsMenu(false);
+          setShowPossessivePronounsPractice(true);
+        }}
+      />
+    );
+  }
+
+  if (showPossessivePronounsPractice) {
+    return <PossessivePronounsPractice onBack={() => setShowPossessivePronounsPractice(false)} />;
+  }
+
+  if (showEverydayHebrew) {
+    if (!everydayHebrewCategory) {
+      return (
+        <EverydayHebrewCategorySelect 
+          onBack={resetToMainMenu}
+          onSelectCategory={setEverydayHebrewCategory}
         />
-      </div>
-    );
-  }
-
-  // Text comprehension practice screens
-  if (selectedTextComp) {
+      );
+    }
     return (
-      <div className="w-full">
-        <div className="flex justify-end mb-4">
-          <Button variant="outline" onClick={handleBack}>⬅ Back</Button>
-        </div>
-        {selectedTextComp === "food" && <TextComprehensionFood />}
-        {selectedTextComp === "animals-easy" && <TextComprehensionAnimalsEasy />}
-        {selectedTextComp === "food-order-medium" && (
-          <TextComprehensionFoodOrderMedium />
-        )}
-        {selectedTextComp === "social-media" && <TextComprehensionSocialMedia />}
-        {selectedTextComp === "food-levels" && (
-          <Suspense fallback={<div>Loading…</div>}>
-            <LazyTextComprehensionFoodLevels />
-          </Suspense>
-        )}
-        {selectedTextComp === "countries-levels" && (
-          <Suspense fallback={<div>Loading…</div>}>
-            <LazyTextComprehensionCountriesLevels />
-          </Suspense>
-        )}
-        {selectedTextComp === "movies-series-levels" && (
-          <Suspense fallback={<div>Loading…</div>}>
-            <LazyTextComprehensionMoviesAndSeriesLevels />
-          </Suspense>
-        )}
-        {selectedTextComp === "places-food-easy" && <TextComprehensionPlacesFoodEasy />}
-      </div>
-    );
-  }
-
-  // תרגול יחיד/רבים + זכר/נקבה
-  if (showSingularPlural) {
-    return (
-      <SingularPluralPractice
-        lang={lang}
-        onBack={() => setShowSingularPlural(false)}
+      <EverydayHebrewPractice 
+        category={everydayHebrewCategory}
+        onBack={() => setEverydayHebrewCategory(null)}
       />
     );
   }
 
-  // דוגמה: שינוי התפריט הראשי באחת התצוגות
-  if (!selectedPractice) {
-    return (
-      <div className="flex flex-col gap-8 items-center w-full max-w-md mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir="rtl">
-          איזה תרגול תרצה לתרגל?<br />
-          <span className="text-base text-slate-600 font-normal" dir="ltr">
-            What would you like to practice?
-          </span>
-        </h1>
-        <div className="grid gap-6 w-full">
-          {/* יחיד/רבים + זכר/נקבה*/}
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-lime-100 text-lime-900 border-lime-300"
-            onClick={() => setShowSingularPlural(true)}
-          >
-            <span className="text-3xl mb-2">📚</span>
-            <span dir="rtl">{t("singularPlural").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("singularPlural").en}</span>
-          </button>
-          {/* שאר הכפתורים – תצוגה דו־לשונית */}
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
-            onClick={() => setShowLinkingWords(true)}
-          >
-            <span className="text-3xl mb-2">🔗</span>
-            <span dir="rtl">{t("linkingWords").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("linkingWords").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
-            onClick={() => setShowPronounsTable(true)}
-          >
-            <span className="text-3xl mb-2">👤</span>
-            <span dir="rtl">{t("pronouns").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("pronouns").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-teal-100 text-teal-900 border-teal-300"
-            onClick={() => setShowPossessivePronouns(true)}
-          >
-            <span className="text-3xl mb-2">🔗</span>
-            <span dir="rtl">{t("possessivePronouns").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("possessivePronouns").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-100 text-orange-900 border-orange-300"
-            onClick={() => setShowEverydayHebrew(true)}
-          >
-            <span className="text-3xl mb-2">🗣️</span>
-            <span dir="rtl">{t("everydayHebrew").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("everydayHebrew").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 text-blue-900 border-blue-200"
-            onClick={() => setSelectedPractice("verb")}
-          >
-            <span className="text-3xl mb-2">🕰️</span>
-            <span dir="rtl">{t("verbs").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("verbs").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-pink-100 text-pink-900 border-pink-400"
-            onClick={() => setSelectedPractice("nounAdj")}
-          >
-            <span className="text-3xl mb-2">📝</span>
-            <span dir="rtl">{t("nouns").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("nouns").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
-            onClick={() => setShowQuestionnaire(true)}
-          >
-            <span className="text-3xl mb-2">💬</span>
-            <span dir="rtl">{t("questionnaire").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("questionnaire").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-yellow-100 text-yellow-900 border-yellow-300"
-            onClick={() => setSelectedTextComp("food-levels")}
-          >
-            <span className="text-3xl mb-2">🥗</span>
-            <span dir="rtl">{t("foodComp").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("foodComp").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-200 text-orange-900 border-orange-300"
-            onClick={() => setSelectedTextComp("food-order-medium")}
-          >
-            <span className="text-3xl mb-2">🍽️</span>
-            <span dir="rtl">{t("foodOrder").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("foodOrder").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-green-100 text-green-900 border-green-200"
-            onClick={() => setSelectedTextComp("animals-easy")}
-          >
-            <span className="text-3xl mb-2">🐾</span>
-            <span dir="rtl">{t("animalsEasy").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("animalsEasy").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-100 text-blue-900 border-blue-300"
-            onClick={() => setSelectedTextComp("social-media")}
-          >
-            <span className="text-3xl mb-2">📱</span>
-            <span dir="rtl">{t("socialMedia").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("socialMedia").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
-            onClick={() => setSelectedTextComp("countries-levels")}
-          >
-            <span className="text-3xl mb-2">🌏</span>
-            <span dir="rtl">{t("countries").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("countries").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-50 text-blue-900 border-blue-400"
-            onClick={() => setSelectedTextComp("movies-series-levels")}
-          >
-            <span className="text-3xl mb-2">📺</span>
-            <span dir="rtl">{t("movies").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("movies").en}</span>
-          </button>
-          <button
-            className="w-full flex flex-col items-center justify-center gap-0 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-sky-100 text-sky-900 border-sky-400"
-            onClick={() => setSelectedTextComp("places-food-easy")}
-          >
-            <span className="text-3xl mb-2">🌊</span>
-            <span dir="rtl">{t("placesFoodEasy").he}</span>
-            <span className="text-base font-normal text-slate-600" dir="ltr">{t("placesFoodEasy").en}</span>
-          </button>
+  if (selectedPractice === "verb") {
+    if (!verbTense) {
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full">
+            <Button 
+              variant="ghost" 
+              onClick={() => setSelectedPractice(null)}
+              className="mb-4"
+            >
+              ⬅ חזרה
+            </Button>
+            <h2 className="text-2xl font-bold mb-6 text-center" dir="rtl">
+              בחר זמן לתרגול
+            </h2>
+            <div className="flex flex-col gap-4">
+              <Button
+                onClick={() => setVerbTense("present")}
+                className="py-6 text-xl bg-blue-500 hover:bg-blue-600"
+              >
+                זמן הווה
+              </Button>
+              <Button
+                onClick={() => setVerbTense("past")}
+                className="py-6 text-xl bg-green-500 hover:bg-green-600"
+              >
+                זמן עבר
+              </Button>
+              <Button
+                onClick={() => setVerbTense("future")}
+                className="py-6 text-xl bg-purple-500 hover:bg-purple-600"
+              >
+                זמן עתיד
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    if (verbTense === "present") {
+      return <PresentTenseVerbPractice onBack={() => setVerbTense(null)} />;
+    }
+    if (verbTense === "past") {
+      return <PastTenseVerbPractice onBack={() => setVerbTense(null)} />;
+    }
+    if (verbTense === "future") {
+      return <FutureTenseVerbPractice onBack={() => setVerbTense(null)} />;
+    }
+  }
+
+  if (selectedPractice === "nounAdj") {
+    return <NounAdjectivePractice onBack={() => setSelectedPractice(null)} />;
+  }
+
+  if (showQuestionnaire) {
+    return <InterviewQuestionnaire onBack={resetToMainMenu} />;
+  }
+
+  if (selectedTextComp === "food") {
+    return <TextComprehensionFood onBack={() => setSelectedTextComp(null)} />;
+  }
+
+  if (selectedTextComp === "animals-easy") {
+    return <TextComprehensionAnimalsEasy onBack={() => setSelectedTextComp(null)} />;
+  }
+
+  if (selectedTextComp === "food-order-medium") {
+    return <TextComprehensionFoodOrderMedium onBack={() => setSelectedTextComp(null)} />;
+  }
+
+  if (selectedTextComp === "social-media") {
+    return <TextComprehensionSocialMedia onBack={() => setSelectedTextComp(null)} />;
+  }
+
+  if (selectedTextComp === "food-levels") {
+    return <TextComprehensionFoodLevels onBack={() => setSelectedTextComp(null)} />;
+  }
+
+  if (selectedTextComp === "countries-levels") {
+    return <TextComprehensionCountriesLevels onBack={() => setSelectedTextComp(null)} />;
+  }
+
+  if (selectedTextComp === "movies-series-levels") {
+    return <TextComprehensionMoviesAndSeriesLevels onBack={() => setSelectedTextComp(null)} />;
+  }
+
+  if (selectedTextComp === "places-food-easy") {
+    return <TextComprehensionPlacesFoodEasy onBack={() => setSelectedTextComp(null)} />;
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      {!selectedPractice && (
-        <div className="flex flex-col gap-8 items-center w-full max-w-md mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir="rtl">
-            איזה תרגול תרצה לתרגל?
-          </h1>
-          <div className="grid gap-6 w-full">
-            {/* כפתור חדש — טבלת מילות קישור */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
-              onClick={() => setShowLinkingWords(true)}
-            >
-              <span className="text-3xl">🔗</span>
-              <span dir="rtl">טבלת מילות קישור (קטגוריות ודוגמאות)</span>
-            </button>
-            {/* כפתור חדש — טבלת שמות גוף */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
-              onClick={() => setShowPronounsTable(true)}
-            >
-              <span className="text-3xl">👤</span>
-              <span dir="rtl">טבלת שמות גוף (עברית-אנגלית)</span>
-            </button>
-            {/* כפתור לטבלת מילות שייכות */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-teal-100 text-teal-900 border-teal-300"
-              onClick={() => setShowPossessivePronouns(true)}
-            >
-              <span className="text-3xl">🔗</span>
-              <span dir="rtl">טבלת מילות שייכות (עברית-אנגלית)</span>
-            </button>
-            {practiceOptions.map((option) => (
-              <button
-                key={option.value}
-                className={`w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none ${option.color}`}
-                onClick={() => setSelectedPractice(option.value as any)}
-              >
-                <span className="text-3xl">{option.emoji}</span>
-                <span dir="rtl">{option.label}</span>
-              </button>
-            ))}
-            {/* כפתור לשאלון היכרות */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
-              onClick={() => setShowQuestionnaire(true)}
-            >
-              <span className="text-3xl">💬</span>
-              <span dir="rtl">שאלון היכרות</span>
-            </button>
-            {/* כפתור חדש לתרגול הבנת הנקרא - אוכל (בשלוש רמות) */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-yellow-100 text-yellow-900 border-yellow-300"
-              onClick={() => setSelectedTextComp("food-levels")}
-            >
-              <span className="text-3xl">🥗</span>
-              <span dir="rtl">הבנת הנקרא - אוכל (שלוש רמות)</span>
-            </button>
-            {/* כפתור חדש לתרגול הבנת הנקרא - אוכל (בינוני) */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-orange-200 text-orange-900 border-orange-300"
-              onClick={() => setSelectedTextComp("food-order-medium")}
-            >
-              <span className="text-3xl">🍽️</span>
-              <span dir="rtl">הבנת הנקרא - הזמנת אוכל (בינוני)</span>
-            </button>
-            {/* כפתור חדש לתרגול הבנת הנקרא - חיות (קל) */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-green-100 text-green-900 border-green-200"
-              onClick={() => setSelectedTextComp("animals-easy")}
-            >
-              <span className="text-3xl">🐾</span>
-              <span dir="rtl">הבנת הנקרא - חיות (קל)</span>
-            </button>
-            {/* כפתור חדש לתרגול הבנת הנקרא - טלוויזיה ורשתות חברתיות */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-blue-100 text-blue-900 border-blue-300"
-              onClick={() => setSelectedTextComp("social-media")}
-            >
-              <span className="text-3xl">📱</span>
-              <span dir="rtl">הבנת הנקרא - טלוויזיה ורשתות חברתיות</span>
-            </button>
-            {/* כפתור חדש: מדינות (שלוש רמות) */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
-              onClick={() => setSelectedTextComp("countries-levels")}
-            >
-              <span className="text-3xl">🌏</span>
-              <span dir="rtl">הבנת הנקרא - מדינות (שלוש רמות)</span>
-            </button>
-            {/* כפתור חדש: טלוויזיה וסדרות (שלוש רמות) */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-blue-50 text-blue-900 border-blue-400"
-              onClick={() => setSelectedTextComp("movies-series-levels")}
-            >
-              <span className="text-3xl">📺</span>
-              <span dir="rtl">הבנת הנקרא - טלוויזיה וסדרות (שלוש רמות)</span>
-            </button>
-            {/* כפתור חדש: בילוי בים ואוכל (קל) */}
-            <button
-              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-sky-100 text-sky-900 border-sky-400"
-              onClick={() => setSelectedTextComp("places-food-easy")}
-            >
-              <span className="text-3xl">🌊</span>
-              <span dir="rtl">הבנת הנקרא - בילוי בים ואוכל (קל)</span>
-            </button>
-          </div>
-        </div>
-      )}
-      {selectedPractice === "verb" && !selectedTense && (
-        <div className="flex flex-col gap-8 items-center w-full max-w-md mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir="rtl">
-            איזה זמן תרצה לתרגל?
-          </h1>
-          <div className="grid gap-6 w-full">
-            {tenseOptions.map((option) => (
-              <button
-                key={option.value}
-                className={`w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none ${option.color}`}
-                onClick={() => setSelectedTense(option.value as any)}
-              >
-                <span className="text-3xl">{option.emoji}</span>
-                <span dir="rtl">{option.label}</span>
-              </button>
-            ))}
-          </div>
-          <Button variant="outline" onClick={handleBack}>⬅ חזרה</Button>
-        </div>
-      )}
-      {selectedPractice === "verb" && selectedTense === "present" && (
-        <div className="w-full">
-          <div className="flex justify-end mb-4">
-            <Button variant="outline" onClick={handleBack}>⬅ חזרה</Button>
-          </div>
-          <PresentTenseVerbPractice />
-        </div>
-      )}
-      {selectedPractice === "verb" && selectedTense === "past" && (
-        <div className="w-full">
-          <div className="flex justify-end mb-4">
-            <Button variant="outline" onClick={handleBack}>⬅ חזרה</Button>
-          </div>
-          <PastTenseVerbPractice />
-        </div>
-      )}
-      {selectedPractice === "verb" && selectedTense === "future" && (
-        <div className="w-full">
-          <div className="flex justify-end mb-4">
-            <Button variant="outline" onClick={handleBack}>⬅ חזרה</Button>
-          </div>
-          <FutureTenseVerbPractice />
-        </div>
-      )}
-      {selectedPractice === "nounAdj" && (
-        <div className="w-full">
-          <NounAdjectivePractice onBack={handleBack} />
-        </div>
-      )}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <IndexMainMenu 
+        setShowLinkingWords={setShowLinkingWords}
+        setShowPronounsTable={setShowPronounsTable}
+        setShowPossessivePronouns={setShowPossessivePronouns}
+        setShowQuestionnaire={setShowQuestionnaire}
+        setSelectedPractice={setSelectedPractice}
+        setSelectedTextComp={setSelectedTextComp}
+        setShowEverydayHebrew={setShowEverydayHebrew}
+      />
     </div>
   );
-};
-
-export default Index;
+}
