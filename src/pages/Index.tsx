@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import IndexMainMenu from "./IndexMainMenu";
@@ -26,6 +27,7 @@ import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensi
 import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlacesFoodEasy";
 
 export default function Index() {
+  const [lang, setLang] = useState<"he" | "en">("he");
   const [showLinkingWords, setShowLinkingWords] = useState(false);
   const [showLinkingWordsPractice, setShowLinkingWordsPractice] = useState(false);
   const [showPronounsTable, setShowPronounsTable] = useState(false);
@@ -35,7 +37,7 @@ export default function Index() {
   const [showPossessivePronounsMenu, setShowPossessivePronounsMenu] = useState(false);
   const [showPossessivePronounsPractice, setShowPossessivePronounsPractice] = useState(false);
   const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
-  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<string | null>(null);
+  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<"restaurant" | "supermarket" | "transportation" | null>(null);
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [verbTense, setVerbTense] = useState<"present" | "past" | "future" | null>(null);
@@ -58,8 +60,10 @@ export default function Index() {
     setSelectedTextComp(null);
   };
 
+  const t = (he: string, en: string) => (lang === "he" ? he : en);
+
   if (showLinkingWordsPractice) {
-    return <LinkingWordsPractice onBack={() => setShowLinkingWordsPractice(false)} />;
+    return <LinkingWordsPractice lang={lang} onBack={() => setShowLinkingWordsPractice(false)} />;
   }
 
   if (showLinkingWords) {
@@ -68,15 +72,24 @@ export default function Index() {
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <Button variant="ghost" onClick={resetToMainMenu}>
-              ⬅ חזרה לתפריט הראשי
+              ⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}
             </Button>
-            <Button 
-              variant="default" 
-              onClick={() => setShowLinkingWordsPractice(true)}
-              className="bg-green-600 hover:bg-green-700"
-            >
-              🏃‍♂️ תרגול מילות קישור
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                variant="outline"
+                size="sm"
+                onClick={() => setLang(lang === "he" ? "en" : "he")}
+              >
+                {lang === "he" ? "English" : "עברית"}
+              </Button>
+              <Button 
+                variant="default" 
+                onClick={() => setShowLinkingWordsPractice(true)}
+                className="bg-green-600 hover:bg-green-700"
+              >
+                🏃‍♂️ {t("תרגול מילות קישור", "Linking Words Practice")}
+              </Button>
+            </div>
           </div>
           <LinkingWordsTable />
         </div>
@@ -90,14 +103,14 @@ export default function Index() {
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <Button variant="ghost" onClick={resetToMainMenu}>
-              ⬅ חזרה לתפריט הראשי
+              ⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}
             </Button>
             <Button 
               variant="default" 
               onClick={() => setShowPronounsMenu(true)}
               className="bg-green-600 hover:bg-green-700"
             >
-              🏃‍♂️ תרגול שמות גוף
+              🏃‍♂️ {t("תרגול שמות גוף", "Pronouns Practice")}
             </Button>
           </div>
           <PronounsTable />
@@ -113,10 +126,6 @@ export default function Index() {
           setShowPronounsMenu(false);
           setShowPronounsTable(true);
         }}
-        onSelectPractice={() => {
-          setShowPronounsMenu(false);
-          setShowPronounsPractice(true);
-        }}
       />
     );
   }
@@ -131,14 +140,14 @@ export default function Index() {
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <Button variant="ghost" onClick={resetToMainMenu}>
-              ⬅ חזרה לתפריט הראשי
+              ⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}
             </Button>
             <Button 
               variant="default" 
               onClick={() => setShowPossessivePronounsMenu(true)}
               className="bg-green-600 hover:bg-green-700"
             >
-              🏃‍♂️ תרגול מילות שייכות
+              🏃‍♂️ {t("תרגול מילות שייכות", "Possessive Pronouns Practice")}
             </Button>
           </div>
           <PossessivePronounsTable />
@@ -154,10 +163,6 @@ export default function Index() {
           setShowPossessivePronounsMenu(false);
           setShowPossessivePronouns(true);
         }}
-        onSelectPractice={() => {
-          setShowPossessivePronounsMenu(false);
-          setShowPossessivePronounsPractice(true);
-        }}
       />
     );
   }
@@ -171,7 +176,6 @@ export default function Index() {
       return (
         <EverydayHebrewCategorySelect 
           onBack={resetToMainMenu}
-          onSelectCategory={setEverydayHebrewCategory}
         />
       );
     }
@@ -193,29 +197,29 @@ export default function Index() {
               onClick={() => setSelectedPractice(null)}
               className="mb-4"
             >
-              ⬅ חזרה
+              ⬅ {t("חזרה", "Back")}
             </Button>
-            <h2 className="text-2xl font-bold mb-6 text-center" dir="rtl">
-              בחר זמן לתרגול
+            <h2 className="text-2xl font-bold mb-6 text-center" dir={lang === "he" ? "rtl" : "ltr"}>
+              {t("בחר זמן לתרגול", "Choose tense to practice")}
             </h2>
             <div className="flex flex-col gap-4">
               <Button
                 onClick={() => setVerbTense("present")}
                 className="py-6 text-xl bg-blue-500 hover:bg-blue-600"
               >
-                זמן הווה
+                {t("זמן הווה", "Present tense")}
               </Button>
               <Button
                 onClick={() => setVerbTense("past")}
                 className="py-6 text-xl bg-green-500 hover:bg-green-600"
               >
-                זמן עבר
+                {t("זמן עבר", "Past tense")}
               </Button>
               <Button
                 onClick={() => setVerbTense("future")}
                 className="py-6 text-xl bg-purple-500 hover:bg-purple-600"
               >
-                זמן עתיד
+                {t("זמן עתיד", "Future tense")}
               </Button>
             </div>
           </div>
@@ -277,6 +281,8 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <IndexMainMenu 
+        lang={lang}
+        setLang={setLang}
         setShowLinkingWords={setShowLinkingWords}
         setShowPronounsTable={setShowPronounsTable}
         setShowPossessivePronouns={setShowPossessivePronouns}

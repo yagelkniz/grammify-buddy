@@ -1,9 +1,13 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ListCheck } from "lucide-react";
+import { ChevronRight, ListCheck, Globe } from "lucide-react";
 import type { SetStateAction, Dispatch } from "react";
+import menuText from "@/i18n/menu";
 
 interface IndexMainMenuProps {
+  lang: "he" | "en";
+  setLang: (lang: "he" | "en") => void;
   setShowLinkingWords: (b: boolean) => void;
   setShowPronounsTable: (b: boolean) => void;
   setShowPossessivePronouns: (b: boolean) => void;
@@ -14,6 +18,8 @@ interface IndexMainMenuProps {
 }
 
 export default function IndexMainMenu({
+  lang,
+  setLang,
   setShowLinkingWords,
   setShowPronounsTable,
   setShowPossessivePronouns,
@@ -22,109 +28,122 @@ export default function IndexMainMenu({
   setSelectedTextComp,
   setShowEverydayHebrew,
 }: IndexMainMenuProps) {
+  const t = menuText[lang];
+
   return (
     <div className="flex flex-col gap-8 items-center w-full max-w-md mx-auto">
-      <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir="rtl">
-        איזה תרגול תרצה לתרגל?
-      </h1>
+      <div className="flex items-center justify-between w-full">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir={lang === "he" ? "rtl" : "ltr"}>
+          {t.mainTitle}
+        </h1>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setLang(lang === "he" ? "en" : "he")}
+          className="flex items-center gap-2"
+        >
+          <Globe className="h-4 w-4" />
+          {lang === "he" ? "English" : "עברית"}
+        </Button>
+      </div>
       <div className="grid gap-6 w-full">
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
           onClick={() => setShowLinkingWords(true)}
         >
           <span className="text-3xl">🔗</span>
-          <span dir="rtl">טבלת מילות קישור (קטגוריות ודוגמאות)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.linkingWords}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
           onClick={() => setShowPronounsTable(true)}
         >
           <span className="text-3xl">👤</span>
-          <span dir="rtl">טבלת שמות גוף (עברית-אנגלית)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.pronouns}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-teal-100 text-teal-900 border-teal-300"
           onClick={() => setShowPossessivePronouns(true)}
         >
           <span className="text-3xl">🔗</span>
-          <span dir="rtl">טבלת מילות שייכות (עברית-אנגלית)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.possessivePronouns}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-100 text-orange-900 border-orange-300"
           onClick={() => setShowEverydayHebrew(true)}
         >
           <span className="text-3xl">🗣️</span>
-          <span dir="rtl">עברית יומיומית – תרגול השלמת מילים</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.everydayHebrew}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 text-blue-900 border-blue-200"
           onClick={() => setSelectedPractice("verb")}
         >
           <span className="text-3xl">🕰️</span>
-          <span dir="rtl">פעלים - זמן עבר/הווה/עתיד</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.verbs}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-pink-100 text-pink-900 border-pink-400"
           onClick={() => setSelectedPractice("nounAdj")}
         >
           <span className="text-3xl">📝</span>
-          <span dir="rtl">שמות עצם + תואר</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.nouns}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
           onClick={() => setShowQuestionnaire(true)}
         >
           <span className="text-3xl">💬</span>
-          <span dir="rtl">שאלון היכרות</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.questionnaire}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-yellow-100 text-yellow-900 border-yellow-300"
           onClick={() => setSelectedTextComp("food-levels")}
         >
           <span className="text-3xl">🥗</span>
-          <span dir="rtl">הבנת הנקרא - אוכל (שלוש רמות)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.foodComp}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-200 text-orange-900 border-orange-300"
           onClick={() => setSelectedTextComp("food-order-medium")}
         >
           <span className="text-3xl">🍽️</span>
-          <span dir="rtl">הבנת הנקרא - הזמנת אוכל (בינוני)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.foodOrder}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-green-100 text-green-900 border-green-200"
           onClick={() => setSelectedTextComp("animals-easy")}
         >
           <span className="text-3xl">🐾</span>
-          <span dir="rtl">הבנת הנקרא - חיות (קל)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.animalsEasy}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-100 text-blue-900 border-blue-300"
           onClick={() => setSelectedTextComp("social-media")}
         >
           <span className="text-3xl">📱</span>
-          <span dir="rtl">הבנת הנקרא - טלוויזיה ורשתות חברתיות</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.socialMedia}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
           onClick={() => setSelectedTextComp("countries-levels")}
         >
           <span className="text-3xl">🌏</span>
-          <span dir="rtl">הבנת הנקרא - מדינות (שלוש רמות)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.countries}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-50 text-blue-900 border-blue-400"
           onClick={() => setSelectedTextComp("movies-series-levels")}
         >
           <span className="text-3xl">📺</span>
-          <span dir="rtl">הבנת הנקרא - טלוויזיה וסדרות (שלוש רמות)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.movies}</span>
         </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-sky-100 text-sky-900 border-sky-400"
           onClick={() => setSelectedTextComp("places-food-easy")}
         >
           <span className="text-3xl">🌊</span>
-          <span dir="rtl">הבנת הנקרא - בילוי בים ואוכל (קל)</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>{t.placesFoodEasy}</span>
         </button>
       </div>
     </div>
