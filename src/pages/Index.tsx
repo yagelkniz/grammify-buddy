@@ -126,6 +126,7 @@ export default function Index() {
           setShowPronounsMenu(false);
           setShowPronounsTable(true);
         }}
+        onSelect={() => setShowPronounsPractice(true)}
       />
     );
   }
@@ -163,6 +164,7 @@ export default function Index() {
           setShowPossessivePronounsMenu(false);
           setShowPossessivePronouns(true);
         }}
+        onSelect={() => setShowPossessivePronounsPractice(true)}
       />
     );
   }
@@ -176,6 +178,7 @@ export default function Index() {
       return (
         <EverydayHebrewCategorySelect 
           onBack={resetToMainMenu}
+          onSelect={(category) => setEverydayHebrewCategory(category)}
         />
       );
     }

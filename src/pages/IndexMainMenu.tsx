@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ListCheck, Globe } from "lucide-react";
@@ -15,6 +14,7 @@ interface IndexMainMenuProps {
   setSelectedPractice: (val: null | "verb" | "nounAdj") => void;
   setSelectedTextComp: Dispatch<SetStateAction<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">>;
   setShowEverydayHebrew: (b: boolean) => void;
+  setShowVerbToBePresentation: (b: boolean) => void;
 }
 
 export default function IndexMainMenu({
@@ -27,6 +27,7 @@ export default function IndexMainMenu({
   setSelectedPractice,
   setSelectedTextComp,
   setShowEverydayHebrew,
+  setShowVerbToBePresentation,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -47,6 +48,15 @@ export default function IndexMainMenu({
         </Button>
       </div>
       <div className="grid gap-6 w-full">
+        <button
+          className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-emerald-100 text-emerald-900 border-emerald-300"
+          onClick={() => setShowVerbToBePresentation(true)}
+        >
+          <span className="text-3xl">📚</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>
+            {lang === "he" ? 'הפועל "להיות"' : 'Verb "To Be"'}
+          </span>
+        </button>
         <button
           className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
           onClick={() => setShowLinkingWords(true)}
