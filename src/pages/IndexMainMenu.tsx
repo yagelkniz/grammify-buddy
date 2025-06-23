@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ListCheck, Globe } from "lucide-react";
@@ -11,7 +12,7 @@ interface IndexMainMenuProps {
   setShowPronounsTable: (b: boolean) => void;
   setShowPossessivePronouns: (b: boolean) => void;
   setShowQuestionnaire: (b: boolean) => void;
-  setSelectedPractice: (val: null | "verb" | "nounAdj") => void;
+  setSelectedPractice: (val: null | "verb" | "nounAdj" | "household") => void;
   setSelectedTextComp: Dispatch<SetStateAction<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">>;
   setShowEverydayHebrew: (b: boolean) => void;
   setShowVerbToBePresentation: (b: boolean) => void;
@@ -55,6 +56,15 @@ export default function IndexMainMenu({
           <span className="text-3xl">📚</span>
           <span dir={lang === "he" ? "rtl" : "ltr"}>
             {lang === "he" ? 'הפועל "להיות"' : 'Verb "To Be"'}
+          </span>
+        </button>
+        <button
+          className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-red-100 text-red-900 border-red-300"
+          onClick={() => setSelectedPractice("household")}
+        >
+          <span className="text-3xl">🏠</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>
+            {lang === "he" ? "כלי בית" : "Household Items"}
           </span>
         </button>
         <button

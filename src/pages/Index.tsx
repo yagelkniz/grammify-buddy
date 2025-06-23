@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import IndexMainMenu from "./IndexMainMenu";
@@ -26,6 +25,7 @@ import TextComprehensionCountriesLevels from "@/components/TextComprehensionCoun
 import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensionMoviesAndSeriesLevels";
 import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlacesFoodEasy";
 import VerbToBePresentation from "@/components/VerbToBePresentation";
+import HebrewHouseholdItemsPractice from "@/components/HebrewHouseholdItemsPractice";
 
 export default function Index() {
   const [lang, setLang] = useState<"he" | "en">("he");
@@ -40,7 +40,7 @@ export default function Index() {
   const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
   const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<"restaurant" | "supermarket" | "transportation" | null>(null);
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
-  const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
+  const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj" | "household">(null);
   const [verbTense, setVerbTense] = useState<"present" | "past" | "future" | null>(null);
   const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">(null);
   const [showVerbToBePresentation, setShowVerbToBePresentation] = useState(false);
@@ -133,6 +133,7 @@ export default function Index() {
           setShowPronounsMenu(false);
           setShowPronounsTable(true);
         }}
+        onSelect={() => setShowPronounsPractice(true)}
       />
     );
   }
@@ -193,6 +194,10 @@ export default function Index() {
         onBack={() => setEverydayHebrewCategory(null)}
       />
     );
+  }
+
+  if (selectedPractice === "household") {
+    return <HebrewHouseholdItemsPractice onBack={() => setSelectedPractice(null)} />;
   }
 
   if (selectedPractice === "verb") {
