@@ -34,6 +34,7 @@ import LinkingWordsLevelsPractice from "@/components/LinkingWordsLevelsPractice"
 import VerbMemoryGame from "@/components/VerbMemoryGame";
 import ColorsAndFruitsPractice from "@/components/ColorsAndFruitsPractice";
 import HifilVerbPractice from "@/components/hifil/HifilVerbPractice";
+import PielVerbPractice from "@/components/piel/PielVerbPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -88,6 +89,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowColorsAndFruits,
     showHifilVerb,
     setShowHifilVerb,
+    showPielVerb,
+    setShowPielVerb,
     resetToMainMenu,
   } = state;
 
@@ -95,6 +98,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   if (showHifilVerb) {
     return <HifilVerbPractice onBack={resetToMainMenu} />;
+  }
+
+  if (showPielVerb) {
+    return <PielVerbPractice onBack={resetToMainMenu} />;
   }
 
   if (showColorsAndFruits) {
