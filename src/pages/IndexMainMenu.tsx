@@ -21,6 +21,7 @@ interface IndexMainMenuProps {
   setShowEmotions: (b: boolean) => void;
   setShowLinkingWordsLevels: (b: boolean) => void;
   setShowVerbMemoryGame: (b: boolean) => void;
+  setShowColorsAndFruits: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -62,6 +63,7 @@ export default function IndexMainMenu({
   setShowEmotions,
   setShowLinkingWordsLevels,
   setShowVerbMemoryGame,
+  setShowColorsAndFruits,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -166,6 +168,13 @@ export default function IndexMainMenu({
             label={t.everydayHebrew}
             onClick={() => setShowEverydayHebrew(true)}
             colorClass="bg-orange-100 text-orange-900 border-orange-300"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="🎨"
+            label={lang === "he" ? "צבעים ופירות" : "Colors & Fruits"}
+            onClick={() => setShowColorsAndFruits(true)}
+            colorClass="bg-gradient-to-br from-pink-100 to-green-100 text-pink-900 border-pink-300"
             lang={lang}
           />
         </div>
