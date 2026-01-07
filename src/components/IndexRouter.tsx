@@ -31,6 +31,7 @@ import QuestionWordsPractice from "@/components/QuestionWordsPractice";
 import OddOneOutGame from "@/components/OddOneOutGame";
 import EmotionsPractice from "@/components/EmotionsPractice";
 import LinkingWordsLevelsPractice from "@/components/LinkingWordsLevelsPractice";
+import VerbMemoryGame from "@/components/VerbMemoryGame";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -79,10 +80,16 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowEmotions,
     showLinkingWordsLevels,
     setShowLinkingWordsLevels,
+    showVerbMemoryGame,
+    setShowVerbMemoryGame,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  if (showVerbMemoryGame) {
+    return <VerbMemoryGame onBack={() => setShowVerbMemoryGame(false)} />;
+  }
 
   if (showLinkingWordsLevels) {
     return <LinkingWordsLevelsPractice onBack={() => setShowLinkingWordsLevels(false)} />;

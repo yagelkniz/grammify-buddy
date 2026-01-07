@@ -20,6 +20,7 @@ interface IndexMainMenuProps {
   setShowOddOneOut: (b: boolean) => void;
   setShowEmotions: (b: boolean) => void;
   setShowLinkingWordsLevels: (b: boolean) => void;
+  setShowVerbMemoryGame: (b: boolean) => void;
 }
 
 export default function IndexMainMenu({
@@ -38,6 +39,7 @@ export default function IndexMainMenu({
   setShowOddOneOut,
   setShowEmotions,
   setShowLinkingWordsLevels,
+  setShowVerbMemoryGame,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -110,6 +112,15 @@ export default function IndexMainMenu({
           <span className="text-3xl">🔗</span>
           <span dir={lang === "he" ? "rtl" : "ltr"}>
             {lang === "he" ? "מילות קישור (רמות)" : "Linking Words (Levels)"}
+          </span>
+        </button>
+        <button
+          className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
+          onClick={() => setShowVerbMemoryGame(true)}
+        >
+          <span className="text-3xl">🧠</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>
+            {lang === "he" ? "משחק זיכרון - פעלים" : "Verb Memory Game"}
           </span>
         </button>
         <button
