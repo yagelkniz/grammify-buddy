@@ -30,6 +30,7 @@ import DaysAndPlacesVocabulary from "@/components/DaysAndPlacesVocabulary";
 import QuestionWordsPractice from "@/components/QuestionWordsPractice";
 import OddOneOutGame from "@/components/OddOneOutGame";
 import EmotionsPractice from "@/components/EmotionsPractice";
+import LinkingWordsLevelsPractice from "@/components/LinkingWordsLevelsPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -76,10 +77,16 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowOddOneOut,
     showEmotions,
     setShowEmotions,
+    showLinkingWordsLevels,
+    setShowLinkingWordsLevels,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  if (showLinkingWordsLevels) {
+    return <LinkingWordsLevelsPractice onBack={() => setShowLinkingWordsLevels(false)} />;
+  }
 
   if (showEmotions) {
     return <EmotionsPractice onBack={() => setShowEmotions(false)} />;

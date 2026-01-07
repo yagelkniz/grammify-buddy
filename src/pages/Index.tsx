@@ -24,7 +24,8 @@ export default function Index() {
     state.showDaysAndPlacesVocab ||
     state.showQuestionWords ||
     state.showOddOneOut ||
-    state.showEmotions;
+    state.showEmotions ||
+    state.showLinkingWordsLevels;
 
   if (shouldShowRouter) {
     return <IndexRouter state={state} />;
@@ -47,6 +48,7 @@ export default function Index() {
         setShowQuestionWords={state.setShowQuestionWords}
         setShowOddOneOut={state.setShowOddOneOut}
         setShowEmotions={state.setShowEmotions}
+        setShowLinkingWordsLevels={state.setShowLinkingWordsLevels}
       />
     </div>
   );
