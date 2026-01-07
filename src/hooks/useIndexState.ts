@@ -23,6 +23,7 @@ export const useIndexState = () => {
   const [showOddOneOut, setShowOddOneOut] = useState(false);
   const [showEmotions, setShowEmotions] = useState(false);
   const [showLinkingWordsLevels, setShowLinkingWordsLevels] = useState(false);
+  const [showVerbMemoryGame, setShowVerbMemoryGame] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -45,6 +46,7 @@ export const useIndexState = () => {
     setShowOddOneOut(false);
     setShowEmotions(false);
     setShowLinkingWordsLevels(false);
+    setShowVerbMemoryGame(false);
   };
 
   return {
@@ -90,6 +92,8 @@ export const useIndexState = () => {
     setShowEmotions,
     showLinkingWordsLevels,
     setShowLinkingWordsLevels,
+    showVerbMemoryGame,
+    setShowVerbMemoryGame,
     resetToMainMenu,
   };
 };
