@@ -23,6 +23,7 @@ interface IndexMainMenuProps {
   setShowVerbMemoryGame: (b: boolean) => void;
   setShowColorsAndFruits: (b: boolean) => void;
   setShowHifilVerb: (b: boolean) => void;
+  setShowPielVerb: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -66,6 +67,7 @@ export default function IndexMainMenu({
   setShowVerbMemoryGame,
   setShowColorsAndFruits,
   setShowHifilVerb,
+  setShowPielVerb,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -221,6 +223,13 @@ export default function IndexMainMenu({
             label={lang === "he" ? "בניין הפעיל" : "Hif'il Pattern"}
             onClick={() => setShowHifilVerb(true)}
             colorClass="bg-amber-100 text-amber-900 border-amber-300"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="🗣️"
+            label={lang === "he" ? "בניין פיעל" : "Pi'el Pattern"}
+            onClick={() => setShowPielVerb(true)}
+            colorClass="bg-purple-100 text-purple-900 border-purple-300"
             lang={lang}
           />
           <MenuItem

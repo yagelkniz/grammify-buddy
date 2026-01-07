@@ -26,6 +26,7 @@ export const useIndexState = () => {
   const [showVerbMemoryGame, setShowVerbMemoryGame] = useState(false);
   const [showColorsAndFruits, setShowColorsAndFruits] = useState(false);
   const [showHifilVerb, setShowHifilVerb] = useState(false);
+  const [showPielVerb, setShowPielVerb] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -51,6 +52,7 @@ export const useIndexState = () => {
     setShowVerbMemoryGame(false);
     setShowColorsAndFruits(false);
     setShowHifilVerb(false);
+    setShowPielVerb(false);
   };
 
   return {
@@ -102,6 +104,8 @@ export const useIndexState = () => {
     setShowColorsAndFruits,
     showHifilVerb,
     setShowHifilVerb,
+    showPielVerb,
+    setShowPielVerb,
     resetToMainMenu,
   };
 };
