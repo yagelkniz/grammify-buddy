@@ -19,6 +19,7 @@ interface IndexMainMenuProps {
   setShowQuestionWords: (b: boolean) => void;
   setShowOddOneOut: (b: boolean) => void;
   setShowEmotions: (b: boolean) => void;
+  setShowLinkingWordsLevels: (b: boolean) => void;
 }
 
 export default function IndexMainMenu({
@@ -36,6 +37,7 @@ export default function IndexMainMenu({
   setShowQuestionWords,
   setShowOddOneOut,
   setShowEmotions,
+  setShowLinkingWordsLevels,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -99,6 +101,15 @@ export default function IndexMainMenu({
           <span className="text-3xl">😊</span>
           <span dir={lang === "he" ? "rtl" : "ltr"}>
             {lang === "he" ? "רגשות" : "Emotions"}
+          </span>
+        </button>
+        <button
+          className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
+          onClick={() => setShowLinkingWordsLevels(true)}
+        >
+          <span className="text-3xl">🔗</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>
+            {lang === "he" ? "מילות קישור (רמות)" : "Linking Words (Levels)"}
           </span>
         </button>
         <button
