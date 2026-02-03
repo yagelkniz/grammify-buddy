@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   presentTenseQuestionsPart1,
   presentTenseQuestionsPart2,
@@ -7,6 +6,7 @@ import {
   presentTenseQuestionsPart4,
 } from "./presentTenseQuestionsParts";
 import type { PresentTenseQuestion } from "./presentTenseQuestions";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 const parts = [
   { label: "חלק 1", data: presentTenseQuestionsPart1 },
@@ -21,7 +21,15 @@ interface PresentTenseVerbPracticeProps {
 
 export default function PresentTenseVerbPractice({ onBack }: PresentTenseVerbPracticeProps) {
   const [currentPart, setCurrentPart] = useState(0); // begin with part 1
-  const questions = parts[currentPart].data;
+  const [shuffleKey, setShuffleKey] = useState(0); // trigger re-shuffle
+
+  // Shuffle options for each question
+  const questions = useMemo(() => {
+    return parts[currentPart].data.map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
+  }, [currentPart, shuffleKey]);
 
   const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
@@ -41,6 +49,7 @@ export default function PresentTenseVerbPractice({ onBack }: PresentTenseVerbPra
     setCurrentPart(idx);
     setSelections({});
     setFeedbacks({});
+    setShuffleKey(k => k + 1); // re-shuffle on part change
   }
 
   const correctAnswers = Object.values(feedbacks).filter((f) => f === "correct").length;

@@ -1,7 +1,7 @@
-
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import questions from "./possessivePronounsQuestions.json";
+import questionsRaw from "./possessivePronounsQuestions.json";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 interface PossessivePronounQuestion {
   question: string;
@@ -26,7 +26,14 @@ export default function PossessivePronounsPractice({
   const [showFeedback, setShowFeedback] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
 
-  const q: PossessivePronounQuestion = (questions as PossessivePronounQuestion[])[step];
+  const questions = useMemo(() => {
+    return (questionsRaw as PossessivePronounQuestion[]).map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
+  }, []);
+
+  const q = questions[step];
 
   // Add safety check
   if (!q) {
@@ -47,9 +54,9 @@ export default function PossessivePronounsPractice({
 
   const t = (h: string, e: string) => (lang === "he" ? h : e);
 
-  function getCorrectOptionIdx() {
-    return q.options.findIndex(opt => opt === q.answer);
-  }
+  const correctOptionIdx = useMemo(() => {
+    return q ? q.options.findIndex(opt => opt === q.answer) : -1;
+  }, [q]);
 
   return (
     <div className="flex flex-col items-center max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow p-8 gap-6 min-h-[60vh]">
@@ -94,16 +101,16 @@ export default function PossessivePronounsPractice({
       {showFeedback && (
         <div
           className={`rounded-xl p-4 w-full text-lg font-bold ${
-            selected === getCorrectOptionIdx()
+            selected === correctOptionIdx
               ? "bg-green-100 text-green-900"
               : "bg-red-100 text-red-900"
           }`}
         >
-          {selected === getCorrectOptionIdx()
+          {selected === correctOptionIdx
             ? t("נכון! מעולה!", "Correct! Well done!")
             : t(
-                `לא נכון. התשובה: ${q.options[getCorrectOptionIdx()]}`,
-                `Incorrect. The answer: ${q.options[getCorrectOptionIdx()]}`
+                `לא נכון. התשובה: ${q.answer}`,
+                `Incorrect. The answer: ${q.answer}`
               )}
         </div>
       )}

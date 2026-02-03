@@ -42,23 +42,38 @@ export default function ColorsAndFruitsPractice({ onBack }: ColorsAndFruitsPract
   const [answers, setAnswers] = useState<{ [i: number]: string | null }>({});
   const [feedback, setFeedback] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
 
-  // Get shuffled questions based on level
+  // Get shuffled questions based on level - also shuffle options within each question
   const colorQs = useMemo(() => {
     const count = level === "easy" ? 5 : level === "medium" ? 8 : 10;
-    return shuffleArray(colorQuestions).slice(0, count);
+    return shuffleArray(colorQuestions).slice(0, count).map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
   }, [level]);
 
   const fruitQs = useMemo(() => {
     const count = level === "easy" ? 5 : level === "medium" ? 8 : 10;
-    return shuffleArray(fruitQuestions).slice(0, count);
+    return shuffleArray(fruitQuestions).slice(0, count).map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
   }, [level]);
 
   const matchQs = useMemo(() => {
     const count = level === "easy" ? 4 : level === "medium" ? 6 : 10;
-    return shuffleArray(colorFruitMatchQuestions).slice(0, count);
+    return shuffleArray(colorFruitMatchQuestions).slice(0, count).map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
   }, [level]);
 
-  const storyQs = level ? questions[level] : [];
+  const storyQsShuffled = useMemo(() => {
+    return (level ? questions[level] : []).map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
+  }, [level]);
+
   const story = level ? stories[level] : null;
 
   const getCurrentQuestions = (): Question[] => {
@@ -66,7 +81,7 @@ export default function ColorsAndFruitsPractice({ onBack }: ColorsAndFruitsPract
       case "colorQuiz": return colorQs;
       case "fruitQuiz": return fruitQs;
       case "matchQuiz": return matchQs;
-      case "storyQuestions": return storyQs;
+      case "storyQuestions": return storyQsShuffled;
       default: return [];
     }
   };

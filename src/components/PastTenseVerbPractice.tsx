@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   pastTenseQuestionsPart1,
   pastTenseQuestionsPart2,
@@ -7,6 +6,7 @@ import {
   pastTenseQuestionsPart4,
 } from "./pastTenseQuestionsParts";
 import type { PastTenseQuestion } from "./pastTenseQuestions";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 const parts = [
   { label: "חלק 1", data: pastTenseQuestionsPart1 },
@@ -21,7 +21,14 @@ interface PastTenseVerbPracticeProps {
 
 export default function PastTenseVerbPractice({ onBack }: PastTenseVerbPracticeProps) {
   const [currentPart, setCurrentPart] = useState(0); // מתחילים בחלק 1
-  const questions = parts[currentPart].data;
+  const [shuffleKey, setShuffleKey] = useState(0);
+
+  const questions = useMemo(() => {
+    return parts[currentPart].data.map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
+  }, [currentPart, shuffleKey]);
 
   const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
@@ -41,6 +48,7 @@ export default function PastTenseVerbPractice({ onBack }: PastTenseVerbPracticeP
     setCurrentPart(idx);
     setSelections({});
     setFeedbacks({});
+    setShuffleKey(k => k + 1);
   }
 
   const correctAnswers = Object.values(feedbacks).filter((f) => f === "correct").length;
