@@ -98,7 +98,11 @@ export default function TextComprehensionFood({ onBack }: TextComprehensionFoodP
       <h2 className="text-3xl font-bold mb-2 text-yellow-800 flex items-center gap-2" dir="rtl">
         🍝 הבנת הנקרא: אוכל
       </h2>
-      <div className="border px-7 py-5 rounded-xl bg-yellow-100 text-lg leading-8 mb-2 shadow" dir="rtl">
+      <div 
+        className="border px-6 md:px-8 py-5 md:py-6 rounded-xl bg-yellow-100 text-lg md:text-xl mb-3 shadow w-full text-right" 
+        dir="rtl"
+        style={{ lineHeight: '1.8', whiteSpace: 'pre-wrap' }}
+      >
         <TranslatableText text={readingText} translations={translationMap} />
       </div>
       <div className="flex flex-col gap-5 w-full">

@@ -101,7 +101,11 @@ export default function TextComprehensionFoodLevels({ onBack }: TextComprehensio
       <h2 className="text-2xl font-bold text-yellow-800 flex items-center gap-2 mb-2" dir="rtl">
         <BookOpen className="text-yellow-400" /> תרגול ברמת {levels.find(l => l.key === selectedLevel)?.label}
       </h2>
-      <div className="rounded-xl border px-5 py-3 bg-yellow-100 text-lg leading-8 text-black shadow-sm w-full" dir="rtl">
+      <div 
+        className="rounded-xl border px-6 md:px-8 py-5 md:py-6 bg-yellow-100 text-lg md:text-xl text-black shadow-sm w-full text-right" 
+        dir="rtl"
+        style={{ lineHeight: '1.8', whiteSpace: 'pre-wrap' }}
+      >
         {text}
       </div>
       <div className="flex flex-col gap-4 w-full">

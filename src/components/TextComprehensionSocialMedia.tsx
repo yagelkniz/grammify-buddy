@@ -81,7 +81,13 @@ export default function TextComprehensionSocialMedia({ onBack }: TextComprehensi
           <div key={i} className="w-full bg-white border border-blue-100 rounded-xl p-3 shadow">
             <div className="font-bold text-lg text-blue-600 mb-2" dir="rtl">
               <span>רמת {q.label}:</span>
-              <div className="bg-blue-50 border rounded-md px-3 py-2 mt-2 text-black">{SocialMediaReadingData[q.level as "easy"|"medium"|"hard"]}</div>
+              <div 
+                className="bg-blue-50 border rounded-md px-4 md:px-6 py-3 md:py-4 mt-2 text-black text-lg md:text-xl text-right"
+                dir="rtl"
+                style={{ lineHeight: '1.8', whiteSpace: 'pre-wrap' }}
+              >
+                {SocialMediaReadingData[q.level as "easy"|"medium"|"hard"]}
+              </div>
             </div>
             <div className="font-semibold text-md mb-2" dir="rtl">
               {q.question}
