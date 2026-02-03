@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   futureTenseQuestionsPart1,
   futureTenseQuestionsPart2,
@@ -7,6 +6,7 @@ import {
   futureTenseQuestionsPart4,
 } from "./futureTenseQuestionsParts";
 import type { FutureTenseQuestion } from "./futureTenseQuestions";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 const parts = [
   { label: "חלק 1", data: futureTenseQuestionsPart1 },
@@ -21,7 +21,14 @@ interface FutureTenseVerbPracticeProps {
 
 export default function FutureTenseVerbPractice({ onBack }: FutureTenseVerbPracticeProps) {
   const [currentPart, setCurrentPart] = useState(0);
-  const questions = parts[currentPart].data;
+  const [shuffleKey, setShuffleKey] = useState(0);
+
+  const questions = useMemo(() => {
+    return parts[currentPart].data.map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
+  }, [currentPart, shuffleKey]);
 
   const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
@@ -40,6 +47,7 @@ export default function FutureTenseVerbPractice({ onBack }: FutureTenseVerbPract
     setCurrentPart(idx);
     setSelections({});
     setFeedbacks({});
+    setShuffleKey(k => k + 1);
   }
 
   const correctAnswers = Object.values(feedbacks).filter((f) => f === "correct").length;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, X } from "lucide-react";
 import {
@@ -8,6 +8,7 @@ import {
   hardQuestions,
   type QuestionWordQuestion,
 } from "./questionWordsData";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 type Level = "easy" | "medium" | "hard";
 
@@ -21,8 +22,9 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
   const [answers, setAnswers] = useState<{ [id: number]: string }>({});
   const [feedback, setFeedback] = useState<{ [id: number]: "correct" | "incorrect" }>({});
   const [showVocab, setShowVocab] = useState(false);
+  const [shuffleKey, setShuffleKey] = useState(0);
 
-  const getQuestions = (): QuestionWordQuestion[] => {
+  const getQuestionsRaw = (): QuestionWordQuestion[] => {
     switch (level) {
       case "easy":
         return easyQuestions;
@@ -35,8 +37,13 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
     }
   };
 
-  const questions = getQuestions();
-
+  // Shuffle options for each question
+  const questions = useMemo(() => {
+    return getQuestionsRaw().map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
+  }, [level, shuffleKey]);
   const handleAnswer = (questionId: number, answer: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
     const question = questions.find((q) => q.id === questionId);
@@ -54,6 +61,7 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
   const resetPractice = () => {
     setAnswers({});
     setFeedback({});
+    setShuffleKey(k => k + 1);
   };
 
   // Level selection screen

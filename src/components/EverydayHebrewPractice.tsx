@@ -1,8 +1,8 @@
-
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "./ui/switch";
-import questionsRaw from "./everydayHebrewQuestions.json";
+import questionsRawJson from "./everydayHebrewQuestions.json";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 interface EverydayHebrewPracticeProps {
   category: "restaurant" | "supermarket" | "transportation";
@@ -10,13 +10,20 @@ interface EverydayHebrewPracticeProps {
 }
 
 export default function EverydayHebrewPractice({ category, onBack }: EverydayHebrewPracticeProps) {
-  // סינון השאלות לפי קטגוריה
-  const questions = (questionsRaw as any[]).filter(q => q.category === category);
-
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
+
+  // Shuffle options for each question
+  const questions = useMemo(() => {
+    return (questionsRawJson as any[])
+      .filter(q => q.category === category)
+      .map(q => ({
+        ...q,
+        options: shuffleArray(q.options)
+      }));
+  }, [category]);
 
   const q = questions[current];
 
