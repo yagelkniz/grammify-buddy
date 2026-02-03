@@ -39,7 +39,11 @@ export default function TextComprehensionFoodOrderMedium({ onBack }: TextCompreh
         <UtensilsCrossed className="inline-block text-orange-400" />
         הבנת הנקרא: הזמנת אוכל (בינוני)
       </h2>
-      <div className="rounded-xl border px-6 py-4 bg-yellow-50 text-lg leading-8 text-black mb-1 shadow-sm" dir="rtl">
+      <div 
+        className="rounded-xl border px-6 md:px-8 py-5 md:py-6 bg-yellow-50 text-lg md:text-xl text-black mb-3 shadow-sm w-full text-right" 
+        dir="rtl"
+        style={{ lineHeight: '1.8', whiteSpace: 'pre-wrap' }}
+      >
         <TranslatableText text={readingText} translations={translationMap} />
       </div>
       <div className="flex flex-col gap-3 w-full">

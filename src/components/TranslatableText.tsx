@@ -16,7 +16,11 @@ export default function TranslatableText({ text, translations }: Props) {
   const words = text.split(/(\s+)/);
 
   return (
-    <span dir="rtl" className="leading-8 flex flex-wrap gap-y-[0.15em]">
+    <span 
+      dir="rtl" 
+      className="leading-loose text-lg md:text-xl whitespace-pre-wrap text-right block"
+      style={{ lineHeight: '1.8' }}
+    >
       {words.map((rawWord, idx) => {
         // ניקיון תווים מסוימים לבדיקת תרגום
         const cleanWord = rawWord.replace(/[.,!?\"'־–;:]/g, "");
@@ -36,6 +40,7 @@ export default function TranslatableText({ text, translations }: Props) {
               <TooltipContent
                 side="top"
                 className="bg-blue-100 text-blue-900 border-blue-400 font-bold"
+                dir="ltr"
               >
                 {translate}
               </TooltipContent>

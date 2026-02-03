@@ -36,14 +36,18 @@ export default function MoviesAndSeriesTranslatableText({ text }: { text: string
   }
 
   return (
-    <span dir="rtl" className="leading-8 flex flex-wrap gap-y-[0.15em]">
+    <span 
+      dir="rtl" 
+      className="leading-loose text-lg md:text-xl whitespace-pre-wrap text-right block"
+      style={{ lineHeight: '1.8' }}
+    >
       {parts.map((part, i) =>
         part.english ? (
           <Tooltip key={i}>
             <TooltipTrigger asChild>
               <span
                 tabIndex={0}
-                className="relative cursor-pointer font-semibold text-blue-900 px-1 transition hover:bg-blue-100 hover:underline rounded flex items-center group"
+                className="relative cursor-pointer font-semibold text-blue-900 px-1 transition hover:bg-blue-100 hover:underline rounded inline-flex items-center group"
                 aria-label={`פירוש: ${part.english}`}
                 onClick={() => speakWord(part.word)}
                 style={{ outline: "none" }}
@@ -63,6 +67,7 @@ export default function MoviesAndSeriesTranslatableText({ text }: { text: string
             <TooltipContent
               side="top"
               className="bg-blue-100 text-blue-900 border-blue-400 font-bold"
+              dir="ltr"
             >
               {part.english}
             </TooltipContent>
