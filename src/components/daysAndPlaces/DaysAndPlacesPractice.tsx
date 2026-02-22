@@ -188,15 +188,25 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
               ⬅ {t("חזרה", "Back")}
             </Button>
             <h1 className="text-2xl font-bold text-amber-800">{currentCat.nameHe}</h1>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowNikud(!showNikud)}
-              className="mr-auto"
-            >
-              {showNikud ? <Eye className="w-4 h-4 ml-1" /> : <EyeOff className="w-4 h-4 ml-1" />}
-              {t("ניקוד", "Nikud")}
-            </Button>
+            <div className="flex gap-2 mr-auto">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowNikud(!showNikud)}
+              >
+                {showNikud ? <Eye className="w-4 h-4 ml-1" /> : <EyeOff className="w-4 h-4 ml-1" />}
+                {t("ניקוד", "Nikud")}
+              </Button>
+              <Button
+                variant={showTranslation ? "default" : "outline"}
+                size="sm"
+                onClick={() => setShowTranslation(!showTranslation)}
+                className={showTranslation ? "bg-amber-600 hover:bg-amber-700" : ""}
+              >
+                {showTranslation ? <Eye className="w-4 h-4 ml-1" /> : <EyeOff className="w-4 h-4 ml-1" />}
+                EN
+              </Button>
+            </div>
           </div>
 
           {/* Category tabs */}
@@ -233,9 +243,11 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
                   <p className="text-sm text-gray-500 italic text-center my-1">
                     {word.transliteration}
                   </p>
-                  <p className="text-md font-medium text-amber-700 text-center">
-                    {word.english}
-                  </p>
+                  {showTranslation && (
+                    <p className="text-md font-medium text-amber-700 text-center">
+                      {word.english}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             ))}
