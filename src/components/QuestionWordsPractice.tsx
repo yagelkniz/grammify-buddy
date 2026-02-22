@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { Eye, EyeOff } from "lucide-react";
 import { ArrowRight, Check, X } from "lucide-react";
 import {
@@ -179,6 +180,11 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
           {level === "easy" ? "קל" : level === "medium" ? "בינוני" : "קשה"}
         </h1>
       </div>
+
+      <Progress 
+        value={(totalAnswered / questions.length) * 100} 
+        className="mb-4 h-2"
+      />
 
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4 flex-wrap">

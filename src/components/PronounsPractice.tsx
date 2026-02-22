@@ -58,7 +58,7 @@ export default function PronounsPractice({
   }, [q]);
 
   return (
-    <div className="flex flex-col items-center max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow p-8 gap-6 min-h-[60vh]">
+    <div className="flex flex-col items-center max-w-lg mx-auto bg-card text-card-foreground rounded-2xl shadow p-8 gap-6 min-h-[60vh]" dir="rtl">
       <div className="self-end">
         <Button variant="ghost" onClick={onBack}>
           ⬅ {t("חזרה", "Back")}

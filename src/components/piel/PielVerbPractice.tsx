@@ -125,26 +125,26 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-sm md:text-base">
           <thead>
-            <tr className="bg-purple-100">
-              <th className="border border-purple-300 p-2 text-right">גוף</th>
-              <th className="border border-purple-300 p-2">עבר</th>
-              <th className="border border-purple-300 p-2">הווה</th>
-              <th className="border border-purple-300 p-2">עתיד</th>
+            <tr className="bg-secondary">
+              <th className="border border-border p-2 text-right">גוף</th>
+              <th className="border border-border p-2">עבר</th>
+              <th className="border border-border p-2">הווה</th>
+              <th className="border border-border p-2">עתיד</th>
             </tr>
           </thead>
           <tbody>
             {pronouns.map((pronoun, idx) => {
               const presentKey = presentPronouns[idx] || pronoun;
               return (
-                <tr key={pronoun} className={idx % 2 === 0 ? "bg-white" : "bg-purple-50"}>
-                  <td className="border border-purple-200 p-2 font-medium text-right">{pronoun}</td>
-                  <td className="border border-purple-200 p-2 text-center">
+                <tr key={pronoun} className={idx % 2 === 0 ? "bg-background" : "bg-muted/50"}>
+                  <td className="border border-border p-2 font-medium text-right">{pronoun}</td>
+                  <td className="border border-border p-2 text-center">
                     {showNikud ? verb.conjugations.past[pronoun] : removeNikud(verb.conjugations.past[pronoun] || "")}
                   </td>
-                  <td className="border border-purple-200 p-2 text-center">
+                  <td className="border border-border p-2 text-center">
                     {showNikud ? verb.conjugations.present[presentKey] : removeNikud(verb.conjugations.present[presentKey] || "")}
                   </td>
-                  <td className="border border-purple-200 p-2 text-center">
+                  <td className="border border-border p-2 text-center">
                     {showNikud ? verb.conjugations.future[pronoun] : removeNikud(verb.conjugations.future[pronoun] || "")}
                   </td>
                 </tr>
@@ -159,7 +159,7 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
   // Menu phase
   if (phase === "menu") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4" dir="rtl">
+      <div className="min-h-screen bg-gradient-to-br from-secondary to-accent p-4" dir="rtl">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <Button variant="ghost" onClick={onBack} className="gap-2">
@@ -178,8 +178,8 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
             </div>
           </div>
 
-          <Card className="p-6 mb-6 bg-white/90">
-            <h1 className="text-3xl font-bold text-purple-800 mb-2 text-center">בניין פיעל</h1>
+          <Card className="p-6 mb-6 bg-card/90">
+            <h1 className="text-3xl font-bold text-primary mb-2 text-center">בניין פיעל</h1>
             <p className="text-center text-gray-600 mb-4">Pi'el Pattern - Active Intensive</p>
             <p className="text-center text-sm text-gray-500">
               בניין פיעל משמש לפעולות אינטנסיביות, גורמות או מעבר. המאפיין העיקרי: דגש חזק באות האמצעית.
@@ -187,7 +187,7 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
           </Card>
 
           {/* Difficulty Selection */}
-          <Card className="p-4 mb-6 bg-white/90">
+          <Card className="p-4 mb-6 bg-card/90">
             <h2 className="font-bold text-lg mb-3 text-center">בחר רמה:</h2>
             <div className="flex justify-center gap-3 flex-wrap">
               {(["easy", "medium", "hard"] as Difficulty[]).map(d => (
@@ -195,7 +195,6 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
                   key={d}
                   variant={difficulty === d ? "default" : "outline"}
                   onClick={() => setDifficulty(d)}
-                  className={difficulty === d ? "bg-purple-600" : ""}
                 >
                   {d === "easy" ? "קל (10)" : d === "medium" ? "בינוני (18)" : "קשה (30)"}
                 </Button>
@@ -204,22 +203,22 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
           </Card>
 
           {/* Quiz Options */}
-          <Card className="p-4 mb-6 bg-white/90">
+          <Card className="p-4 mb-6 bg-card/90">
             <h2 className="font-bold text-lg mb-3 flex items-center gap-2 justify-center">
               <HelpCircle className="h-5 w-5" />
               תרגול שאלות
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <Button onClick={() => startQuiz("all")} className="bg-purple-600 hover:bg-purple-700">
+              <Button onClick={() => startQuiz("all")}>
                 כל הזמנים
               </Button>
-              <Button onClick={() => startQuiz("past")} variant="outline" className="border-purple-400 text-purple-700">
+              <Button onClick={() => startQuiz("past")} variant="outline">
                 עבר
               </Button>
-              <Button onClick={() => startQuiz("present")} variant="outline" className="border-purple-400 text-purple-700">
+              <Button onClick={() => startQuiz("present")} variant="outline">
                 הווה
               </Button>
-              <Button onClick={() => startQuiz("future")} variant="outline" className="border-purple-400 text-purple-700">
+              <Button onClick={() => startQuiz("future")} variant="outline">
                 עתיד
               </Button>
             </div>
@@ -227,19 +226,19 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
 
           {/* Verb Categories */}
           {verbCategories.map(category => (
-            <Card key={category.title} className="mb-4 bg-white/90 overflow-hidden">
+            <Card key={category.title} className="mb-4 bg-card/90 overflow-hidden">
               <button
                 onClick={() => toggleCategory(category.title)}
-                className="w-full p-4 flex justify-between items-center hover:bg-purple-50 transition-colors"
+                className="w-full p-4 flex justify-between items-center hover:bg-muted transition-colors"
               >
                 <div>
-                  <h2 className="font-bold text-lg text-purple-800">{category.title}</h2>
+                  <h2 className="font-bold text-lg text-primary">{category.title}</h2>
                   {showEnglish && <p className="text-sm text-gray-500">{category.titleEn}</p>}
                 </div>
                 {expandedCategories.includes(category.title) ? (
-                  <ChevronUp className="h-5 w-5 text-purple-600" />
+                  <ChevronUp className="h-5 w-5 text-primary" />
                 ) : (
-                  <ChevronDown className="h-5 w-5 text-purple-600" />
+                  <ChevronDown className="h-5 w-5 text-primary" />
                 )}
               </button>
               
@@ -256,7 +255,7 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
                           setSelectedVerb(verb);
                           setPhase("table");
                         }}
-                        className="flex flex-col h-auto py-3 border-purple-200 hover:bg-purple-50"
+                        className="flex flex-col h-auto py-3 border-border hover:bg-muted"
                       >
                         <span className="text-lg font-medium">
                           {showNikud ? verb.infinitiveNikud : verb.infinitive}
@@ -279,7 +278,7 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
   // Table phase
   if (phase === "table" && selectedVerb) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4" dir="rtl">
+      <div className="min-h-screen bg-gradient-to-br from-secondary to-accent p-4" dir="rtl">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <Button variant="ghost" onClick={() => setPhase("menu")} className="gap-2">
@@ -294,19 +293,19 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
             </div>
           </div>
 
-          <Card className="p-6 bg-white/90">
+          <Card className="p-6 bg-card/90">
             <div className="text-center mb-6">
-              <h1 className="text-3xl font-bold text-purple-800">
+              <h1 className="text-3xl font-bold text-primary">
                 {showNikud ? selectedVerb.infinitiveNikud : selectedVerb.infinitive}
               </h1>
-              <p className="text-gray-600">{selectedVerb.english}</p>
-              <p className="text-sm text-purple-600">שורש: {selectedVerb.root}</p>
+              <p className="text-muted-foreground">{selectedVerb.english}</p>
+              <p className="text-sm text-primary">שורש: {selectedVerb.root}</p>
             </div>
             
             {renderVerbTable(selectedVerb)}
             
             <div className="mt-6 flex justify-center">
-              <Button onClick={() => setPhase("menu")} className="bg-purple-600">
+              <Button onClick={() => setPhase("menu")}>
                 <BookOpen className="h-4 w-4 ml-2" />
                 חזרה לרשימה
               </Button>
@@ -322,18 +321,18 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
     if (quizComplete) {
       const percentage = Math.round((score / quizQuestions.length) * 100);
       return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center p-4" dir="rtl">
-          <Card className="p-8 max-w-md w-full text-center bg-white/95">
-            <h2 className="text-2xl font-bold text-purple-800 mb-4">סיימת את התרגול!</h2>
+        <div className="min-h-screen bg-gradient-to-br from-secondary to-accent flex items-center justify-center p-4" dir="rtl">
+          <Card className="p-8 max-w-md w-full text-center bg-card/95">
+            <h2 className="text-2xl font-bold text-primary mb-4">סיימת את התרגול!</h2>
             <div className="text-6xl mb-4">
               {percentage >= 80 ? "🌟" : percentage >= 60 ? "👍" : "💪"}
             </div>
             <p className="text-xl mb-2">
               {score} / {quizQuestions.length} תשובות נכונות
             </p>
-            <p className="text-lg text-purple-600 mb-6">{percentage}%</p>
+            <p className="text-lg text-primary mb-6">{percentage}%</p>
             <div className="flex flex-col gap-3">
-              <Button onClick={resetQuiz} className="bg-purple-600">
+              <Button onClick={resetQuiz}>
                 <RotateCcw className="h-4 w-4 ml-2" />
                 נסה שוב
               </Button>
@@ -347,7 +346,7 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4" dir="rtl">
+      <div className="min-h-screen bg-gradient-to-br from-secondary to-accent p-4" dir="rtl">
         <div className="max-w-2xl mx-auto">
           <div className="flex justify-between items-center mb-4">
             <Button variant="ghost" onClick={() => setPhase("menu")} className="gap-2">
@@ -371,7 +370,7 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
             שאלה {currentQuestionIndex + 1} מתוך {quizQuestions.length} | ציון: {score}
           </p>
 
-          <Card className="p-6 bg-white/95">
+          <Card className="p-6 bg-card/95">
             <div className="mb-4 text-center">
               <span className={`inline-block px-3 py-1 rounded-full text-sm ${
                 currentQuestion.tense === "past" ? "bg-orange-100 text-orange-700" :
@@ -387,7 +386,7 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
               {showNikud ? currentQuestion.verbNikud : currentQuestion.verb}
             </p>
             
-            <h2 className="text-xl font-bold text-center mb-6 text-purple-900">
+            <h2 className="text-xl font-bold text-center mb-6 text-foreground">
               {showNikud ? currentQuestion.questionNikud : removeNikud(currentQuestion.question)}
             </h2>
 
@@ -429,7 +428,7 @@ export default function PielVerbPractice({ onBack, initialLevel = "learn", lang 
 
             {showResult && (
               <div className="mt-6 text-center">
-                <Button onClick={handleNextQuestion} className="bg-purple-600">
+                <Button onClick={handleNextQuestion}>
                   {currentQuestionIndex < quizQuestions.length - 1 ? "שאלה הבאה" : "סיום"}
                 </Button>
               </div>
