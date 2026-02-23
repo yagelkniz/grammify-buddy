@@ -24,6 +24,7 @@ interface IndexMainMenuProps {
   setShowColorsAndFruits: (b: boolean) => void;
   setShowVerbPatternsMenu: (b: boolean) => void;
   setShowListeningPractice: (b: boolean) => void;
+  setShowConversationRoulette: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -68,6 +69,7 @@ export default function IndexMainMenu({
   setShowColorsAndFruits,
   setShowVerbPatternsMenu,
   setShowListeningPractice,
+  setShowConversationRoulette,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -223,6 +225,13 @@ export default function IndexMainMenu({
             label={lang === "he" ? "בניינים בעברית" : "Verb Patterns"}
             onClick={() => setShowVerbPatternsMenu(true)}
             colorClass="bg-gradient-to-br from-amber-100 to-purple-100 text-amber-900 border-amber-300"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="🎲"
+            label={lang === "he" ? "רולטת שיחה" : "Conversation Roulette"}
+            onClick={() => setShowConversationRoulette(true)}
+            colorClass="bg-gradient-to-br from-orange-100 to-rose-100 text-orange-900 border-orange-300"
             lang={lang}
           />
           <MenuItem

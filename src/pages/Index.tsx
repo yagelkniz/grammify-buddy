@@ -31,7 +31,8 @@ export default function Index() {
     state.showHifilVerb ||
     state.showPielVerb ||
     state.selectedVerbPattern ||
-    state.showListeningPractice;
+    state.showListeningPractice ||
+    state.showConversationRoulette;
 
   // Show Verb Patterns Menu
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
@@ -72,6 +73,7 @@ export default function Index() {
         setShowColorsAndFruits={state.setShowColorsAndFruits}
         setShowVerbPatternsMenu={state.setShowVerbPatternsMenu}
         setShowListeningPractice={state.setShowListeningPractice}
+        setShowConversationRoulette={state.setShowConversationRoulette}
       />
     </div>
   );
