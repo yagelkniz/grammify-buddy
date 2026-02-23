@@ -37,6 +37,7 @@ import HifilVerbPractice from "@/components/hifil/HifilVerbPractice";
 import PielVerbPractice from "@/components/piel/PielVerbPractice";
 import BinyanRecognitionPractice from "@/components/binyanRecognition/BinyanRecognitionPractice";
 import ListeningPractice from "@/components/ListeningPractice";
+import ConversationRouletteStandalone from "@/components/ConversationRouletteStandalone";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -97,6 +98,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setSelectedVerbPattern,
     showListeningPractice,
     setShowListeningPractice,
+    showConversationRoulette,
+    setShowConversationRoulette,
     resetToMainMenu,
   } = state;
 
@@ -134,6 +137,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   if (showListeningPractice) {
     return <ListeningPractice onBack={() => setShowListeningPractice(false)} lang={lang} />;
+  }
+
+  if (showConversationRoulette) {
+    return <ConversationRouletteStandalone onBack={() => setShowConversationRoulette(false)} lang={lang} />;
   }
 
   if (showPielVerb) {
