@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 export function useIndexState() {
   const [lang, setLang] = useState<"he" | "en">("he");
   const [showLinkingWords, setShowLinkingWords] = useState(false);
