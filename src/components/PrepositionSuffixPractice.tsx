@@ -18,11 +18,7 @@ export default function PrepositionSuffixPractice({ onBack, lang = "he" }: Props
   const [levelScores, setLevelScores] = useState<Record<string, number>>({});
   const [activeLevelIndex, setActiveLevelIndex] = useState<number | null>(null);
 
-  const isLevelUnlocked = (index: number) => {
-    if (index === 0) return true;
-    const prevLevel = prepositionSuffixLevels[index - 1];
-    return (levelScores[prevLevel.levelId] ?? 0) >= 80;
-  };
+  const isLevelUnlocked = (_index: number) => true;
 
   if (activeLevelIndex === null) {
     return (
