@@ -41,6 +41,7 @@ import ConversationRouletteStandalone from "@/components/ConversationRouletteSta
 import SentenceOrderPractice from "@/components/SentenceOrderPractice";
 import PrepositionSuffixPractice from "@/components/PrepositionSuffixPractice";
 import HebrewSlangPractice from "@/components/HebrewSlangPractice";
+import RolePlayPractice from "@/components/RolePlayPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -109,6 +110,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowPrepositionSuffix,
     showHebrewSlang,
     setShowHebrewSlang,
+    showRolePlay,
+    setShowRolePlay,
     resetToMainMenu,
   } = state;
 
@@ -162,6 +165,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   if (showHebrewSlang) {
     return <HebrewSlangPractice onBack={() => setShowHebrewSlang(false)} lang={lang} />;
+  }
+
+  if (showRolePlay) {
+    return <RolePlayPractice onBack={() => setShowRolePlay(false)} lang={lang} />;
   }
 
   if (showPielVerb) {

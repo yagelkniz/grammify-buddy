@@ -33,6 +33,7 @@ export function useIndexState() {
   const [showSentenceOrder, setShowSentenceOrder] = useState(false);
   const [showPrepositionSuffix, setShowPrepositionSuffix] = useState(false);
   const [showHebrewSlang, setShowHebrewSlang] = useState(false);
+  const [showRolePlay, setShowRolePlay] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -66,6 +67,7 @@ export function useIndexState() {
     setShowSentenceOrder(false);
     setShowPrepositionSuffix(false);
     setShowHebrewSlang(false);
+    setShowRolePlay(false);
   };
 
   return {
@@ -133,6 +135,8 @@ export function useIndexState() {
     setShowPrepositionSuffix,
     showHebrewSlang,
     setShowHebrewSlang,
+    showRolePlay,
+    setShowRolePlay,
     resetToMainMenu,
   };
 }
