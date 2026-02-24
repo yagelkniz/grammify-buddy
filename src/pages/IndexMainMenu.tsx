@@ -28,6 +28,7 @@ interface IndexMainMenuProps {
   setShowSentenceOrder: (b: boolean) => void;
   setShowPrepositionSuffix: (b: boolean) => void;
   setShowHebrewSlang: (b: boolean) => void;
+  setShowRolePlay: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -76,6 +77,7 @@ export default function IndexMainMenu({
   setShowSentenceOrder,
   setShowPrepositionSuffix,
   setShowHebrewSlang,
+  setShowRolePlay,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -259,6 +261,13 @@ export default function IndexMainMenu({
             label={lang === "he" ? "סלנג ישראלי" : "Israeli Slang"}
             onClick={() => setShowHebrewSlang(true)}
             colorClass="bg-gradient-to-br from-yellow-100 to-orange-100 text-orange-900 border-orange-300"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="🎭"
+            label={lang === "he" ? "סימולציית שיחה" : "Role-Play"}
+            onClick={() => setShowRolePlay(true)}
+            colorClass="bg-gradient-to-br from-rose-100 to-purple-100 text-rose-900 border-rose-300"
             lang={lang}
           />
           <MenuItem
