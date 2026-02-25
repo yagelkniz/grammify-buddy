@@ -26,6 +26,23 @@ export interface GlossaryScreen {
   ctaEn: string;
 }
 
+export interface PracticeQuestion {
+  type: "multiple_choice";
+  focus: string;
+  questionHe: string;
+  questionEn: string;
+  optionsHe: string[];
+  correctIndex: number;
+}
+
+export interface PracticeBlock {
+  titleHe: string;
+  titleEn: string;
+  instructionsHe: string;
+  instructionsEn: string;
+  questions: PracticeQuestion[];
+}
+
 export interface RolePlayScenario {
   scenarioId: string;
   title: string;
@@ -36,6 +53,7 @@ export interface RolePlayScenario {
   characterToneEn: string;
   glossaryScreen: GlossaryScreen;
   steps: RolePlayStep[];
+  practiceBlock: PracticeBlock;
 }
 
 export const rolePlayScenarios: RolePlayScenario[] = [
@@ -85,6 +103,54 @@ export const rolePlayScenarios: RolePlayScenario[] = [
         ],
       },
     ],
+    practiceBlock: {
+      titleHe: "תרגול אחרי הסימולציה",
+      titleEn: "Practice After Simulation",
+      instructionsHe: "ענה על השאלות כדי לחזק את מה שלמדת בשיחה.",
+      instructionsEn: "Answer the questions to reinforce what you learned.",
+      questions: [
+        {
+          type: "multiple_choice",
+          focus: "vocabulary",
+          questionHe: "מה המשמעות של 'מה נסגר'?",
+          questionEn: "What does 'מה נסגר' mean?",
+          optionsHe: ["מה התוכנית?", "מה נגמר?", "מה נסגר (פיזית)?", "מה חדש?"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "tone",
+          questionHe: "איזה ביטוי נשמע רובוטי מדי כשקובעים עם חבר?",
+          questionEn: "Which expression sounds too robotic when making plans with a friend?",
+          optionsHe: ["ייתכן ואגיע", "יש מצב", "יאללה", "בא לך?"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "vocabulary",
+          questionHe: "'אני על זה' – מה הכוונה?",
+          questionEn: "What does 'אני על זה' mean?",
+          optionsHe: ["אני בפנים / מסכים", "אני על משהו גבוה", "אני עסוק", "אני חולה"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "sentence_correction",
+          questionHe: "איך תגיד 'אולי אגיע' בצורה טבעית?",
+          questionEn: "How do you say 'I might come' naturally?",
+          optionsHe: ["יש מצב שאגיע", "ייתכן ואגיע", "אני אבדוק ואשוב אליך", "אולי אפשר להגיע"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "vocabulary",
+          questionHe: "מה המשמעות של 'זורם'?",
+          questionEn: "What does 'זורם' mean in context?",
+          optionsHe: ["הולך עם הזרם / גמיש", "שוחה", "ממהר", "מתעצבן"],
+          correctIndex: 0,
+        },
+      ],
+    },
   },
   {
     scenarioId: "restaurant_telaviv",
@@ -132,6 +198,54 @@ export const rolePlayScenarios: RolePlayScenario[] = [
         ],
       },
     ],
+    practiceBlock: {
+      titleHe: "תרגול אחרי הסימולציה",
+      titleEn: "Practice After Simulation",
+      instructionsHe: "ענה על השאלות כדי לחזק את מה שלמדת בשיחה.",
+      instructionsEn: "Answer the questions to reinforce what you learned.",
+      questions: [
+        {
+          type: "multiple_choice",
+          focus: "vocabulary",
+          questionHe: "מה המשמעות של 'אפשר…?'",
+          questionEn: "What does 'אפשר…?' mean?",
+          optionsHe: ["אפשר לקבל בבקשה…?", "מותר לי?", "יש סיכוי?", "יכול להיות?"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "tone",
+          questionHe: "איזה ביטוי פורמלי מדי למסעדה רגילה?",
+          questionEn: "Which expression is too formal for a casual restaurant?",
+          optionsHe: ["ברצוני במזון", "תביא לי סלט", "אפשר בירה?", "יאללה, שניצל"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "vocabulary",
+          questionHe: "'תביא לי' – מה הטון?",
+          questionEn: "What's the tone of 'תביא לי'?",
+          optionsHe: ["ישיר וקליל", "מנומס מאוד", "פורמלי", "גס"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "sentence_correction",
+          questionHe: "איך תזמין מים בצורה טבעית?",
+          questionEn: "How do you order water naturally?",
+          optionsHe: ["אפשר מים בבקשה?", "ברצוני במים", "אין צורך בנוזלים", "אני צורך מים"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "tone",
+          questionHe: "'מעוניין להזמין' – למה זה לא מתאים?",
+          questionEn: "Why is 'מעוניין להזמין' inappropriate?",
+          optionsHe: ["פורמלי מדי לשיחה יומיומית", "לא נכון דקדוקית", "גס", "ילדותי"],
+          correctIndex: 0,
+        },
+      ],
+    },
   },
   {
     scenarioId: "boss_message",
@@ -179,5 +293,53 @@ export const rolePlayScenarios: RolePlayScenario[] = [
         ],
       },
     ],
+    practiceBlock: {
+      titleHe: "תרגול אחרי הסימולציה",
+      titleEn: "Practice After Simulation",
+      instructionsHe: "ענה על השאלות כדי לחזק את מה שלמדת בשיחה.",
+      instructionsEn: "Answer the questions to reinforce what you learned.",
+      questions: [
+        {
+          type: "multiple_choice",
+          focus: "vocabulary",
+          questionHe: "מה המשמעות של 'לעדכן'?",
+          questionEn: "What does 'לעדכן' mean?",
+          optionsHe: ["ליידע / להודיע", "לחדש", "לתקן", "לשנות"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "tone",
+          questionHe: "'איחורי יתרחש' – למה זה לא מתאים?",
+          questionEn: "Why is 'איחורי יתרחש' inappropriate?",
+          optionsHe: ["נשמע רובוטי ולא טבעי", "גס מדי", "ילדותי", "לא נכון דקדוקית"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "vocabulary",
+          questionHe: "מה הכוונה ב'כנראה'?",
+          questionEn: "What does 'כנראה' mean?",
+          optionsHe: ["ככל הנראה / סביר", "בטוח", "אולי לא", "לא יודע"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "sentence_correction",
+          questionHe: "איך תגיד לבוס שתאחר בצורה מקצועית?",
+          questionEn: "How do you tell your boss you'll be late professionally?",
+          optionsHe: ["אני כנראה אאחר מחר בכ-20 דקות", "לא אגיע בזמן", "יש מצב שאאחר, סורי", "אין באפשרותי להגיע"],
+          correctIndex: 0,
+        },
+        {
+          type: "multiple_choice",
+          focus: "tone",
+          questionHe: "'אין באפשרותי לפרט' – מה הבעיה?",
+          questionEn: "What's wrong with 'אין באפשרותי לפרט'?",
+          optionsHe: ["פורמלי ומרוחק מדי", "גס", "קליל מדי", "לא נכון"],
+          correctIndex: 0,
+        },
+      ],
+    },
   },
 ];

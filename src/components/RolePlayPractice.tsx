@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Trophy, RotateCcw, ArrowLeft, MessageCircle, User, BookOpen } from "lucide-react";
+import { Trophy, RotateCcw, ArrowLeft, MessageCircle, User, BookOpen, CheckCircle2, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { rolePlayScenarios, RolePlayScenario, RolePlayOption, GlossaryScreen } from "@/data/rolePlayData";
+import { shuffleArray } from "@/lib/shuffleArray";
+import { rolePlayScenarios, RolePlayScenario, RolePlayOption, GlossaryScreen, PracticeBlock, PracticeQuestion } from "@/data/rolePlayData";
 
 interface Props {
   onBack: () => void;
@@ -138,7 +139,9 @@ function ScenarioPlay({
   const [stepIndex, setStepIndex] = useState(0);
   const [selected, setSelected] = useState<RolePlayOption | null>(null);
   const [totalNaturalness, setTotalNaturalness] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const [dialogueComplete, setDialogueComplete] = useState(false);
+  const [practiceComplete, setPracticeComplete] = useState(false);
+  const [practiceScore, setPracticeScore] = useState(0);
   const [choices, setChoices] = useState<{ step: string; option: RolePlayOption }[]>([]);
 
   const step = scenario.steps[stepIndex];
@@ -156,7 +159,7 @@ function ScenarioPlay({
       setStepIndex((i) => i + 1);
       setSelected(null);
     } else {
-      setIsComplete(true);
+      setDialogueComplete(true);
     }
   };
 
@@ -185,8 +188,28 @@ function ScenarioPlay({
     );
   }
 
-  if (isComplete) {
-    const avgScore = Math.round(totalNaturalness / scenario.steps.length);
+  // Show practice block after dialogue
+  if (dialogueComplete && !practiceComplete) {
+    const avgNaturalness = Math.round(totalNaturalness / scenario.steps.length);
+    return (
+      <PracticeBlockView
+        practiceBlock={scenario.practiceBlock}
+        lang={lang}
+        t={t}
+        onComplete={(score) => {
+          setPracticeScore(score);
+          setPracticeComplete(true);
+        }}
+        onBack={onBack}
+        scenarioTitle={lang === "he" ? scenario.title : scenario.titleEn}
+      />
+    );
+  }
+
+  // Show final results after practice
+  if (practiceComplete) {
+    const avgNaturalness = Math.round(totalNaturalness / scenario.steps.length);
+    const combinedScore = Math.round((avgNaturalness + practiceScore) / 2);
     return (
       <div dir="rtl" className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <Card className="max-w-md w-full text-center">
@@ -199,13 +222,24 @@ function ScenarioPlay({
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="text-5xl font-bold text-primary">{avgScore}%</div>
+            <div className="text-5xl font-bold text-primary">{combinedScore}%</div>
             <p className="text-muted-foreground">
-              {t("ציון טבעיות ממוצע", "Average naturalness score")}
+              {t("ציון כולל", "Overall Score")}
             </p>
-            <Progress value={avgScore} className="h-3" />
+            <Progress value={combinedScore} className="h-3" />
 
-            {/* Summary of choices */}
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="p-3 rounded-lg border bg-muted/50">
+                <div className="font-bold text-lg text-primary">{avgNaturalness}%</div>
+                <p className="text-muted-foreground">{t("טבעיות שיחה", "Dialogue Naturalness")}</p>
+              </div>
+              <div className="p-3 rounded-lg border bg-muted/50">
+                <div className="font-bold text-lg text-primary">{practiceScore}%</div>
+                <p className="text-muted-foreground">{t("תרגול", "Practice Quiz")}</p>
+              </div>
+            </div>
+
+            {/* Summary of dialogue choices */}
             <div className="space-y-2 text-right">
               {choices.map((c, i) => (
                 <div key={i} className={cn("p-2 rounded border text-sm", getNaturalnessColor(c.option.naturalness))}>
@@ -222,14 +256,16 @@ function ScenarioPlay({
                   setStepIndex(0);
                   setSelected(null);
                   setTotalNaturalness(0);
-                  setIsComplete(false);
+                  setDialogueComplete(false);
+                  setPracticeComplete(false);
+                  setPracticeScore(0);
                   setChoices([]);
                 }}
               >
                 <RotateCcw className="h-4 w-4 ml-2" />
                 {t("נסה שוב", "Try Again")}
               </Button>
-              <Button onClick={() => onFinish(avgScore)}>
+              <Button onClick={() => onFinish(combinedScore)}>
                 {t("חזרה לתרחישים", "Back to Scenarios")}
               </Button>
             </div>
@@ -334,6 +370,149 @@ function ScenarioPlay({
                 <Button className="w-full" onClick={handleNext}>
                   {stepIndex < scenario.steps.length - 1
                     ? t("המשך שיחה", "Continue Conversation")
+                    : t("עבור לתרגול", "Continue to Practice")}
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                </Button>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Practice Block View ─── */
+function PracticeBlockView({
+  practiceBlock, lang, t, onComplete, onBack, scenarioTitle,
+}: {
+  practiceBlock: PracticeBlock;
+  lang: string;
+  t: (he: string, en: string) => string;
+  onComplete: (score: number) => void;
+  onBack: () => void;
+  scenarioTitle: string;
+}) {
+  const [qIndex, setQIndex] = useState(0);
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const [correctCount, setCorrectCount] = useState(0);
+
+  const shuffledQuestions = useMemo(() => {
+    return practiceBlock.questions.map((q) => {
+      const indices = q.optionsHe.map((_, i) => i);
+      const shuffled = shuffleArray(indices);
+      return {
+        ...q,
+        shuffledIndices: shuffled,
+        shuffledOptions: shuffled.map((i) => q.optionsHe[i]),
+        correctShuffledIdx: shuffled.indexOf(q.correctIndex),
+      };
+    });
+  }, [practiceBlock]);
+
+  const current = shuffledQuestions[qIndex];
+  const progress = ((qIndex + 1) / shuffledQuestions.length) * 100;
+  const isCorrect = selectedIdx === current.correctShuffledIdx;
+
+  const handleSelect = (idx: number) => {
+    if (selectedIdx !== null) return;
+    setSelectedIdx(idx);
+    if (idx === current.correctShuffledIdx) {
+      setCorrectCount((c) => c + 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (qIndex < shuffledQuestions.length - 1) {
+      setQIndex((i) => i + 1);
+      setSelectedIdx(null);
+    } else {
+      const score = Math.round((correctCount / shuffledQuestions.length) * 100);
+      onComplete(score);
+    }
+  };
+
+  return (
+    <div dir="rtl" className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="max-w-2xl mx-auto space-y-6">
+        <div className="flex items-center justify-between">
+          <Button variant="ghost" onClick={onBack}>
+            ⬅ {t("חזרה", "Back")}
+          </Button>
+          <Badge variant="outline">{scenarioTitle}</Badge>
+        </div>
+
+        <div className="text-center">
+          <h2 className="text-xl font-bold text-primary">
+            📝 {lang === "he" ? practiceBlock.titleHe : practiceBlock.titleEn}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            {lang === "he" ? practiceBlock.instructionsHe : practiceBlock.instructionsEn}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <Progress value={progress} className="flex-1 h-2" />
+          <Badge variant="secondary">
+            {qIndex + 1} / {shuffledQuestions.length}
+          </Badge>
+        </div>
+
+        <Card>
+          <CardContent className="space-y-5 pt-6">
+            <p className="text-lg font-semibold text-center">
+              {lang === "he" ? current.questionHe : current.questionEn}
+            </p>
+
+            <div className="space-y-3">
+              {current.shuffledOptions.map((option, idx) => {
+                let cls = "text-base py-4 font-medium text-right justify-start w-full";
+
+                if (selectedIdx !== null) {
+                  if (idx === current.correctShuffledIdx) {
+                    cls += " bg-green-100 border-green-400 text-green-800";
+                  } else if (idx === selectedIdx) {
+                    cls += " bg-red-100 border-red-400 text-red-800";
+                  } else {
+                    cls += " opacity-40";
+                  }
+                } else {
+                  cls += " hover:bg-primary/10 hover:border-primary";
+                }
+
+                return (
+                  <Button
+                    key={idx}
+                    variant="outline"
+                    className={cls}
+                    onClick={() => handleSelect(idx)}
+                    disabled={selectedIdx !== null}
+                  >
+                    <div className="flex items-center gap-2 w-full">
+                      {selectedIdx !== null && idx === current.correctShuffledIdx && (
+                        <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0" />
+                      )}
+                      {selectedIdx !== null && idx === selectedIdx && idx !== current.correctShuffledIdx && (
+                        <XCircle className="h-5 w-5 text-red-600 shrink-0" />
+                      )}
+                      <span className="flex-1">{option}</span>
+                    </div>
+                  </Button>
+                );
+              })}
+            </div>
+
+            {selectedIdx !== null && (
+              <div className="space-y-3">
+                <div className={cn(
+                  "p-3 rounded-lg border text-center font-medium",
+                  isCorrect ? "bg-green-50 border-green-200 text-green-700" : "bg-red-50 border-red-200 text-red-700"
+                )}>
+                  {isCorrect ? t("נכון! 🎉", "Correct! 🎉") : t("לא נכון ❌", "Incorrect ❌")}
+                </div>
+                <Button className="w-full" onClick={handleNext}>
+                  {qIndex < shuffledQuestions.length - 1
+                    ? t("שאלה הבאה", "Next Question")
                     : t("ראה תוצאות", "See Results")}
                   <ArrowLeft className="h-4 w-4 mr-2" />
                 </Button>
