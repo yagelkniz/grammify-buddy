@@ -261,15 +261,11 @@ function LevelPractice({
           </Badge>
         </div>
 
-        {/* Translation hint */}
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg">
-              {t("תרגום:", "Translation:")}
+              {t("סדרו את המילים למשפט נכון", "Arrange the words into a correct sentence")}
             </CardTitle>
-            <p className="text-base text-muted-foreground" dir="ltr">
-              {currentItem.translationEn}
-            </p>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Sentence Building Area */}
