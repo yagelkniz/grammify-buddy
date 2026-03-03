@@ -226,11 +226,6 @@ export default function NounAdjectivePractice({ onBack }: { onBack?: () => void 
       {questions.map((q, i) => (
         <div key={i} className="w-full max-w-md flex flex-col items-center mb-2">
           <p className="text-lg mb-2 flex flex-wrap items-center justify-center" dir="rtl">{q.sentence}</p>
-          {q.translation && (
-            <div className="text-sm text-gray-500 italic mb-1 text-center" dir="ltr">
-              ({q.translation})
-            </div>
-          )}
           <div className="grid grid-cols-2 gap-3 mb-1 w-full max-w-xs">
             {q.options.map((opt) => (
               <button
