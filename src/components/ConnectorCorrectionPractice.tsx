@@ -18,12 +18,7 @@ export default function ConnectorCorrectionPractice({ onBack, lang = "he" }: Pro
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
   const [scores, setScores] = useState<Record<string, number>>({});
 
-  const isUnlocked = (idx: number) => {
-    if (idx === 0) return true;
-    const prevLevel = connectorLevels[idx - 1];
-    const prevScore = scores[prevLevel.levelId];
-    return prevScore !== undefined && prevScore >= 80;
-  };
+  const isUnlocked = (_idx: number) => true;
 
   if (selectedLevel === null) {
     return (
@@ -85,9 +80,6 @@ function LevelSelect({
           {t("תרגול מתקדם – זהה טעויות נפוצות במילות קישור!", "Advanced practice – identify common connector mistakes!")}
         </p>
 
-        <div className="p-4 rounded-xl bg-muted/50 border text-center text-sm text-muted-foreground">
-          🔓 {t("צריך 80% כדי לפתוח את הרמה הבאה", "Need 80% to unlock the next level")}
-        </div>
 
         <div className="space-y-4">
           {levels.map((level, i) => {
@@ -107,7 +99,7 @@ function LevelSelect({
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    {!unlocked && <Lock className="h-5 w-5 text-muted-foreground" />}
+                    
                     {score !== undefined && (
                       <Badge variant={score >= 80 ? "default" : "secondary"}>
                         {score}%
@@ -200,11 +192,11 @@ function LevelPlay({
 
             {score >= 80 ? (
               <div className="p-3 rounded-lg bg-green-50 border border-green-200 text-green-700 font-medium">
-                🔓 {t("הרמה הבאה נפתחה!", "Next level unlocked!")}
+                🎉 {t("כל הכבוד!", "Great job!")}
               </div>
             ) : (
               <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-700 font-medium">
-                🔒 {t("צריך 80% כדי לפתוח את הרמה הבאה. נסה שוב!", "Need 80% to unlock next level. Try again!")}
+                💪 {t("נסה שוב לשפר את הציון!", "Try again to improve your score!")}
               </div>
             )}
 

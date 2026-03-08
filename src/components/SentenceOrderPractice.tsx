@@ -20,11 +20,7 @@ export default function SentenceOrderPractice({ onBack, lang = "he" }: Props) {
   const [levelScores, setLevelScores] = useState<Record<string, number>>({});
   const [activeLevelIndex, setActiveLevelIndex] = useState<number | null>(null);
 
-  const isLevelUnlocked = (index: number) => {
-    if (index === 0) return true;
-    const prevLevel = sentenceOrderLevels[index - 1];
-    return (levelScores[prevLevel.levelId] ?? 0) >= 80;
-  };
+  const isLevelUnlocked = (_index: number) => true;
 
   if (activeLevelIndex === null) {
     return <LevelSelect
@@ -102,7 +98,7 @@ function LevelSelect({
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    {!unlocked && <Lock className="h-5 w-5 text-muted-foreground" />}
+                    
                     {score !== undefined && (
                       <Badge variant={score >= 80 ? "default" : "secondary"}>
                         {score}%
@@ -119,11 +115,6 @@ function LevelSelect({
                     </p>
                   </div>
                 </div>
-                {!unlocked && (
-                  <p className="text-xs text-muted-foreground mt-2">
-                    {t("נדרש 80% בשלב הקודם כדי לפתוח", "Requires 80% on previous level to unlock")}
-                  </p>
-                )}
               </button>
             );
           })}
@@ -217,11 +208,6 @@ function LevelPractice({
               {score} / {items.length} {t("נכון", "correct")}
             </p>
             <Progress value={percentage} className="h-3" />
-            {percentage < 80 && (
-              <p className="text-sm text-destructive">
-                {t("נדרש 80% כדי לפתוח את השלב הבא", "Need 80% to unlock the next level")}
-              </p>
-            )}
             <div className="flex gap-3 justify-center pt-2">
               <Button variant="outline" onClick={() => {
                 setCurrentIndex(0);
