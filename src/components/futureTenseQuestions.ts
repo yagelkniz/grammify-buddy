@@ -133,7 +133,7 @@ const baseQuestions = [
 
 export const futureTenseQuestions: FutureTenseQuestion[] = [];
 for (let i = 0; i < 100; i++) {
-  const baseQ = baseQuestions[i % 10];
+  const baseQ = baseQuestions[i % baseQuestions.length];
   futureTenseQuestions.push({
     number: i + 1,
     ...baseQ,
