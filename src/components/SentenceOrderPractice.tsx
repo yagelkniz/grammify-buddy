@@ -115,11 +115,6 @@ function LevelSelect({
                     </p>
                   </div>
                 </div>
-                {!unlocked && (
-                  <p className="text-xs text-muted-foreground mt-2">
-                    {t("נדרש 80% בשלב הקודם כדי לפתוח", "Requires 80% on previous level to unlock")}
-                  </p>
-                )}
               </button>
             );
           })}
