@@ -80,9 +80,6 @@ function LevelSelect({
           {t("תרגול מתקדם – זהה טעויות נפוצות במילות קישור!", "Advanced practice – identify common connector mistakes!")}
         </p>
 
-        <div className="p-4 rounded-xl bg-muted/50 border text-center text-sm text-muted-foreground">
-          🔓 {t("צריך 80% כדי לפתוח את הרמה הבאה", "Need 80% to unlock the next level")}
-        </div>
 
         <div className="space-y-4">
           {levels.map((level, i) => {
