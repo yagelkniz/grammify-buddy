@@ -67,6 +67,11 @@ export const sentenceOrderLevels: SentenceOrderLevel[] = [
       { id: "i13", targetSentence: "מחר אני אפגוש אותך ליד התחנה.", translationEn: "Tomorrow I will meet you near the station.", words: ["מחר", "ליד", "התחנה", "אני", "אותך", "אפגוש"], correctOrder: ["מחר", "אני", "אפגוש", "אותך", "ליד", "התחנה"] },
       { id: "i14", targetSentence: "אתמול בלילה הם דיברו הרבה.", translationEn: "Last night they talked a lot.", words: ["הם", "אתמול", "בלילה", "הרבה", "דיברו"], correctOrder: ["אתמול", "בלילה", "הם", "דיברו", "הרבה"] },
       { id: "i15", targetSentence: "בעוד רגע אנחנו נצא מהמסעדה.", translationEn: "In a moment we will leave the restaurant.", words: ["מהמסעדה", "נצא", "אנחנו", "בעוד", "רגע"], correctOrder: ["בעוד", "רגע", "אנחנו", "נצא", "מהמסעדה"] },
+      { id: "i16", targetSentence: "בחודש הבא הוא יתחיל עבודה חדשה.", translationEn: "Next month he will start a new job.", words: ["חדשה", "עבודה", "בחודש", "יתחיל", "הבא", "הוא"], correctOrder: ["בחודש", "הבא", "הוא", "יתחיל", "עבודה", "חדשה"] },
+      { id: "i17", targetSentence: "לפני שבוע היא חגגה יום הולדת.", translationEn: "A week ago she celebrated a birthday.", words: ["יום", "היא", "לפני", "הולדת", "חגגה", "שבוע"], correctOrder: ["לפני", "שבוע", "היא", "חגגה", "יום", "הולדת"] },
+      { id: "i18", targetSentence: "אתמול בצהריים אכלתי סלט גדול.", translationEn: "Yesterday at noon I ate a big salad.", words: ["גדול", "סלט", "בצהריים", "אתמול", "אכלתי"], correctOrder: ["אתמול", "בצהריים", "אכלתי", "סלט", "גדול"] },
+      { id: "i19", targetSentence: "מחר בערב נבשל ארוחה מיוחדת.", translationEn: "Tomorrow evening we will cook a special meal.", words: ["מיוחדת", "ארוחה", "נבשל", "מחר", "בערב"], correctOrder: ["מחר", "בערב", "נבשל", "ארוחה", "מיוחדת"] },
+      { id: "i20", targetSentence: "בשנה שעברה למדנו הרבה דברים חדשים.", translationEn: "Last year we learned many new things.", words: ["חדשים", "דברים", "הרבה", "בשנה", "למדנו", "שעברה"], correctOrder: ["בשנה", "שעברה", "למדנו", "הרבה", "דברים", "חדשים"] },
     ],
   },
   {
