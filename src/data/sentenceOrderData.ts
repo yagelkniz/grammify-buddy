@@ -37,6 +37,11 @@ export const sentenceOrderLevels: SentenceOrderLevel[] = [
       { id: "b13", targetSentence: "אני פוגש חברים אחרי העבודה.", translationEn: "I meet friends after work.", words: ["אחרי", "חברים", "אני", "העבודה", "פוגש"], correctOrder: ["אני", "פוגש", "חברים", "אחרי", "העבודה"] },
       { id: "b14", targetSentence: "היא נוסעת באוטובוס לבית הספר.", translationEn: "She travels by bus to school.", words: ["לבית", "באוטובוס", "היא", "נוסעת", "הספר"], correctOrder: ["היא", "נוסעת", "באוטובוס", "לבית", "הספר"] },
       { id: "b15", targetSentence: "אנחנו שותים תה בערב.", translationEn: "We drink tea in the evening.", words: ["בערב", "אנחנו", "תה", "שותים"], correctOrder: ["אנחנו", "שותים", "תה", "בערב"] },
+      { id: "b16", targetSentence: "הילד רוצה גלידה בקיץ.", translationEn: "The child wants ice cream in summer.", words: ["בקיץ", "גלידה", "הילד", "רוצה"], correctOrder: ["הילד", "רוצה", "גלידה", "בקיץ"] },
+      { id: "b17", targetSentence: "אני שומע מוזיקה בדרך.", translationEn: "I listen to music on the way.", words: ["בדרך", "מוזיקה", "אני", "שומע"], correctOrder: ["אני", "שומע", "מוזיקה", "בדרך"] },
+      { id: "b18", targetSentence: "הוא כותב מכתב לחבר.", translationEn: "He writes a letter to a friend.", words: ["לחבר", "מכתב", "הוא", "כותב"], correctOrder: ["הוא", "כותב", "מכתב", "לחבר"] },
+      { id: "b19", targetSentence: "היא רואה סרט בטלוויזיה.", translationEn: "She watches a movie on TV.", words: ["בטלוויזיה", "סרט", "רואה", "היא"], correctOrder: ["היא", "רואה", "סרט", "בטלוויזיה"] },
+      { id: "b20", targetSentence: "אנחנו לומדים עברית בכיתה.", translationEn: "We study Hebrew in class.", words: ["בכיתה", "עברית", "אנחנו", "לומדים"], correctOrder: ["אנחנו", "לומדים", "עברית", "בכיתה"] },
     ],
   },
   {
