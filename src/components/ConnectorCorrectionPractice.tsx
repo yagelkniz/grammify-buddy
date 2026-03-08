@@ -18,12 +18,7 @@ export default function ConnectorCorrectionPractice({ onBack, lang = "he" }: Pro
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
   const [scores, setScores] = useState<Record<string, number>>({});
 
-  const isUnlocked = (idx: number) => {
-    if (idx === 0) return true;
-    const prevLevel = connectorLevels[idx - 1];
-    const prevScore = scores[prevLevel.levelId];
-    return prevScore !== undefined && prevScore >= 80;
-  };
+  const isUnlocked = (_idx: number) => true;
 
   if (selectedLevel === null) {
     return (
