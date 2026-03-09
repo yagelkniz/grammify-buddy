@@ -62,8 +62,7 @@ export default function Index() {
         lang={state.lang}
         setLang={state.setLang}
         setShowLinkingWords={state.setShowLinkingWords}
-        setShowPronounsTable={state.setShowPronounsTable}
-        setShowPossessivePronouns={state.setShowPossessivePronouns}
+        setShowPronounsMenu={state.setShowPronounsMenu}
         setShowQuestionnaire={state.setShowQuestionnaire}
         setSelectedPractice={state.setSelectedPractice}
         setSelectedTextComp={state.setSelectedTextComp}

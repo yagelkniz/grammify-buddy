@@ -8,7 +8,7 @@ interface IndexMainMenuProps {
   lang: "he" | "en";
   setLang: (lang: "he" | "en") => void;
   setShowLinkingWords: (b: boolean) => void;
-  setShowPronounsTable: (b: boolean) => void;
+  setShowPronounsMenu: (b: boolean) => void;
   setShowPossessivePronouns: (b: boolean) => void;
   setShowQuestionnaire: (b: boolean) => void;
   setSelectedPractice: (val: null | "verb" | "nounAdj" | "household") => void;
