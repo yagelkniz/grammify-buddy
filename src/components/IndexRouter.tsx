@@ -259,8 +259,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
             </Button>
             <Button 
               variant="default" 
-              onClick={() => setShowPronounsMenu(true)}
-              className="bg-green-600 hover:bg-green-700"
+              onClick={() => {
+                setShowPronounsTable(false);
+                setShowPronounsMenu(true);
+              }}
             >
               🏃‍♂️ {t("תרגול שמות גוף", "Pronouns Practice")}
             </Button>

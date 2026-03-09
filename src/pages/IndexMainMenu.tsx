@@ -8,7 +8,7 @@ interface IndexMainMenuProps {
   lang: "he" | "en";
   setLang: (lang: "he" | "en") => void;
   setShowLinkingWords: (b: boolean) => void;
-  setShowPronounsTable: (b: boolean) => void;
+  setShowPronounsMenu: (b: boolean) => void;
   setShowPossessivePronouns: (b: boolean) => void;
   setShowQuestionnaire: (b: boolean) => void;
   setSelectedPractice: (val: null | "verb" | "nounAdj" | "household") => void;
@@ -58,7 +58,7 @@ export default function IndexMainMenu({
   lang,
   setLang,
   setShowLinkingWords,
-  setShowPronounsTable,
+  setShowPronounsMenu,
   setShowPossessivePronouns,
   setShowQuestionnaire,
   setSelectedPractice,
@@ -131,7 +131,7 @@ export default function IndexMainMenu({
           <MenuItem
             emoji="👤"
             label={t.pronouns}
-            onClick={() => setShowPronounsTable(true)}
+            onClick={() => setShowPronounsMenu(true)}
             colorClass="bg-indigo-100 text-indigo-900 border-indigo-300"
             lang={lang}
           />
