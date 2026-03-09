@@ -70,8 +70,8 @@ export default function Index() {
         setShowEverydayHebrew={state.setShowEverydayHebrew}
         setShowVerbToBePresentation={state.setShowVerbToBePresentation}
         setShowDaysAndPlacesVocab={state.setShowDaysAndPlacesVocab}
+        setShowQuestionWords={state.setShowQuestionWords}
         setShowOddOneOut={state.setShowOddOneOut}
-        setShowEmotions={state.setShowEmotions}
         setShowLinkingWordsLevels={state.setShowLinkingWordsLevels}
         setShowVerbMemoryGame={state.setShowVerbMemoryGame}
         setShowColorsAndFruits={state.setShowColorsAndFruits}
