@@ -72,6 +72,7 @@ export default function Index() {
         setShowDaysAndPlacesVocab={state.setShowDaysAndPlacesVocab}
         setShowQuestionWords={state.setShowQuestionWords}
         setShowOddOneOut={state.setShowOddOneOut}
+        setShowEmotions={state.setShowEmotions}
         setShowLinkingWordsLevels={state.setShowLinkingWordsLevels}
         setShowVerbMemoryGame={state.setShowVerbMemoryGame}
         setShowColorsAndFruits={state.setShowColorsAndFruits}
