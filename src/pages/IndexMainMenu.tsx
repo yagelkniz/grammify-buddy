@@ -131,7 +131,7 @@ export default function IndexMainMenu({
           <MenuItem
             emoji="👤"
             label={t.pronouns}
-            onClick={() => setShowPronounsTable(true)}
+            onClick={() => setShowPronounsMenu(true)}
             colorClass="bg-indigo-100 text-indigo-900 border-indigo-300"
             lang={lang}
           />
