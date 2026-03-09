@@ -58,7 +58,7 @@ export default function IndexMainMenu({
   lang,
   setLang,
   setShowLinkingWords,
-  setShowPronounsTable,
+  setShowPronounsMenu,
   setShowPossessivePronouns,
   setShowQuestionnaire,
   setSelectedPractice,
