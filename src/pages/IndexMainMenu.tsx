@@ -81,6 +81,7 @@ export default function IndexMainMenu({
   setShowHebrewSlang,
   setShowRolePlay,
   setShowConnectorCorrection,
+  setShowPronounSuffixReflexive,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
