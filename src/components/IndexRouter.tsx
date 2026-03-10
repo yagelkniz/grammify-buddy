@@ -43,6 +43,7 @@ import PrepositionSuffixPractice from "@/components/PrepositionSuffixPractice";
 import HebrewSlangPractice from "@/components/HebrewSlangPractice";
 import RolePlayPractice from "@/components/RolePlayPractice";
 import ConnectorCorrectionPractice from "@/components/ConnectorCorrectionPractice";
+import PronounSuffixReflexivePractice from "@/components/PronounSuffixReflexivePractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -115,6 +116,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowRolePlay,
     showConnectorCorrection,
     setShowConnectorCorrection,
+    showPronounSuffixReflexive,
+    setShowPronounSuffixReflexive,
     resetToMainMenu,
   } = state;
 
@@ -176,6 +179,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   if (showConnectorCorrection) {
     return <ConnectorCorrectionPractice onBack={() => setShowConnectorCorrection(false)} lang={lang} />;
+  }
+
+  if (showPronounSuffixReflexive) {
+    return <PronounSuffixReflexivePractice onBack={() => setShowPronounSuffixReflexive(false)} lang={lang} />;
   }
 
   if (showPielVerb) {

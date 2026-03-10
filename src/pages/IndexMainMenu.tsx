@@ -30,6 +30,7 @@ interface IndexMainMenuProps {
   setShowHebrewSlang: (b: boolean) => void;
   setShowRolePlay: (b: boolean) => void;
   setShowConnectorCorrection: (b: boolean) => void;
+  setShowPronounSuffixReflexive: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -80,6 +81,7 @@ export default function IndexMainMenu({
   setShowHebrewSlang,
   setShowRolePlay,
   setShowConnectorCorrection,
+  setShowPronounSuffixReflexive,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -154,6 +156,13 @@ export default function IndexMainMenu({
             label={lang === "he" ? "מילות יחס + כינויים" : "Preposition Suffixes"}
             onClick={() => setShowPrepositionSuffix(true)}
             colorClass="bg-gradient-to-br from-sky-100 to-violet-100 text-sky-900 border-sky-300"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="🪞"
+            label={lang === "he" ? "כינויי יחס + רפלקסיב" : "Pronoun Suffixes + Reflexive"}
+            onClick={() => setShowPronounSuffixReflexive(true)}
+            colorClass="bg-gradient-to-br from-amber-100 to-rose-100 text-amber-900 border-amber-300"
             lang={lang}
           />
         </div>
