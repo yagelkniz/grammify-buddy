@@ -158,6 +158,13 @@ export default function IndexMainMenu({
             colorClass="bg-gradient-to-br from-sky-100 to-violet-100 text-sky-900 border-sky-300"
             lang={lang}
           />
+          <MenuItem
+            emoji="🪞"
+            label={lang === "he" ? "כינויי יחס + רפלקסיב" : "Pronoun Suffixes + Reflexive"}
+            onClick={() => setShowPronounSuffixReflexive(true)}
+            colorClass="bg-gradient-to-br from-amber-100 to-rose-100 text-amber-900 border-amber-300"
+            lang={lang}
+          />
         </div>
       </div>
 
