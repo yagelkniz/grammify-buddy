@@ -1,0 +1,50 @@
+import type { Level } from "./types";
+
+export const level4: Level = {
+  id: "level4",
+  title: "רמה 4 – משפטים מורכבים (כל הצורות)",
+  titleEn: "Level 4 – Advanced: All Forms Mixed",
+  goal: "שילוב כל הצורות (ל, ב, אצל, כמו, עצמ-) במשפטים טבעיים ומורכבים.",
+  goalEn: "Combine all forms (ל, ב, אצל, כמו, עצמ-) in natural, complex sentences.",
+  tables: [],
+  examples: [
+    { he: "היא אמרה לי שאצלה בעבודה יש מישהו כמוני.", en: "She told me that at her workplace there's someone like me." },
+    { he: "אני מאמין בעצמי ולא תלוי בהם.", en: "I believe in myself and don't depend on them." },
+    { he: "בוא אצלנו, יש לנו מקום בשבילך.", en: "Come to our place, we have room for you." },
+    { he: "הוא עשה הכול בעצמו כי אין כמוהו.", en: "He did everything himself because there's no one like him." },
+    { he: "תגיד להם שאני אבוא אצלם מחר.", en: "Tell them I'll come to their place tomorrow." },
+    { he: "יש בך כוח שאתה לא מכיר בעצמך.", en: "There's strength in you that you don't recognize in yourself." },
+    { he: "אצלנו בבית כולם עושים הכול בעצמם.", en: "At our house everyone does everything by themselves." },
+    { he: "אין לה מישהו כמוך שמאמין בה.", en: "She doesn't have someone like you who believes in her." },
+  ],
+  fillIn: [
+    { id: "l4f1", sentence: "תגיד ___ שאני מאמין בהם.", translation: "Tell them I believe in them.", options: ["להם", "לנו", "לכם", "לי"], correct: "להם" },
+    { id: "l4f2", sentence: "הוא עשה את זה ___, בלי עזרה.", translation: "He did it himself, without help.", options: ["בעצמו", "בעצמי", "בעצמך", "בעצמם"], correct: "בעצמו" },
+    { id: "l4f3", sentence: "בוא ___, יש לי משהו בשבילך.", translation: "Come to my place, I have something for you.", options: ["אצלי", "אצלו", "אצלנו", "אצלך"], correct: "אצלי" },
+    { id: "l4f4", sentence: "אין ___ בעולם הזה.", translation: "There's no one like you in this world.", options: ["כמוך", "כמוני", "כמוהו", "כמוה"], correct: "כמוך" },
+    { id: "l4f5", sentence: "אני תלוי רק ___.", translation: "I depend only on myself.", options: ["בעצמי", "בעצמך", "בעצמו", "בי"], correct: "בעצמי" },
+    { id: "l4f6", sentence: "אנחנו צריכים לפתור את הבעיה ___.", translation: "We need to solve the problem ourselves.", options: ["בעצמנו", "בעצמם", "בעצמכם", "בעצמי"], correct: "בעצמנו" },
+    { id: "l4f7", sentence: "היא רוצה מישהו ___.", translation: "She wants someone like me.", options: ["כמוני", "כמוך", "כמוהו", "כמוה"], correct: "כמוני" },
+    { id: "l4f8", sentence: "הילדים נשארו ___ כשנסענו.", translation: "The kids stayed at her place when we traveled.", options: ["אצלה", "אצלנו", "אצלם", "אצלך"], correct: "אצלה" },
+  ],
+  translateEnHe: [
+    { id: "l4te1", source: "Tell her I believe in myself.", answer: "תגיד לה שאני מאמין בעצמי.", direction: "en-he" },
+    { id: "l4te2", source: "Come to our place, we have food for you.", answer: "בוא אצלנו, יש לנו אוכל בשבילך.", direction: "en-he" },
+    { id: "l4te3", source: "No one is like them – they did it themselves.", answer: "אין כמוהם – הם עשו את זה בעצמם.", direction: "en-he" },
+    { id: "l4te4", source: "I depend only on myself.", answer: "אני תלוי רק בעצמי.", direction: "en-he" },
+    { id: "l4te5", source: "There's no one like her in the world.", answer: "אין כמוה בעולם.", direction: "en-he" },
+    { id: "l4te6", source: "We solved it ourselves.", answer: "פתרנו את זה בעצמנו.", direction: "en-he" },
+  ],
+  translateHeEn: [
+    { id: "l4th1", source: "אני מאמין בעצמי ולא תלוי באף אחד.", answer: "I believe in myself and don't depend on anyone.", direction: "he-en" },
+    { id: "l4th2", source: "אצלנו בבית כולם עושים הכול בעצמם.", answer: "At our house everyone does everything by themselves.", direction: "he-en" },
+    { id: "l4th3", source: "אין לי מישהו כמוך.", answer: "I don't have anyone like you.", direction: "he-en" },
+    { id: "l4th4", source: "הוא אמר להם לפתור את זה בעצמם.", answer: "He told them to solve it themselves.", direction: "he-en" },
+  ],
+  conversation: [
+    { he: "מה הדבר הכי מאתגר שעשית בעצמך?", en: "What's the most challenging thing you've done by yourself?" },
+    { he: "אצל מי את/ה מרגיש/ה הכי בבית? למה?", en: "At whose place do you feel most at home? Why?" },
+    { he: "יש מישהו שאת/ה מאמין/ה בו לגמרי? ספר/י.", en: "Is there someone you completely believe in? Tell about it." },
+    { he: "מה ההבדל בין לעשות משהו בעצמך לבין לעשות עם אחרים?", en: "What's the difference between doing something yourself vs. with others?" },
+  ],
+};
