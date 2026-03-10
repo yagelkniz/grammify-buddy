@@ -43,6 +43,7 @@ import PrepositionSuffixPractice from "@/components/PrepositionSuffixPractice";
 import HebrewSlangPractice from "@/components/HebrewSlangPractice";
 import RolePlayPractice from "@/components/RolePlayPractice";
 import ConnectorCorrectionPractice from "@/components/ConnectorCorrectionPractice";
+import PronounSuffixReflexivePractice from "@/components/PronounSuffixReflexivePractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
