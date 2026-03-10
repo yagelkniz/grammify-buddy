@@ -30,6 +30,7 @@ interface IndexMainMenuProps {
   setShowHebrewSlang: (b: boolean) => void;
   setShowRolePlay: (b: boolean) => void;
   setShowConnectorCorrection: (b: boolean) => void;
+  setShowPronounSuffixReflexive: (b: boolean) => void;
 }
 
 interface MenuItemProps {
