@@ -71,6 +71,7 @@ export function useIndexState() {
     setShowHebrewSlang(false);
     setShowRolePlay(false);
     setShowConnectorCorrection(false);
+    setShowPronounSuffixReflexive(false);
   };
 
   return {
