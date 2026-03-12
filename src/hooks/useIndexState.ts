@@ -36,6 +36,7 @@ export function useIndexState() {
   const [showRolePlay, setShowRolePlay] = useState(false);
   const [showConnectorCorrection, setShowConnectorCorrection] = useState(false);
   const [showPronounSuffixReflexive, setShowPronounSuffixReflexive] = useState(false);
+  const [showBeginnerHebrew, setShowBeginnerHebrew] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -72,6 +73,7 @@ export function useIndexState() {
     setShowRolePlay(false);
     setShowConnectorCorrection(false);
     setShowPronounSuffixReflexive(false);
+    setShowBeginnerHebrew(false);
   };
 
   return {
@@ -145,6 +147,8 @@ export function useIndexState() {
     setShowConnectorCorrection,
     showPronounSuffixReflexive,
     setShowPronounSuffixReflexive,
+    showBeginnerHebrew,
+    setShowBeginnerHebrew,
     resetToMainMenu,
   };
 }

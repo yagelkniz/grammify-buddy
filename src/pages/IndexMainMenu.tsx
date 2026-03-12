@@ -31,6 +31,7 @@ interface IndexMainMenuProps {
   setShowRolePlay: (b: boolean) => void;
   setShowConnectorCorrection: (b: boolean) => void;
   setShowPronounSuffixReflexive: (b: boolean) => void;
+  setShowBeginnerHebrew: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -82,6 +83,7 @@ export default function IndexMainMenu({
   setShowRolePlay,
   setShowConnectorCorrection,
   setShowPronounSuffixReflexive,
+  setShowBeginnerHebrew,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -109,6 +111,13 @@ export default function IndexMainMenu({
           {lang === "he" ? "📖 לימוד בסיסי" : "📖 Basic Learning"}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <MenuItem
+            emoji="🌱"
+            label={lang === "he" ? "עברית למתחילים" : "Beginner Hebrew"}
+            onClick={() => setShowBeginnerHebrew(true)}
+            colorClass="bg-lime-100 text-lime-900 border-lime-300"
+            lang={lang}
+          />
           <MenuItem
             emoji="📚"
             label={lang === "he" ? 'הפועל "להיות"' : 'Verb "To Be"'}

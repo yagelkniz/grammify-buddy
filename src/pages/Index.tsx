@@ -37,7 +37,8 @@ export default function Index() {
     state.showPrepositionSuffix ||
     state.showHebrewSlang ||
     state.showRolePlay ||
-    state.showConnectorCorrection;
+    state.showConnectorCorrection ||
+    state.showBeginnerHebrew;
 
   // Show Verb Patterns Menu
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
@@ -85,6 +86,7 @@ export default function Index() {
         setShowRolePlay={state.setShowRolePlay}
         setShowConnectorCorrection={state.setShowConnectorCorrection}
         setShowPronounSuffixReflexive={state.setShowPronounSuffixReflexive}
+        setShowBeginnerHebrew={state.setShowBeginnerHebrew}
       />
     </div>
   );
