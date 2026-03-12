@@ -188,6 +188,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     return <PronounSuffixReflexivePractice onBack={() => setShowPronounSuffixReflexive(false)} lang={lang} />;
   }
 
+  if (showBeginnerHebrew) {
+    return <BeginnerHebrewPractice onBack={() => setShowBeginnerHebrew(false)} />;
+  }
+
   if (showPielVerb) {
     return <PielVerbPractice onBack={resetToMainMenu} />;
   }

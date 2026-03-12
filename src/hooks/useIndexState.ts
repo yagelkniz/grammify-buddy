@@ -147,6 +147,8 @@ export function useIndexState() {
     setShowConnectorCorrection,
     showPronounSuffixReflexive,
     setShowPronounSuffixReflexive,
+    showBeginnerHebrew,
+    setShowBeginnerHebrew,
     resetToMainMenu,
   };
 }

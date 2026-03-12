@@ -37,7 +37,8 @@ export default function Index() {
     state.showPrepositionSuffix ||
     state.showHebrewSlang ||
     state.showRolePlay ||
-    state.showConnectorCorrection;
+    state.showConnectorCorrection ||
+    state.showBeginnerHebrew;
 
   // Show Verb Patterns Menu
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
