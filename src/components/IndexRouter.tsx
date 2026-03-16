@@ -45,6 +45,19 @@ import RolePlayPractice from "@/components/RolePlayPractice";
 import ConnectorCorrectionPractice from "@/components/ConnectorCorrectionPractice";
 import PronounSuffixReflexivePractice from "@/components/PronounSuffixReflexivePractice";
 import BeginnerHebrewPractice from "@/components/BeginnerHebrewPractice";
+// New exercise imports
+import NumbersPractice from "@/components/NumbersPractice";
+import MonthsPractice from "@/components/MonthsPractice";
+import AdjectivesPractice from "@/components/AdjectivesPractice";
+import CityVocabPractice from "@/components/CityVocabPractice";
+import ShoppingPractice from "@/components/ShoppingPractice";
+import FamilyPractice from "@/components/FamilyPractice";
+import QuickQuizPractice from "@/components/QuickQuizPractice";
+import GenderFlipPractice from "@/components/GenderFlipPractice";
+import SongLyricsPractice from "@/components/SongLyricsPractice";
+import HospitalReadingPractice from "@/components/HospitalReadingPractice";
+import AirportReadingPractice from "@/components/AirportReadingPractice";
+import NewsReadingPractice from "@/components/NewsReadingPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -53,208 +66,118 @@ interface IndexRouterProps {
 
 export default function IndexRouter({ state }: IndexRouterProps) {
   const {
-    lang,
-    setLang,
-    showLinkingWords,
-    setShowLinkingWords,
-    showLinkingWordsPractice,
-    setShowLinkingWordsPractice,
-    showPronounsTable,
-    setShowPronounsTable,
-    showPronounsMenu,
-    setShowPronounsMenu,
-    showPronounsPractice,
-    setShowPronounsPractice,
-    showPossessivePronouns,
-    setShowPossessivePronouns,
-    showPossessivePronounsMenu,
-    setShowPossessivePronounsMenu,
-    showPossessivePronounsPractice,
-    setShowPossessivePronounsPractice,
-    showEverydayHebrew,
-    setShowEverydayHebrew,
-    everydayHebrewCategory,
-    setEverydayHebrewCategory,
+    lang, setLang,
+    showLinkingWords, setShowLinkingWords,
+    showLinkingWordsPractice, setShowLinkingWordsPractice,
+    showPronounsTable, setShowPronounsTable,
+    showPronounsMenu, setShowPronounsMenu,
+    showPronounsPractice, setShowPronounsPractice,
+    showPossessivePronouns, setShowPossessivePronouns,
+    showPossessivePronounsMenu, setShowPossessivePronounsMenu,
+    showPossessivePronounsPractice, setShowPossessivePronounsPractice,
+    showEverydayHebrew, setShowEverydayHebrew,
+    everydayHebrewCategory, setEverydayHebrewCategory,
     showQuestionnaire,
-    selectedPractice,
-    setSelectedPractice,
-    verbTense,
-    setVerbTense,
+    selectedPractice, setSelectedPractice,
+    verbTense, setVerbTense,
     selectedTextComp,
-    showVerbToBePresentation,
-    setShowVerbToBePresentation,
-    showDaysAndPlacesVocab,
-    setShowDaysAndPlacesVocab,
-    showQuestionWords,
-    setShowQuestionWords,
-    showOddOneOut,
-    setShowOddOneOut,
-    showEmotions,
-    setShowEmotions,
-    showLinkingWordsLevels,
-    setShowLinkingWordsLevels,
-    showVerbMemoryGame,
-    setShowVerbMemoryGame,
-    showColorsAndFruits,
-    setShowColorsAndFruits,
+    showVerbToBePresentation, setShowVerbToBePresentation,
+    showDaysAndPlacesVocab, setShowDaysAndPlacesVocab,
+    showQuestionWords, setShowQuestionWords,
+    showOddOneOut, setShowOddOneOut,
+    showEmotions, setShowEmotions,
+    showLinkingWordsLevels, setShowLinkingWordsLevels,
+    showVerbMemoryGame, setShowVerbMemoryGame,
+    showColorsAndFruits, setShowColorsAndFruits,
     showHifilVerb,
-    setShowHifilVerb,
     showPielVerb,
-    setShowPielVerb,
-    selectedVerbPattern,
-    setSelectedVerbPattern,
-    showListeningPractice,
-    setShowListeningPractice,
-    showConversationRoulette,
-    setShowConversationRoulette,
-    showSentenceOrder,
-    setShowSentenceOrder,
-    showPrepositionSuffix,
-    setShowPrepositionSuffix,
-    showHebrewSlang,
-    setShowHebrewSlang,
-    showRolePlay,
-    setShowRolePlay,
-    showConnectorCorrection,
-    setShowConnectorCorrection,
-    showPronounSuffixReflexive,
-    setShowPronounSuffixReflexive,
-    showBeginnerHebrew,
-    setShowBeginnerHebrew,
+    selectedVerbPattern, setSelectedVerbPattern,
+    showListeningPractice, setShowListeningPractice,
+    showConversationRoulette, setShowConversationRoulette,
+    showSentenceOrder, setShowSentenceOrder,
+    showPrepositionSuffix, setShowPrepositionSuffix,
+    showHebrewSlang, setShowHebrewSlang,
+    showRolePlay, setShowRolePlay,
+    showConnectorCorrection, setShowConnectorCorrection,
+    showPronounSuffixReflexive, setShowPronounSuffixReflexive,
+    showBeginnerHebrew, setShowBeginnerHebrew,
+    showNumbers, setShowNumbers,
+    showMonths, setShowMonths,
+    showAdjectives, setShowAdjectives,
+    showCityVocab, setShowCityVocab,
+    showShopping, setShowShopping,
+    showFamily, setShowFamily,
+    showQuickQuiz, setShowQuickQuiz,
+    showGenderFlip, setShowGenderFlip,
+    showSongLyrics, setShowSongLyrics,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
 
+  // New exercises
+  if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;
+  if (showMonths) return <MonthsPractice onBack={() => setShowMonths(false)} lang={lang} />;
+  if (showAdjectives) return <AdjectivesPractice onBack={() => setShowAdjectives(false)} lang={lang} />;
+  if (showCityVocab) return <CityVocabPractice onBack={() => setShowCityVocab(false)} lang={lang} />;
+  if (showShopping) return <ShoppingPractice onBack={() => setShowShopping(false)} lang={lang} />;
+  if (showFamily) return <FamilyPractice onBack={() => setShowFamily(false)} lang={lang} />;
+  if (showQuickQuiz) return <QuickQuizPractice onBack={() => setShowQuickQuiz(false)} lang={lang} />;
+  if (showGenderFlip) return <GenderFlipPractice onBack={() => setShowGenderFlip(false)} lang={lang} />;
+  if (showSongLyrics) return <SongLyricsPractice onBack={() => setShowSongLyrics(false)} lang={lang} />;
+
+  // New reading comprehension
+  if (selectedTextComp === "hospital") return <HospitalReadingPractice onBack={resetToMainMenu} lang={lang} />;
+  if (selectedTextComp === "airport") return <AirportReadingPractice onBack={resetToMainMenu} lang={lang} />;
+  if (selectedTextComp === "news") return <NewsReadingPractice onBack={resetToMainMenu} lang={lang} />;
+
   // Handle verb pattern selection with levels
   if (selectedVerbPattern) {
     const { pattern, level } = selectedVerbPattern;
-    
-    if (pattern === "binyan-recognition") {
-      return <BinyanRecognitionPractice onBack={() => setSelectedVerbPattern(null)} />;
-    }
-    if (pattern === "hifil") {
-      return <HifilVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
-    }
-    if (pattern === "piel") {
-      return <PielVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
-    }
+    if (pattern === "binyan-recognition") return <BinyanRecognitionPractice onBack={() => setSelectedVerbPattern(null)} />;
+    if (pattern === "hifil") return <HifilVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
+    if (pattern === "piel") return <PielVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
     if (pattern === "paal") {
-      // Redirect to the verb tense selector for Pa'al
       return <VerbTenseSelector lang={lang} onBack={() => setSelectedVerbPattern(null)} onSelectTense={(tense) => {
         setSelectedVerbPattern(null);
         setVerbTense(tense);
         setSelectedPractice("verb");
       }} />;
     }
-    // For unavailable patterns, go back
     setSelectedVerbPattern(null);
     return null;
   }
 
-  if (showHifilVerb) {
-    return <HifilVerbPractice onBack={resetToMainMenu} />;
-  }
-
-  if (showListeningPractice) {
-    return <ListeningPractice onBack={() => setShowListeningPractice(false)} lang={lang} />;
-  }
-
-  if (showConversationRoulette) {
-    return <ConversationRouletteStandalone onBack={() => setShowConversationRoulette(false)} lang={lang} />;
-  }
-
-  if (showSentenceOrder) {
-    return <SentenceOrderPractice onBack={() => setShowSentenceOrder(false)} lang={lang} />;
-  }
-
-  if (showPrepositionSuffix) {
-    return <PrepositionSuffixPractice onBack={() => setShowPrepositionSuffix(false)} lang={lang} />;
-  }
-
-  if (showHebrewSlang) {
-    return <HebrewSlangPractice onBack={() => setShowHebrewSlang(false)} lang={lang} />;
-  }
-
-  if (showRolePlay) {
-    return <RolePlayPractice onBack={() => setShowRolePlay(false)} lang={lang} />;
-  }
-
-  if (showConnectorCorrection) {
-    return <ConnectorCorrectionPractice onBack={() => setShowConnectorCorrection(false)} lang={lang} />;
-  }
-
-  if (showPronounSuffixReflexive) {
-    return <PronounSuffixReflexivePractice onBack={() => setShowPronounSuffixReflexive(false)} lang={lang} />;
-  }
-
-  if (showBeginnerHebrew) {
-    return <BeginnerHebrewPractice onBack={() => setShowBeginnerHebrew(false)} />;
-  }
-
-  if (showPielVerb) {
-    return <PielVerbPractice onBack={resetToMainMenu} />;
-  }
-
-  if (showColorsAndFruits) {
-    return <ColorsAndFruitsPractice onBack={() => setShowColorsAndFruits(false)} />;
-  }
-
-  if (showVerbMemoryGame) {
-    return <VerbMemoryGame onBack={() => setShowVerbMemoryGame(false)} />;
-  }
-
-  if (showLinkingWordsLevels) {
-    return <LinkingWordsLevelsPractice onBack={() => setShowLinkingWordsLevels(false)} />;
-  }
-
-  if (showEmotions) {
-    return <EmotionsPractice onBack={() => setShowEmotions(false)} />;
-  }
-
-  if (showOddOneOut) {
-    return <OddOneOutGame onBack={() => setShowOddOneOut(false)} />;
-  }
-
-  if (showQuestionWords) {
-    return <QuestionWordsPractice onBack={() => setShowQuestionWords(false)} />;
-  }
-
-  if (showDaysAndPlacesVocab) {
-    return <DaysAndPlacesPractice onBack={() => setShowDaysAndPlacesVocab(false)} lang={lang} />;
-  }
-
-  if (showVerbToBePresentation) {
-    return <VerbToBePresentation onBack={() => setShowVerbToBePresentation(false)} />;
-  }
-
-  if (showLinkingWordsPractice) {
-    return <LinkingWordsPractice lang={lang} onBack={() => setShowLinkingWordsPractice(false)} />;
-  }
+  if (showHifilVerb) return <HifilVerbPractice onBack={resetToMainMenu} />;
+  if (showListeningPractice) return <ListeningPractice onBack={() => setShowListeningPractice(false)} lang={lang} />;
+  if (showConversationRoulette) return <ConversationRouletteStandalone onBack={() => setShowConversationRoulette(false)} lang={lang} />;
+  if (showSentenceOrder) return <SentenceOrderPractice onBack={() => setShowSentenceOrder(false)} lang={lang} />;
+  if (showPrepositionSuffix) return <PrepositionSuffixPractice onBack={() => setShowPrepositionSuffix(false)} lang={lang} />;
+  if (showHebrewSlang) return <HebrewSlangPractice onBack={() => setShowHebrewSlang(false)} lang={lang} />;
+  if (showRolePlay) return <RolePlayPractice onBack={() => setShowRolePlay(false)} lang={lang} />;
+  if (showConnectorCorrection) return <ConnectorCorrectionPractice onBack={() => setShowConnectorCorrection(false)} lang={lang} />;
+  if (showPronounSuffixReflexive) return <PronounSuffixReflexivePractice onBack={() => setShowPronounSuffixReflexive(false)} lang={lang} />;
+  if (showBeginnerHebrew) return <BeginnerHebrewPractice onBack={() => setShowBeginnerHebrew(false)} />;
+  if (showPielVerb) return <PielVerbPractice onBack={resetToMainMenu} />;
+  if (showColorsAndFruits) return <ColorsAndFruitsPractice onBack={() => setShowColorsAndFruits(false)} />;
+  if (showVerbMemoryGame) return <VerbMemoryGame onBack={() => setShowVerbMemoryGame(false)} />;
+  if (showLinkingWordsLevels) return <LinkingWordsLevelsPractice onBack={() => setShowLinkingWordsLevels(false)} />;
+  if (showEmotions) return <EmotionsPractice onBack={() => setShowEmotions(false)} />;
+  if (showOddOneOut) return <OddOneOutGame onBack={() => setShowOddOneOut(false)} />;
+  if (showQuestionWords) return <QuestionWordsPractice onBack={() => setShowQuestionWords(false)} />;
+  if (showDaysAndPlacesVocab) return <DaysAndPlacesPractice onBack={() => setShowDaysAndPlacesVocab(false)} lang={lang} />;
+  if (showVerbToBePresentation) return <VerbToBePresentation onBack={() => setShowVerbToBePresentation(false)} />;
+  if (showLinkingWordsPractice) return <LinkingWordsPractice lang={lang} onBack={() => setShowLinkingWordsPractice(false)} />;
 
   if (showLinkingWords) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-6">
-            <Button variant="ghost" onClick={resetToMainMenu}>
-              ⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}
-            </Button>
+            <Button variant="ghost" onClick={resetToMainMenu}>⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}</Button>
             <div className="flex gap-2">
-              <Button 
-                variant="outline"
-                size="sm"
-                onClick={() => setLang(lang === "he" ? "en" : "he")}
-              >
-                {lang === "he" ? "English" : "עברית"}
-              </Button>
-              <Button 
-                variant="default" 
-                onClick={() => setShowLinkingWordsPractice(true)}
-                className="bg-green-600 hover:bg-green-700"
-              >
-                🏃‍♂️ {t("תרגול מילות קישור", "Linking Words Practice")}
-              </Button>
+              <Button variant="outline" size="sm" onClick={() => setLang(lang === "he" ? "en" : "he")}>{lang === "he" ? "English" : "עברית"}</Button>
+              <Button variant="default" onClick={() => setShowLinkingWordsPractice(true)} className="bg-green-600 hover:bg-green-700">🏃‍♂️ {t("תרגול מילות קישור", "Linking Words Practice")}</Button>
             </div>
           </div>
           <LinkingWordsTable />
@@ -268,18 +191,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-6">
-            <Button variant="ghost" onClick={resetToMainMenu}>
-              ⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}
-            </Button>
-            <Button 
-              variant="default" 
-              onClick={() => {
-                setShowPronounsTable(false);
-                setShowPronounsMenu(true);
-              }}
-            >
-              🏃‍♂️ {t("תרגול שמות גוף", "Pronouns Practice")}
-            </Button>
+            <Button variant="ghost" onClick={resetToMainMenu}>⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}</Button>
+            <Button variant="default" onClick={() => { setShowPronounsTable(false); setShowPronounsMenu(true); }}>🏃‍♂️ {t("תרגול שמות גוף", "Pronouns Practice")}</Button>
           </div>
           <PronounsTable />
         </div>
@@ -287,37 +200,16 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     );
   }
 
-  if (showPronounsMenu) {
-    return (
-      <PronounsMenu
-        lang={lang}
-        onBack={() => {
-          setShowPronounsMenu(false);
-          setShowPronounsTable(true);
-        }}
-      />
-    );
-  }
-
-  if (showPronounsPractice) {
-    return <PronounsPractice onBack={() => setShowPronounsPractice(false)} />;
-  }
+  if (showPronounsMenu) return <PronounsMenu lang={lang} onBack={() => { setShowPronounsMenu(false); setShowPronounsTable(true); }} />;
+  if (showPronounsPractice) return <PronounsPractice onBack={() => setShowPronounsPractice(false)} />;
 
   if (showPossessivePronouns) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-6">
-            <Button variant="ghost" onClick={resetToMainMenu}>
-              ⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}
-            </Button>
-            <Button 
-              variant="default" 
-              onClick={() => setShowPossessivePronounsMenu(true)}
-              className="bg-green-600 hover:bg-green-700"
-            >
-              🏃‍♂️ {t("תרגול מילות שייכות", "Possessive Pronouns Practice")}
-            </Button>
+            <Button variant="ghost" onClick={resetToMainMenu}>⬅ {t("חזרה לתפריט הראשי", "Back to Main Menu")}</Button>
+            <Button variant="default" onClick={() => setShowPossessivePronounsMenu(true)} className="bg-green-600 hover:bg-green-700">🏃‍♂️ {t("תרגול מילות שייכות", "Possessive Pronouns Practice")}</Button>
           </div>
           <PossessivePronounsTable />
         </div>
@@ -325,103 +217,33 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     );
   }
 
-  if (showPossessivePronounsMenu) {
-    return (
-      <PossessivePronounsMenu
-        onBack={() => {
-          setShowPossessivePronounsMenu(false);
-          setShowPossessivePronouns(true);
-        }}
-      />
-    );
-  }
-
-  if (showPossessivePronounsPractice) {
-    return <PossessivePronounsPractice onBack={() => setShowPossessivePronounsPractice(false)} />;
-  }
+  if (showPossessivePronounsMenu) return <PossessivePronounsMenu onBack={() => { setShowPossessivePronounsMenu(false); setShowPossessivePronouns(true); }} />;
+  if (showPossessivePronounsPractice) return <PossessivePronounsPractice onBack={() => setShowPossessivePronounsPractice(false)} />;
 
   if (showEverydayHebrew) {
-    if (!everydayHebrewCategory) {
-      return (
-        <EverydayHebrewCategorySelect 
-          onBack={resetToMainMenu}
-          onSelect={(category: string) => setEverydayHebrewCategory(category)}
-        />
-      );
-    }
-    return (
-      <EverydayHebrewPractice 
-        category={everydayHebrewCategory as "restaurant" | "supermarket" | "transportation"}
-        onBack={() => setEverydayHebrewCategory(null)}
-      />
-    );
+    if (!everydayHebrewCategory) return <EverydayHebrewCategorySelect onBack={resetToMainMenu} onSelect={(category: string) => setEverydayHebrewCategory(category)} />;
+    return <EverydayHebrewPractice category={everydayHebrewCategory as "restaurant" | "supermarket" | "transportation"} onBack={() => setEverydayHebrewCategory(null)} />;
   }
 
-  if (selectedPractice === "household") {
-    return <HebrewHouseholdItemsPractice onBack={() => setSelectedPractice(null)} />;
-  }
+  if (selectedPractice === "household") return <HebrewHouseholdItemsPractice onBack={() => setSelectedPractice(null)} />;
 
   if (selectedPractice === "verb") {
-    if (!verbTense) {
-      return (
-        <VerbTenseSelector 
-          lang={lang}
-          onBack={() => setSelectedPractice(null)}
-          onSelectTense={setVerbTense}
-        />
-      );
-    }
-
-    if (verbTense === "present") {
-      return <PresentTenseVerbPractice onBack={resetToMainMenu} />;
-    }
-    if (verbTense === "past") {
-      return <PastTenseVerbPractice onBack={resetToMainMenu} />;
-    }
-    if (verbTense === "future") {
-      return <FutureTenseVerbPractice onBack={resetToMainMenu} />;
-    }
+    if (!verbTense) return <VerbTenseSelector lang={lang} onBack={() => setSelectedPractice(null)} onSelectTense={setVerbTense} />;
+    if (verbTense === "present") return <PresentTenseVerbPractice onBack={resetToMainMenu} />;
+    if (verbTense === "past") return <PastTenseVerbPractice onBack={resetToMainMenu} />;
+    if (verbTense === "future") return <FutureTenseVerbPractice onBack={resetToMainMenu} />;
   }
 
-  if (selectedPractice === "nounAdj") {
-    return <NounAdjectivePractice onBack={() => setSelectedPractice(null)} />;
-  }
-
-  if (showQuestionnaire) {
-    return <InterviewQuestionnaire onBack={resetToMainMenu} />;
-  }
-
-  if (selectedTextComp === "food") {
-    return <TextComprehensionFood onBack={resetToMainMenu} />;
-  }
-
-  if (selectedTextComp === "animals-easy") {
-    return <TextComprehensionAnimalsEasy onBack={resetToMainMenu} />;
-  }
-
-  if (selectedTextComp === "food-order-medium") {
-    return <TextComprehensionFoodOrderMedium onBack={resetToMainMenu} />;
-  }
-
-  if (selectedTextComp === "social-media") {
-    return <TextComprehensionSocialMedia onBack={resetToMainMenu} />;
-  }
-
-  if (selectedTextComp === "food-levels") {
-    return <TextComprehensionFoodLevels onBack={resetToMainMenu} />;
-  }
-
-  if (selectedTextComp === "countries-levels") {
-    return <TextComprehensionCountriesLevels onBack={resetToMainMenu} />;
-  }
-
-  if (selectedTextComp === "movies-series-levels") {
-    return <TextComprehensionMoviesAndSeriesLevels onBack={resetToMainMenu} />;
-  }
-
-  if (selectedTextComp === "places-food-easy") {
-    return <TextComprehensionPlacesFoodEasy onBack={resetToMainMenu} />;
-  }
+  if (selectedPractice === "nounAdj") return <NounAdjectivePractice onBack={() => setSelectedPractice(null)} />;
+  if (showQuestionnaire) return <InterviewQuestionnaire onBack={resetToMainMenu} />;
+  if (selectedTextComp === "food") return <TextComprehensionFood onBack={resetToMainMenu} />;
+  if (selectedTextComp === "animals-easy") return <TextComprehensionAnimalsEasy onBack={resetToMainMenu} />;
+  if (selectedTextComp === "food-order-medium") return <TextComprehensionFoodOrderMedium onBack={resetToMainMenu} />;
+  if (selectedTextComp === "social-media") return <TextComprehensionSocialMedia onBack={resetToMainMenu} />;
+  if (selectedTextComp === "food-levels") return <TextComprehensionFoodLevels onBack={resetToMainMenu} />;
+  if (selectedTextComp === "countries-levels") return <TextComprehensionCountriesLevels onBack={resetToMainMenu} />;
+  if (selectedTextComp === "movies-series-levels") return <TextComprehensionMoviesAndSeriesLevels onBack={resetToMainMenu} />;
+  if (selectedTextComp === "places-food-easy") return <TextComprehensionPlacesFoodEasy onBack={resetToMainMenu} />;
 
   return null;
 }
