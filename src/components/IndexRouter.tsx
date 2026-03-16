@@ -58,6 +58,7 @@ import SongLyricsPractice from "@/components/SongLyricsPractice";
 import HospitalReadingPractice from "@/components/HospitalReadingPractice";
 import AirportReadingPractice from "@/components/AirportReadingPractice";
 import NewsReadingPractice from "@/components/NewsReadingPractice";
+import AlphabetCourse from "@/components/AlphabetCourse";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
