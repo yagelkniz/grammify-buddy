@@ -58,6 +58,7 @@ import SongLyricsPractice from "@/components/SongLyricsPractice";
 import HospitalReadingPractice from "@/components/HospitalReadingPractice";
 import AirportReadingPractice from "@/components/AirportReadingPractice";
 import NewsReadingPractice from "@/components/NewsReadingPractice";
+import AlphabetCourse from "@/components/AlphabetCourse";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -110,10 +111,14 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showQuickQuiz, setShowQuickQuiz,
     showGenderFlip, setShowGenderFlip,
     showSongLyrics, setShowSongLyrics,
+    showAlphabetCourse, setShowAlphabetCourse,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  // Alphabet course
+  if (showAlphabetCourse) return <AlphabetCourse onBack={() => setShowAlphabetCourse(false)} />;
 
   // New exercises
   if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;

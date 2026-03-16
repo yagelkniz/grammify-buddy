@@ -47,7 +47,8 @@ export default function Index() {
     state.showFamily ||
     state.showQuickQuiz ||
     state.showGenderFlip ||
-    state.showSongLyrics;
+    state.showSongLyrics ||
+    state.showAlphabetCourse;
 
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
     return (
@@ -104,6 +105,7 @@ export default function Index() {
         setShowQuickQuiz={state.setShowQuickQuiz}
         setShowGenderFlip={state.setShowGenderFlip}
         setShowSongLyrics={state.setShowSongLyrics}
+        setShowAlphabetCourse={state.setShowAlphabetCourse}
       />
     </div>
   );

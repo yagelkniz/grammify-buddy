@@ -47,6 +47,7 @@ export function useIndexState() {
   const [showQuickQuiz, setShowQuickQuiz] = useState(false);
   const [showGenderFlip, setShowGenderFlip] = useState(false);
   const [showSongLyrics, setShowSongLyrics] = useState(false);
+  const [showAlphabetCourse, setShowAlphabetCourse] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -94,6 +95,7 @@ export function useIndexState() {
     setShowQuickQuiz(false);
     setShowGenderFlip(false);
     setShowSongLyrics(false);
+    setShowAlphabetCourse(false);
   };
 
   return {
@@ -143,6 +145,7 @@ export function useIndexState() {
     showQuickQuiz, setShowQuickQuiz,
     showGenderFlip, setShowGenderFlip,
     showSongLyrics, setShowSongLyrics,
+    showAlphabetCourse, setShowAlphabetCourse,
     resetToMainMenu,
   };
 }
