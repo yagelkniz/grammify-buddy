@@ -145,6 +145,7 @@ export function useIndexState() {
     showQuickQuiz, setShowQuickQuiz,
     showGenderFlip, setShowGenderFlip,
     showSongLyrics, setShowSongLyrics,
+    showAlphabetCourse, setShowAlphabetCourse,
     resetToMainMenu,
   };
 }
