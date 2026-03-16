@@ -47,6 +47,7 @@ export function useIndexState() {
   const [showQuickQuiz, setShowQuickQuiz] = useState(false);
   const [showGenderFlip, setShowGenderFlip] = useState(false);
   const [showSongLyrics, setShowSongLyrics] = useState(false);
+  const [showAlphabetCourse, setShowAlphabetCourse] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
