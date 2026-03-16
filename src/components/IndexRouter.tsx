@@ -111,6 +111,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showQuickQuiz, setShowQuickQuiz,
     showGenderFlip, setShowGenderFlip,
     showSongLyrics, setShowSongLyrics,
+    showAlphabetCourse, setShowAlphabetCourse,
     resetToMainMenu,
   } = state;
 
