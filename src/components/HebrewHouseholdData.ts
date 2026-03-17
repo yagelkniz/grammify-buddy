@@ -22,7 +22,7 @@ export const householdItems: HouseholdItem[] = [
   { hebrew: "מדף", transliteration: "madaf", english: "shelf", category: "home" },
 
   // In the Kitchen (במטבח)
-  { hebrew: "צלחת", transliteration: "tzalach", english: "plate", category: "kitchen" },
+  { hebrew: "צלחת", transliteration: "tzalachat", english: "plate", category: "kitchen" },
   { hebrew: "כוס", transliteration: "kos", english: "cup", category: "kitchen" },
   { hebrew: "מזלג", transliteration: "mazleg", english: "fork", category: "kitchen" },
   { hebrew: "סכין", transliteration: "sakin", english: "knife", category: "kitchen" },
