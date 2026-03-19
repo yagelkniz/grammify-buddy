@@ -166,7 +166,7 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
       exampleEn: "was dressed, was played, was invited",
       emoji: "📦",
       colorClass: "bg-gray-50 border-gray-200",
-      available: false,
+      available: true,
     },
     {
       id: "pual",
