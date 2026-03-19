@@ -142,7 +142,7 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
       exampleEn: "to get dressed, to wash oneself, to get organized",
       emoji: "🪞",
       colorClass: "bg-teal-50 border-teal-200",
-      available: false,
+      available: true,
     },
     {
       id: "nifal",
