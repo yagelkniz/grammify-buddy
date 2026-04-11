@@ -54,14 +54,27 @@ interface MenuItemProps {
   onClick: () => void;
   colorClass: string;
   lang: "he" | "en";
+  difficulty?: "beginner" | "intermediate" | "advanced";
 }
 
-function MenuItem({ emoji, label, onClick, colorClass, lang }: MenuItemProps) {
+function MenuItem({ emoji, label, onClick, colorClass, lang, difficulty }: MenuItemProps) {
+  const diffLabel = difficulty === "beginner" ? (lang === "he" ? "מתחיל" : "Beginner")
+    : difficulty === "intermediate" ? (lang === "he" ? "בינוני" : "Intermediate")
+    : difficulty === "advanced" ? (lang === "he" ? "מתקדם" : "Advanced") : null;
+  const diffColor = difficulty === "beginner" ? "bg-green-200 text-green-800"
+    : difficulty === "intermediate" ? "bg-yellow-200 text-yellow-800"
+    : difficulty === "advanced" ? "bg-red-200 text-red-800" : "";
+
   return (
     <button
-      className={`flex flex-col items-center justify-center gap-2 p-4 font-bold text-base rounded-xl border-2 shadow hover:scale-105 transition-transform focus:outline-none ${colorClass}`}
+      className={`relative flex flex-col items-center justify-center gap-2 p-4 font-bold text-base rounded-xl border-2 shadow hover:scale-105 transition-transform focus:outline-none ${colorClass}`}
       onClick={onClick}
     >
+      {diffLabel && (
+        <span className={`absolute top-1 left-1 text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${diffColor}`}>
+          {diffLabel}
+        </span>
+      )}
       <span className="text-2xl">{emoji}</span>
       <span className="text-center leading-tight text-sm" dir={lang === "he" ? "rtl" : "ltr"}>
         {label}
