@@ -172,7 +172,6 @@ export default function IndexRouter({ state }: IndexRouterProps) {
         setSelectedPractice("verb");
       }} />;
     }
-    setSelectedVerbPattern(null);
     return null;
   }
 

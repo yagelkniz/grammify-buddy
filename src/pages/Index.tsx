@@ -48,7 +48,13 @@ export default function Index() {
     state.showQuickQuiz ||
     state.showGenderFlip ||
     state.showSongLyrics ||
-    state.showAlphabetCourse;
+    state.showAlphabetCourse ||
+    // Vocabulary topics
+    state.showPronounSuffixReflexive ||
+    state.showProfessions ||
+    state.showFoodDrinks ||
+    state.showWeather ||
+    state.showBodyHealth;
 
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
     return (
