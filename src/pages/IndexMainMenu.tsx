@@ -46,6 +46,9 @@ interface IndexMainMenuProps {
   setShowFoodDrinks: (b: boolean) => void;
   setShowWeather: (b: boolean) => void;
   setShowBodyHealth: (b: boolean) => void;
+  setShowDialogueFlashcards: (b: boolean) => void;
+  setShowOrdinalNumbers: (b: boolean) => void;
+  setShowBinyanimInAction: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -129,6 +132,7 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
           <MenuItem emoji="🔤" label={lang === "he" ? "מילות יחס + כינויים" : "Preposition Suffixes"} onClick={() => props.setShowPrepositionSuffix(true)} colorClass="bg-gradient-to-br from-sky-100 to-violet-100 text-sky-900 border-sky-300" lang={lang} difficulty="intermediate" />
           <MenuItem emoji="🪞" label={lang === "he" ? "כינויי יחס + רפלקסיב" : "Pronoun Suffixes + Reflexive"} onClick={() => props.setShowPronounSuffixReflexive(true)} colorClass="bg-gradient-to-br from-amber-100 to-rose-100 text-amber-900 border-amber-300" lang={lang} difficulty="advanced" />
           <MenuItem emoji="🔢" label={lang === "he" ? "מספרים בעברית" : "Hebrew Numbers"} onClick={() => props.setShowNumbers(true)} colorClass="bg-blue-100 text-blue-900 border-blue-300" lang={lang} difficulty="beginner" />
+          <MenuItem emoji="🥇" label={lang === "he" ? "מספרים סודרים" : "Ordinal Numbers"} onClick={() => props.setShowOrdinalNumbers(true)} colorClass="bg-blue-100 text-blue-900 border-blue-400" lang={lang} difficulty="intermediate" />
           <MenuItem emoji="🗓️" label={lang === "he" ? "חודשי השנה" : "Months of the Year"} onClick={() => props.setShowMonths(true)} colorClass="bg-cyan-100 text-cyan-900 border-cyan-300" lang={lang} difficulty="beginner" />
           <MenuItem emoji="🌈" label={lang === "he" ? "תארים נפוצים" : "Common Adjectives"} onClick={() => props.setShowAdjectives(true)} colorClass="bg-gradient-to-br from-yellow-100 to-pink-100 text-yellow-900 border-yellow-300" lang={lang} difficulty="beginner" />
         </div>
@@ -176,6 +180,8 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
           <MenuItem emoji="⚡" label={lang === "he" ? "מבחן מהיר" : "Quick Quiz"} onClick={() => props.setShowQuickQuiz(true)} colorClass="bg-gradient-to-br from-red-100 to-yellow-100 text-red-900 border-red-300" lang={lang} />
           <MenuItem emoji="🔄" label={lang === "he" ? "הפוך את המשפט" : "Gender Flip"} onClick={() => props.setShowGenderFlip(true)} colorClass="bg-gradient-to-br from-blue-100 to-pink-100 text-blue-900 border-blue-300" lang={lang} />
           <MenuItem emoji="🎵" label={lang === "he" ? "פזמון קצר" : "Song Lyrics"} onClick={() => props.setShowSongLyrics(true)} colorClass="bg-gradient-to-br from-violet-100 to-pink-100 text-violet-900 border-violet-300" lang={lang} />
+          <MenuItem emoji="🗨️" label={lang === "he" ? "כרטיסיות שיחה" : "Dialogue Flashcards"} onClick={() => props.setShowDialogueFlashcards(true)} colorClass="bg-gradient-to-br from-orange-100 to-rose-100 text-orange-900 border-orange-300" lang={lang} difficulty="intermediate" />
+          <MenuItem emoji="🔄" label={lang === "he" ? "בניינים בפעולה" : "Binyanim in Action"} onClick={() => props.setShowBinyanimInAction(true)} colorClass="bg-gradient-to-br from-amber-100 to-purple-100 text-purple-900 border-purple-300" lang={lang} difficulty="advanced" />
         </div>
       </div>
 
