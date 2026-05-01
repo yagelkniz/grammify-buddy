@@ -53,6 +53,10 @@ export function useIndexState() {
   const [showFoodDrinks, setShowFoodDrinks] = useState(false);
   const [showWeather, setShowWeather] = useState(false);
   const [showBodyHealth, setShowBodyHealth] = useState(false);
+  // New advanced exercises
+  const [showDialogueFlashcards, setShowDialogueFlashcards] = useState(false);
+  const [showOrdinalNumbers, setShowOrdinalNumbers] = useState(false);
+  const [showBinyanimInAction, setShowBinyanimInAction] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -105,6 +109,9 @@ export function useIndexState() {
     setShowFoodDrinks(false);
     setShowWeather(false);
     setShowBodyHealth(false);
+    setShowDialogueFlashcards(false);
+    setShowOrdinalNumbers(false);
+    setShowBinyanimInAction(false);
   };
 
   return {
@@ -159,6 +166,9 @@ export function useIndexState() {
     showFoodDrinks, setShowFoodDrinks,
     showWeather, setShowWeather,
     showBodyHealth, setShowBodyHealth,
+    showDialogueFlashcards, setShowDialogueFlashcards,
+    showOrdinalNumbers, setShowOrdinalNumbers,
+    showBinyanimInAction, setShowBinyanimInAction,
     resetToMainMenu,
   };
 }
