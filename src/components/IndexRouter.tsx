@@ -128,6 +128,9 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showFoodDrinks, setShowFoodDrinks,
     showWeather, setShowWeather,
     showBodyHealth, setShowBodyHealth,
+    showDialogueFlashcards, setShowDialogueFlashcards,
+    showOrdinalNumbers, setShowOrdinalNumbers,
+    showBinyanimInAction, setShowBinyanimInAction,
     resetToMainMenu,
   } = state;
 
@@ -141,6 +144,9 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   if (showFoodDrinks) return <FoodDrinksPractice onBack={() => setShowFoodDrinks(false)} lang={lang} />;
   if (showWeather) return <WeatherPractice onBack={() => setShowWeather(false)} lang={lang} />;
   if (showBodyHealth) return <BodyHealthPractice onBack={() => setShowBodyHealth(false)} lang={lang} />;
+  if (showDialogueFlashcards) return <DialogueFlashcardsPractice onBack={() => setShowDialogueFlashcards(false)} lang={lang} />;
+  if (showOrdinalNumbers) return <OrdinalNumbersPractice onBack={() => setShowOrdinalNumbers(false)} lang={lang} />;
+  if (showBinyanimInAction) return <BinyanimInActionPractice onBack={() => setShowBinyanimInAction(false)} lang={lang} />;
 
   // New exercises
   if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;
