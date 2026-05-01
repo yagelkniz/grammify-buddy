@@ -68,6 +68,9 @@ import ProfessionsPractice from "@/components/ProfessionsPractice";
 import FoodDrinksPractice from "@/components/FoodDrinksPractice";
 import WeatherPractice from "@/components/WeatherPractice";
 import BodyHealthPractice from "@/components/BodyHealthPractice";
+import DialogueFlashcardsPractice from "@/components/DialogueFlashcardsPractice";
+import OrdinalNumbersPractice from "@/components/OrdinalNumbersPractice";
+import BinyanimInActionPractice from "@/components/BinyanimInActionPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
