@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Globe } from "lucide-react";
+import { Globe, Search, Flame, BookOpen, Gamepad2, BookMarked, GraduationCap, LayoutGrid } from "lucide-react";
 import type { SetStateAction, Dispatch } from "react";
 import menuText from "@/i18n/menu";
+
+const heeboStyle = `@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');`;
+
+function updateStreak(): number {
+  try {
+    const stored = localStorage.getItem("grammify_streak");
+    const today = new Date().toDateString();
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (!stored) {
+      localStorage.setItem("grammify_streak", JSON.stringify({ count: 1, lastDate: today }));
+      return 1;
+    }
+    const { count, lastDate } = JSON.parse(stored);
+    if (lastDate === today) return count;
+    if (lastDate === yesterday) {
+      localStorage.setItem("grammify_streak", JSON.stringify({ count: count + 1, lastDate: today }));
+      return count + 1;
+    }
+    localStorage.setItem("grammify_streak", JSON.stringify({ count: 1, lastDate: today }));
+    return 1;
+  } catch { return 0; }
+}
 
 interface IndexMainMenuProps {
   lang: "he" | "en";
@@ -11,199 +33,182 @@ interface IndexMainMenuProps {
   setShowPronounsMenu: (b: boolean) => void;
   setShowPossessivePronouns: (b: boolean) => void;
   setShowQuestionnaire: (b: boolean) => void;
-  setSelectedPractice: (val: null | "verb" | "nounAdj" | "household") => void;
-  setSelectedTextComp: Dispatch<SetStateAction<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy" | "hospital" | "airport" | "news">>;
+  setSelectedPractice: (val: null | "verb" | "sentence") => void;
+  setSelectedTextComp: Dispatch<SetStateAction<string | null>>;
   setShowEverydayHebrew: (b: boolean) => void;
   setShowVerbToBePresentation: (b: boolean) => void;
   setShowDaysAndPlacesVocab: (b: boolean) => void;
   setShowQuestionWords: (b: boolean) => void;
   setShowOddOneOut: (b: boolean) => void;
   setShowEmotions: (b: boolean) => void;
-  setShowLinkingWordsLevels: (b: boolean) => void;
-  setShowVerbMemoryGame: (b: boolean) => void;
-  setShowColorsAndFruits: (b: boolean) => void;
-  setShowVerbPatternsMenu: (b: boolean) => void;
-  setShowListeningPractice: (b: boolean) => void;
-  setShowConversationRoulette: (b: boolean) => void;
-  setShowSentenceOrder: (b: boolean) => void;
-  setShowPrepositionSuffix: (b: boolean) => void;
-  setShowHebrewSlang: (b: boolean) => void;
-  setShowRolePlay: (b: boolean) => void;
-  setShowConnectorCorrection: (b: boolean) => void;
-  setShowPronounSuffixReflexive: (b: boolean) => void;
-  setShowBeginnerHebrew: (b: boolean) => void;
-  setShowNumbers: (b: boolean) => void;
-  setShowMonths: (b: boolean) => void;
-  setShowAdjectives: (b: boolean) => void;
-  setShowCityVocab: (b: boolean) => void;
-  setShowShopping: (b: boolean) => void;
-  setShowFamily: (b: boolean) => void;
-  setShowQuickQuiz: (b: boolean) => void;
-  setShowGenderFlip: (b: boolean) => void;
-  setShowSongLyrics: (b: boolean) => void;
-  setShowAlphabetCourse: (b: boolean) => void;
-  setShowProfessions: (b: boolean) => void;
-  setShowFoodDrinks: (b: boolean) => void;
-  setShowWeather: (b: boolean) => void;
-  setShowBodyHealth: (b: boolean) => void;
-  setShowDialogueFlashcards: (b: boolean) => void;
-  setShowOrdinalNumbers: (b: boolean) => void;
-  setShowBinyanimInAction: (b: boolean) => void;
+  setShowLinkingWordsLevel2: (b: boolean) => void;
+  setShowLinkingWordsLevel3?: (b: boolean) => void;
+  setShowBodyParts?: (b: boolean) => void;
+  setShowColors?: (b: boolean) => void;
+  setShowNumbers?: (b: boolean) => void;
+  setShowFamily?: (b: boolean) => void;
+  setShowFood?: (b: boolean) => void;
+  setShowAnimals?: (b: boolean) => void;
+  setShowSocial?: (b: boolean) => void;
+  setShowCountries?: (b: boolean) => void;
+  setShowMovies?: (b: boolean) => void;
+  setShowPlaces?: (b: boolean) => void;
 }
 
-interface MenuItemProps {
+type Category = "all" | "learn" | "vocab" | "games" | "reading";
+
+interface MenuItem {
   emoji: string;
   label: string;
-  onClick: () => void;
-  colorClass: string;
-  lang: "he" | "en";
-  difficulty?: "beginner" | "intermediate" | "advanced";
+  category: Category[];
+  level?: "beginner" | "intermediate" | "advanced";
+  action: () => void;
 }
 
-function MenuItem({ emoji, label, onClick, colorClass, lang, difficulty }: MenuItemProps) {
-  const diffLabel = difficulty === "beginner" ? (lang === "he" ? "מתחיל" : "Beginner")
-    : difficulty === "intermediate" ? (lang === "he" ? "בינוני" : "Intermediate")
-    : difficulty === "advanced" ? (lang === "he" ? "מתקדם" : "Advanced") : null;
-  const diffColor = difficulty === "beginner" ? "bg-green-200 text-green-800"
-    : difficulty === "intermediate" ? "bg-yellow-200 text-yellow-800"
-    : difficulty === "advanced" ? "bg-red-200 text-red-800" : "";
-
+function MenuItemCard({ emoji, label, onClick, index, visible }: { emoji: string; label: string; onClick: () => void; index: number; visible: boolean }) {
   return (
-    <button
-      className={`relative flex flex-col items-center justify-center gap-2 p-4 font-bold text-base rounded-xl border-2 shadow hover:scale-105 transition-transform focus:outline-none ${colorClass}`}
-      onClick={onClick}
-    >
-      {diffLabel && (
-        <span className={`absolute top-1 left-1 text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${diffColor}`}>
-          {diffLabel}
-        </span>
-      )}
-      <span className="text-2xl">{emoji}</span>
-      <span className="text-center leading-tight text-sm" dir={lang === "he" ? "rtl" : "ltr"}>
-        {label}
-      </span>
+    <button onClick={onClick}
+      style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(20px)", transition: `opacity 0.4s ease ${index * 60}ms, transform 0.4s ease ${index * 60}ms`, fontFamily: "'Heebo', sans-serif" }}
+      className="group flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-purple-200 hover:bg-purple-50 active:scale-95 transition-all cursor-pointer w-full text-center">
+      <span className="text-3xl group-hover:scale-110 transition-transform duration-200">{emoji}</span>
+      <span className="text-sm font-medium text-gray-700 leading-tight">{label}</span>
     </button>
   );
 }
 
-export default function IndexMainMenu(props: IndexMainMenuProps) {
-  const { lang, setLang } = props;
+export default function IndexMainMenu({
+  lang, setLang, setShowLinkingWords, setShowPronounsMenu, setShowPossessivePronouns,
+  setShowQuestionnaire, setSelectedPractice, setSelectedTextComp,
+  setShowEverydayHebrew, setShowVerbToBePresentation, setShowDaysAndPlacesVocab,
+  setShowQuestionWords, setShowOddOneOut, setShowEmotions, setShowLinkingWordsLevel2,
+  setShowLinkingWordsLevel3, setShowBodyParts, setShowColors, setShowNumbers,
+  setShowFamily, setShowFood, setShowAnimals, setShowSocial, setShowCountries,
+  setShowMovies, setShowPlaces,
+}: IndexMainMenuProps) {
   const t = menuText[lang];
+  const isHe = lang === "he";
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<Category>("all");
+  const [streak, setStreak] = useState(0);
+  const [cardsVisible, setCardsVisible] = useState(false);
+
+  useEffect(() => {
+    setStreak(updateStreak());
+    const timer = setTimeout(() => setCardsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const allItems: MenuItem[] = useMemo(() => [
+    { emoji: "🔤", label: t.linkingWords || "Linking Words", category: ["learn"], level: "beginner", action: () => setShowLinkingWords(true) },
+    { emoji: "🧑‍🏫", label: t.pronouns || "Pronouns", category: ["learn"], level: "beginner", action: () => setShowPronounsMenu(true) },
+    { emoji: "👤", label: t.possessivePronouns || "Possessive Pronouns", category: ["learn"], level: "beginner", action: () => setShowPossessivePronouns(true) },
+    { emoji: "📝", label: t.questionnaire || "Questionnaire", category: ["learn"], level: "beginner", action: () => setShowQuestionnaire(true) },
+    { emoji: "💬", label: t.everydayHebrew || "Everyday Hebrew", category: ["learn"], level: "beginner", action: () => setShowEverydayHebrew(true) },
+    { emoji: "🧠", label: t.verbToBe || "Verb To Be", category: ["learn"], level: "beginner", action: () => setShowVerbToBePresentation(true) },
+    { emoji: "❓", label: t.questionWords || "Question Words", category: ["learn"], level: "beginner", action: () => setShowQuestionWords(true) },
+    { emoji: "🔗", label: t.linkingWordsLevel2 || "Linking Words L2", category: ["learn"], level: "intermediate", action: () => setShowLinkingWordsLevel2(true) },
+    { emoji: "🔗", label: t.linkingWordsLevel3 || "Linking Words L3", category: ["learn"], level: "advanced", action: () => setShowLinkingWordsLevel3?.(true) },
+    { emoji: "📅", label: t.daysAndPlaces || "Days & Places", category: ["vocab"], level: "beginner", action: () => setShowDaysAndPlacesVocab(true) },
+    { emoji: "😊", label: t.emotions || "Emotions", category: ["vocab"], level: "beginner", action: () => setShowEmotions(true) },
+    { emoji: "💪", label: t.bodyParts || "Body Parts", category: ["vocab"], level: "beginner", action: () => setShowBodyParts?.(true) },
+    { emoji: "🎨", label: t.colors || "Colors", category: ["vocab"], level: "beginner", action: () => setShowColors?.(true) },
+    { emoji: "🔢", label: t.numbers || "Numbers", category: ["vocab"], level: "beginner", action: () => setShowNumbers?.(true) },
+    { emoji: "👨‍👩‍👧", label: t.family || "Family", category: ["vocab"], level: "beginner", action: () => setShowFamily?.(true) },
+    { emoji: "🍎", label: t.food || "Food", category: ["vocab"], level: "beginner", action: () => setShowFood?.(true) },
+    { emoji: "🐶", label: t.animals || "Animals", category: ["vocab"], level: "beginner", action: () => setShowAnimals?.(true) },
+    { emoji: "🤝", label: t.social || "Social", category: ["vocab"], level: "beginner", action: () => setShowSocial?.(true) },
+    { emoji: "🌍", label: t.countries || "Countries", category: ["vocab"], level: "intermediate", action: () => setShowCountries?.(true) },
+    { emoji: "🎮", label: t.oddOneOut || "Odd One Out", category: ["games"], level: "beginner", action: () => setShowOddOneOut(true) },
+    { emoji: "✏️", label: t.verbPractice || "Verb Practice", category: ["learn", "games"], level: "intermediate", action: () => setSelectedPractice("verb") },
+    { emoji: "📜", label: t.sentencePractice || "Sentence Practice", category: ["learn", "games"], level: "intermediate", action: () => setSelectedPractice("sentence") },
+    { emoji: "🎬", label: t.movies || "Movies", category: ["reading"], level: "intermediate", action: () => setShowMovies?.(true) },
+    { emoji: "✈️", label: t.places || "Places", category: ["reading"], level: "intermediate", action: () => setShowPlaces?.(true) },
+  ], [t]);
+
+  const filteredItems = useMemo(() =>
+    allItems.filter(item => {
+      const matchCat = activeCategory === "all" || item.category.includes(activeCategory);
+      const matchSearch = searchQuery === "" || item.label.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchCat && matchSearch;
+    }), [allItems, activeCategory, searchQuery]);
+
+  const tabs: { key: Category; label: string; icon: React.ReactNode }[] = [
+    { key: "all", label: isHe ? "הכל" : "All", icon: <LayoutGrid size={14} /> },
+    { key: "learn", label: isHe ? "לימוד" : "Learn", icon: <GraduationCap size={14} /> },
+    { key: "vocab", label: isHe ? "מילים" : "Vocab", icon: <BookMarked size={14} /> },
+    { key: "games", label: isHe ? "משחקים" : "Games", icon: <Gamepad2 size={14} /> },
+    { key: "reading", label: isHe ? "קריאה" : "Reading", icon: <BookOpen size={14} /> },
+  ];
 
   return (
-    <div className="flex flex-col gap-6 items-center w-full max-w-4xl mx-auto px-4">
-      {/* Alphabet Course — Top Banner */}
-      <div className="w-full relative">
-        <button
-          onClick={() => props.setShowAlphabetCourse(true)}
-          className="w-full text-right p-6 rounded-2xl border-2 border-emerald-300 bg-gradient-to-l from-emerald-50 to-amber-50 shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all"
-        >
-          <span className="absolute top-3 left-3 bg-amber-400 text-white text-xs font-bold px-2 py-1 rounded-full">חדש! ✨</span>
-          <div className="text-2xl font-bold text-emerald-800 mb-1">📖 קריאה מאפס — לימוד האלף-בית</div>
-          <div className="text-sm text-muted-foreground">למד לקרוא עברית מהאות הראשונה — מושלם למתחילים מוחלטים</div>
-          <div className="mt-3 inline-block bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-bold">התחל את המסע ←</div>
-        </button>
-      </div>
-
-      {/* Header */}
-      <div className="flex items-center justify-between w-full">
-        <h1 className="text-2xl md:text-3xl font-bold text-primary" dir={lang === "he" ? "rtl" : "ltr"}>
-          {t.mainTitle}
-        </h1>
-        <Button variant="outline" size="sm" onClick={() => setLang(lang === "he" ? "en" : "he")} className="flex items-center gap-2">
-          <Globe className="h-4 w-4" />
-          {lang === "he" ? "English" : "עברית"}
-        </Button>
-      </div>
-
-      {/* לימוד בסיסי */}
-      <div className="w-full">
-        <h2 className="text-lg font-semibold text-muted-foreground mb-3" dir={lang === "he" ? "rtl" : "ltr"}>
-          {lang === "he" ? "📖 לימוד בסיסי" : "📖 Basic Learning"}
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <MenuItem emoji="🌱" label={lang === "he" ? "עברית למתחילים" : "Beginner Hebrew"} onClick={() => props.setShowBeginnerHebrew(true)} colorClass="bg-lime-100 text-lime-900 border-lime-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="📚" label={lang === "he" ? 'הפועל "להיות"' : 'Verb "To Be"'} onClick={() => props.setShowVerbToBePresentation(true)} colorClass="bg-emerald-100 text-emerald-900 border-emerald-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="📅" label={lang === "he" ? "ימים ומקומות" : "Days & Places"} onClick={() => props.setShowDaysAndPlacesVocab(true)} colorClass="bg-violet-100 text-violet-900 border-violet-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="❓" label={lang === "he" ? "מילות שאלה" : "Question Words"} onClick={() => props.setShowQuestionWords(true)} colorClass="bg-amber-100 text-amber-900 border-amber-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="👤" label={t.pronouns} onClick={() => props.setShowPronounsMenu(true)} colorClass="bg-indigo-100 text-indigo-900 border-indigo-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="🤝" label={t.possessivePronouns} onClick={() => props.setShowPossessivePronouns(true)} colorClass="bg-teal-100 text-teal-900 border-teal-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🔀" label={t.linkingWords} onClick={() => props.setShowLinkingWords(true)} colorClass="bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🔤" label={lang === "he" ? "מילות יחס + כינויים" : "Preposition Suffixes"} onClick={() => props.setShowPrepositionSuffix(true)} colorClass="bg-gradient-to-br from-sky-100 to-violet-100 text-sky-900 border-sky-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🪞" label={lang === "he" ? "כינויי יחס + רפלקסיב" : "Pronoun Suffixes + Reflexive"} onClick={() => props.setShowPronounSuffixReflexive(true)} colorClass="bg-gradient-to-br from-amber-100 to-rose-100 text-amber-900 border-amber-300" lang={lang} difficulty="advanced" />
-          <MenuItem emoji="🔢" label={lang === "he" ? "מספרים בעברית" : "Hebrew Numbers"} onClick={() => props.setShowNumbers(true)} colorClass="bg-blue-100 text-blue-900 border-blue-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="🥇" label={lang === "he" ? "מספרים סודרים" : "Ordinal Numbers"} onClick={() => props.setShowOrdinalNumbers(true)} colorClass="bg-blue-100 text-blue-900 border-blue-400" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🗓️" label={lang === "he" ? "חודשי השנה" : "Months of the Year"} onClick={() => props.setShowMonths(true)} colorClass="bg-cyan-100 text-cyan-900 border-cyan-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="🌈" label={lang === "he" ? "תארים נפוצים" : "Common Adjectives"} onClick={() => props.setShowAdjectives(true)} colorClass="bg-gradient-to-br from-yellow-100 to-pink-100 text-yellow-900 border-yellow-300" lang={lang} difficulty="beginner" />
+    <div dir={isHe ? "rtl" : "ltr"} style={{ fontFamily: "'Heebo', sans-serif" }} className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+      <style>{heeboStyle}</style>
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div className="max-w-2xl mx-auto px-4 py-3">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🇮🇱</span>
+              <h1 className="text-lg font-bold text-purple-700" style={{ fontFamily: "'Heebo', sans-serif" }}>
+                {isHe ? "גרמיפיי באדי" : "Grammify Buddy"}
+              </h1>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 bg-orange-50 border border-orange-200 rounded-full px-3 py-1">
+                <Flame size={16} className="text-orange-500" />
+                <span className="text-sm font-bold text-orange-600">{streak}</span>
+                <span className="text-xs text-orange-400">{isHe ? "ימים" : "days"}</span>
+              </div>
+              <Button variant="outline" size="sm" onClick={() => setLang(lang === "he" ? "en" : "he")} className="flex items-center gap-1 rounded-full text-xs px-3">
+                <Globe size={14} />{lang === "he" ? "EN" : "עב"}
+              </Button>
+            </div>
+          </div>
+          <div className="relative">
+            <Search size={16} className={`absolute top-1/2 -translate-y-1/2 text-gray-400 ${isHe ? "right-3" : "left-3"}`} />
+            <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
+              placeholder={isHe ? "חפש תרגיל..." : "Search exercises..."}
+              style={{ fontFamily: "'Heebo', sans-serif" }}
+              className={`w-full bg-gray-50 border border-gray-200 rounded-full py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 ${isHe ? "pr-9 pl-4" : "pl-9 pr-4"}`} />
+          </div>
         </div>
-      </div>
-
-      {/* תרגול אוצר מילים */}
-      <div className="w-full">
-        <h2 className="text-lg font-semibold text-muted-foreground mb-3" dir={lang === "he" ? "rtl" : "ltr"}>
-          {lang === "he" ? "🎯 תרגול אוצר מילים" : "🎯 Vocabulary Practice"}
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <MenuItem emoji="😊" label={lang === "he" ? "רגשות" : "Emotions"} onClick={() => props.setShowEmotions(true)} colorClass="bg-pink-100 text-pink-900 border-pink-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="📎" label={lang === "he" ? "מילות קישור" : "Linking Words"} onClick={() => props.setShowLinkingWordsLevels(true)} colorClass="bg-cyan-100 text-cyan-900 border-cyan-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🏠" label={lang === "he" ? "כלי בית" : "Household"} onClick={() => props.setSelectedPractice("household")} colorClass="bg-red-100 text-red-900 border-red-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="🗣️" label={t.everydayHebrew} onClick={() => props.setShowEverydayHebrew(true)} colorClass="bg-orange-100 text-orange-900 border-orange-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🎨" label={lang === "he" ? "צבעים ופירות" : "Colors & Fruits"} onClick={() => props.setShowColorsAndFruits(true)} colorClass="bg-gradient-to-br from-pink-100 to-green-100 text-pink-900 border-pink-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="🏙️" label={lang === "he" ? "בעיר" : "In the City"} onClick={() => props.setShowCityVocab(true)} colorClass="bg-slate-100 text-slate-900 border-slate-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🛒" label={lang === "he" ? "קניות" : "Shopping"} onClick={() => props.setShowShopping(true)} colorClass="bg-emerald-100 text-emerald-900 border-emerald-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="👨‍👩‍👧" label={lang === "he" ? "משפחה" : "Family"} onClick={() => props.setShowFamily(true)} colorClass="bg-rose-100 text-rose-900 border-rose-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="👨‍⚕️" label={lang === "he" ? "מקצועות" : "Professions"} onClick={() => props.setShowProfessions(true)} colorClass="bg-blue-100 text-blue-900 border-blue-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🍽️" label={lang === "he" ? "אוכל ושתייה" : "Food & Drinks"} onClick={() => props.setShowFoodDrinks(true)} colorClass="bg-amber-100 text-amber-900 border-amber-300" lang={lang} difficulty="beginner" />
-          <MenuItem emoji="🌤️" label={lang === "he" ? "מזג אוויר" : "Weather"} onClick={() => props.setShowWeather(true)} colorClass="bg-sky-100 text-sky-900 border-sky-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🏥" label={lang === "he" ? "גוף ובריאות" : "Body & Health"} onClick={() => props.setShowBodyHealth(true)} colorClass="bg-red-100 text-red-900 border-red-300" lang={lang} difficulty="beginner" />
+        <div className="max-w-2xl mx-auto px-4 pb-2">
+          <div className="flex gap-1 overflow-x-auto">
+            {tabs.map(tab => (
+              <button key={tab.key} onClick={() => setActiveCategory(tab.key)}
+                style={{ fontFamily: "'Heebo', sans-serif" }}
+                className={`flex items-center gap-1 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all ${activeCategory === tab.key ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-purple-100 hover:text-purple-700"}`}>
+                {tab.icon}{tab.label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* משחקים ותרגול */}
-      <div className="w-full">
-        <h2 className="text-lg font-semibold text-muted-foreground mb-3" dir={lang === "he" ? "rtl" : "ltr"}>
-          {lang === "he" ? "🎮 משחקים ותרגול" : "🎮 Games & Practice"}
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <MenuItem emoji="🧠" label={lang === "he" ? "משחק זיכרון" : "Memory Game"} onClick={() => props.setShowVerbMemoryGame(true)} colorClass="bg-purple-100 text-purple-900 border-purple-300" lang={lang} />
-          <MenuItem emoji="🎯" label={lang === "he" ? "מה יוצא דופן?" : "Odd One Out"} onClick={() => props.setShowOddOneOut(true)} colorClass="bg-rose-100 text-rose-900 border-rose-300" lang={lang} />
-          <MenuItem emoji="🕰️" label={t.verbs} onClick={() => props.setSelectedPractice("verb")} colorClass="bg-blue-100 text-blue-900 border-blue-200" lang={lang} />
-          <MenuItem emoji="📝" label={t.nouns} onClick={() => props.setSelectedPractice("nounAdj")} colorClass="bg-pink-100 text-pink-900 border-pink-400" lang={lang} />
-          <MenuItem emoji="🔠" label={lang === "he" ? "בניינים בעברית" : "Verb Patterns"} onClick={() => props.setShowVerbPatternsMenu(true)} colorClass="bg-gradient-to-br from-amber-100 to-purple-100 text-amber-900 border-amber-300" lang={lang} />
-          <MenuItem emoji="🎲" label={lang === "he" ? "רולטת שיחה" : "Conversation Roulette"} onClick={() => props.setShowConversationRoulette(true)} colorClass="bg-gradient-to-br from-orange-100 to-rose-100 text-orange-900 border-orange-300" lang={lang} />
-          <MenuItem emoji="🧩" label={lang === "he" ? "סדר את המשפט" : "Sentence Order"} onClick={() => props.setShowSentenceOrder(true)} colorClass="bg-gradient-to-br from-emerald-100 to-cyan-100 text-emerald-900 border-emerald-300" lang={lang} />
-          <MenuItem emoji="🗣️" label={lang === "he" ? "סלנג ישראלי" : "Israeli Slang"} onClick={() => props.setShowHebrewSlang(true)} colorClass="bg-gradient-to-br from-yellow-100 to-orange-100 text-orange-900 border-orange-300" lang={lang} />
-          <MenuItem emoji="🎭" label={lang === "he" ? "סימולציית שיחה" : "Role-Play"} onClick={() => props.setShowRolePlay(true)} colorClass="bg-gradient-to-br from-rose-100 to-purple-100 text-rose-900 border-rose-300" lang={lang} />
-          <MenuItem emoji="🔧" label={lang === "he" ? "תיקון מילות קישור" : "Connector Fix"} onClick={() => props.setShowConnectorCorrection(true)} colorClass="bg-gradient-to-br from-teal-100 to-cyan-100 text-teal-900 border-teal-300" lang={lang} difficulty="advanced" />
-          <MenuItem emoji="💬" label={t.questionnaire} onClick={() => props.setShowQuestionnaire(true)} colorClass="bg-purple-100 text-purple-900 border-purple-300" lang={lang} />
-          {/* New game exercises */}
-          <MenuItem emoji="⚡" label={lang === "he" ? "מבחן מהיר" : "Quick Quiz"} onClick={() => props.setShowQuickQuiz(true)} colorClass="bg-gradient-to-br from-red-100 to-yellow-100 text-red-900 border-red-300" lang={lang} />
-          <MenuItem emoji="🔄" label={lang === "he" ? "הפוך את המשפט" : "Gender Flip"} onClick={() => props.setShowGenderFlip(true)} colorClass="bg-gradient-to-br from-blue-100 to-pink-100 text-blue-900 border-blue-300" lang={lang} />
-          <MenuItem emoji="🎵" label={lang === "he" ? "פזמון קצר" : "Song Lyrics"} onClick={() => props.setShowSongLyrics(true)} colorClass="bg-gradient-to-br from-violet-100 to-pink-100 text-violet-900 border-violet-300" lang={lang} />
-          <MenuItem emoji="🗨️" label={lang === "he" ? "כרטיסיות שיחה" : "Dialogue Flashcards"} onClick={() => props.setShowDialogueFlashcards(true)} colorClass="bg-gradient-to-br from-orange-100 to-rose-100 text-orange-900 border-orange-300" lang={lang} difficulty="intermediate" />
-          <MenuItem emoji="🔄" label={lang === "he" ? "בניינים בפעולה" : "Binyanim in Action"} onClick={() => props.setShowBinyanimInAction(true)} colorClass="bg-gradient-to-br from-amber-100 to-purple-100 text-purple-900 border-purple-300" lang={lang} difficulty="advanced" />
+      </header>
+      <div className="max-w-2xl mx-auto px-4 py-3">
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          {([
+            { label: isHe ? "תרגילים" : "Total", value: allItems.length, color: "purple" },
+            { label: isHe ? "מתחילים" : "Beginner", value: allItems.filter(i => i.level === "beginner").length, color: "green" },
+            { label: isHe ? "רצף" : "Streak", value: streak, color: "orange" },
+          ] as const).map((stat, i) => (
+            <div key={i} style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(10px)", transition: `opacity 0.4s ease ${i * 80}ms, transform 0.4s ease ${i * 80}ms` }}
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-3 text-center">
+              <div className={`text-xl font-bold text-${stat.color}-600`}>{stat.value}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{stat.label}</div>
+            </div>
+          ))}
         </div>
-      </div>
-
-      {/* הבנת הנקרא והנשמע */}
-      <div className="w-full">
-        <h2 className="text-lg font-semibold text-muted-foreground mb-3" dir={lang === "he" ? "rtl" : "ltr"}>
-          {lang === "he" ? "📖 הבנת הנקרא והנשמע" : "📖 Reading & Listening"}
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <MenuItem emoji="🎧" label={lang === "he" ? "הבנת הנשמע" : "Listening"} onClick={() => props.setShowListeningPractice(true)} colorClass="bg-purple-100 text-purple-900 border-purple-300" lang={lang} />
-          <MenuItem emoji="🥗" label={t.foodComp} onClick={() => props.setSelectedTextComp("food-levels")} colorClass="bg-yellow-100 text-yellow-900 border-yellow-300" lang={lang} />
-          <MenuItem emoji="🍽️" label={t.foodOrder} onClick={() => props.setSelectedTextComp("food-order-medium")} colorClass="bg-orange-200 text-orange-900 border-orange-300" lang={lang} />
-          <MenuItem emoji="🐾" label={t.animalsEasy} onClick={() => props.setSelectedTextComp("animals-easy")} colorClass="bg-green-100 text-green-900 border-green-200" lang={lang} />
-          <MenuItem emoji="📱" label={t.socialMedia} onClick={() => props.setSelectedTextComp("social-media")} colorClass="bg-blue-100 text-blue-900 border-blue-300" lang={lang} />
-          <MenuItem emoji="🌏" label={t.countries} onClick={() => props.setSelectedTextComp("countries-levels")} colorClass="bg-cyan-100 text-cyan-900 border-cyan-300" lang={lang} />
-          <MenuItem emoji="📺" label={t.movies} onClick={() => props.setSelectedTextComp("movies-series-levels")} colorClass="bg-blue-50 text-blue-900 border-blue-400" lang={lang} />
-          <MenuItem emoji="🌊" label={t.placesFoodEasy} onClick={() => props.setSelectedTextComp("places-food-easy")} colorClass="bg-sky-100 text-sky-900 border-sky-400" lang={lang} />
-          {/* New reading exercises */}
-          <MenuItem emoji="🏥" label={lang === "he" ? "בבית החולים (קל)" : "Hospital (Easy)"} onClick={() => props.setSelectedTextComp("hospital")} colorClass="bg-red-100 text-red-900 border-red-300" lang={lang} />
-          <MenuItem emoji="✈️" label={lang === "he" ? "בשדה התעופה (בינוני)" : "Airport (Medium)"} onClick={() => props.setSelectedTextComp("airport")} colorClass="bg-indigo-100 text-indigo-900 border-indigo-300" lang={lang} />
-          <MenuItem emoji="📰" label={lang === "he" ? "כתבה עכשווית (קשה)" : "News Article (Hard)"} onClick={() => props.setSelectedTextComp("news")} colorClass="bg-gray-100 text-gray-900 border-gray-300" lang={lang} />
-        </div>
+        {filteredItems.length === 0 ? (
+          <div className="text-center py-16 text-gray-400">
+            <Search size={32} className="mx-auto mb-2 opacity-40" />
+            <p>{isHe ? "לא נמצאו תרגילים" : "No exercises found"}</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-3 pb-8">
+            {filteredItems.map((item, i) => (
+              <MenuItemCard key={item.label + i} emoji={item.emoji} label={item.label} onClick={item.action} index={i} visible={cardsVisible} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
